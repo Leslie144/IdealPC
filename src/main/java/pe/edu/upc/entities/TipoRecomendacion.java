@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "tipoRecomendacion")
@@ -15,15 +16,18 @@ public class TipoRecomendacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTipoRecomendacion;
 	
-	@Column(name = "tRecomendacion", length = 100, nullable = false)
+	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El Tipo de Recomendación no puede contener caracteres especiales")
+	@Pattern(regexp = "[^0-9]+", message = "El Tipo de Recomendación no puede contener un número")
+	@Column(name = "tRecomendacion", nullable = false, length = 100)
 	private String tRecomendacion;
-	
+
 	public TipoRecomendacion() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoRecomendacion(int idTipoRecomendacion, String tRecomendacion) {
+	public TipoRecomendacion(int idTipoRecomendacion,
+			@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El Tipo de Recomendación no puede contener caracteres especiales") @Pattern(regexp = "[^0-9]+", message = "El Tipo de Recomendación no puede contener un número") String tRecomendacion) {
 		super();
 		this.idTipoRecomendacion = idTipoRecomendacion;
 		this.tRecomendacion = tRecomendacion;
@@ -44,4 +48,6 @@ public class TipoRecomendacion {
 	public void settRecomendacion(String tRecomendacion) {
 		this.tRecomendacion = tRecomendacion;
 	}
+	
+	
 }
