@@ -19,7 +19,7 @@ import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
 public class TipoRecomendacionController {
 
 	@Autowired
-	private ITipoRecomendacionService trS;
+	private ITipoRecomendacionService trService;
 
 	@GetMapping("/new")
 	public String newTipoRecomendacion(Model model) {
@@ -31,7 +31,7 @@ public class TipoRecomendacionController {
 	public String listTipoRecomendaciones(Model model) {
 		try {
 			model.addAttribute("tiporecomendacion", new TipoRecomendacion());
-			model.addAttribute("listaTipoRecomendacion", trS.list());
+			model.addAttribute("listaTipoRecomendacion", trService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
@@ -44,7 +44,7 @@ public class TipoRecomendacionController {
 		if (result.hasErrors()) {
 			return "tiporecomendacion/tiporecomendacion";
 		} else {
-			int rpta = trS.insert(tiporecomendacion);
+			int rpta = trService.insert(tiporecomendacion);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
 				return "tiporecomendacion/tiporecomendacion";

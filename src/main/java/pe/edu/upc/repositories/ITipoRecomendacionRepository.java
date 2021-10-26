@@ -12,7 +12,7 @@ import pe.edu.upc.entities.TipoRecomendacion;
 @Repository
 public interface ITipoRecomendacionRepository extends JpaRepository<TipoRecomendacion, Integer>{
 
-	@Query("slect count (t.tRecomendacion) from TipoRecomendacionEntities t where t.tRecomendacion=:tipo")
+	@Query("slect count (t.tRecomendacion) from TipoRecomendacion t where t.tRecomendacion=:tipo")
 	public int TipoRecomendacionExistentes(@Param("tipo") String tipo);
 	
 	

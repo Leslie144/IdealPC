@@ -16,10 +16,10 @@ public class TipoRecomendacionServiceImplement implements ITipoRecomendacionServ
 	private ITipoRecomendacionRepository trR;
 
 	@Override
-	public Integer insert(TipoRecomendacion tiporecomendacion) {
-		int rpta = trR.TipoRecomendacionExistentes(tiporecomendacion.gettRecomendacion());
+	public Integer insert(TipoRecomendacion tiporeco) {
+		int rpta = trR.TipoRecomendacionExistentes(tiporeco.gettRecomendacion());
 		if (rpta == 0) {
-			trR.save(tiporecomendacion);
+			trR.save(tiporeco);
 		}
 
 		return rpta;
