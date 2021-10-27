@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,42 +14,45 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/dive.css">
 </head>
+
 <body>
 
-	<div th:fragment="sidebar" id="panel" class="activepanel ">
-		<div id="cpanel1head" style="margin: 0px; height: 10vh;" class="row">
-			<h2 id="titulopanel" class="col-lg-10">Menú</h2>
-			<i id="iconpanel" class="fa fa-bars col-lg-2"></i>
-		</div>
-		<div id="cpanelbody" class="row">
+	<div th:replace="fragments/sidebar :: sidebar" id="panel"
+		class="activepanel"></div>
 
-			<div class="panelitem">
-				<a th:href="@{/home}"> <i class="fa fa-home"
-					style="color: #7764E4;"></i>
-				</a>
-				<p>Inicio</p>
-			</div>
+	<div class="bg row">
+		<div th:replace="fragments/nav :: nav" class="row topbar col-lg-12"></div>
 
-			<div class="panelitem">
-				<a th:href="@{/categories/list}"> <i class="fa fa-th-large"
-					style="color: #5450D6;"></i>
-				</a>
-				<p>Tipo de Recomendacion</p>
-			</div>
-			
-			<div class="panelitem">
-				<a th:href="@{/distritos/list}"> <i class="fa fa-th-large"
-					style="color: #5450D6;"></i>
-				</a>
-				<p>Distritos</p>
-			</div>
-			<div class="panelitem">
-				<a th:href="@{/store/list}"> <i class="fa fa-th-large"
-					style="color: #5450D6;"></i>
-				</a>
-				<p>Tiendas</p>
+
+		<div class="content container">
+
+			<div class="detail">
+				<img class="detailimg" th:if="${#strings.length(tienda.fotoTienda)> 0}"
+					th:src="@{'/store/uploads/' + ${tienda.fotoTienda}}"
+					th:alt="${tienda.fotoTienda}">
+				<div class="blend"></div>
+
+				<div class="detalles">
+					<a th:href="@{/store/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
+					<h2 th:text="${tienda.nombreTienda}" class="prodnombre"></h2>
+
+					<p th:text="${tienda.webTienda}" class="prodprecio"></p>
+					<p th:text="'Ubicado en '+${tienda.distrito.nombreDistrito}"
+						class="prodproveedor"></p>
+				</div>
 			</div>
 		</div>
+
 	</div>
+
+
+
+
+
+	<script src="/js/popper.min.js"></script>
+	<script src="/js/jquery-3.3.1.slim.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
+	<script src="/js/dive.js"></script>
 </body>
+
 </html>

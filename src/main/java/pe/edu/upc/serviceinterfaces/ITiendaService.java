@@ -1,0 +1,12 @@
+package pe.edu.upc.serviceinterfaces;
+
+import java.util.List;
+
+import pe.edu.upc.entities.Tienda;
+
+public interface ITiendaService {
+	public boolean insert(Tienda tienda);
+	List<Tienda>list();
+	Tienda listarId(int idTienda);
+
+}
