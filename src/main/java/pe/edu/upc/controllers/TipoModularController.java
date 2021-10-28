@@ -1,5 +1,6 @@
 package pe.edu.upc.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,12 +17,13 @@ import pe.edu.upc.serviceinterfaces.ITipoModularService;
 @RequestMapping("/tipomodulares")
 public class TipoModularController {
 
+	@Autowired
 	private ITipoModularService tmService;
 	
 	@GetMapping("/new")
 	public String newTipoModular(Model model) {
 		model.addAttribute("tipomodular", new TipoModular());
-		return "tipomodular/tipomodular";
+		return "tipoModular/tipoModular";
 	}
 
 	@GetMapping("/list")
@@ -33,25 +35,25 @@ public class TipoModularController {
 			model.addAttribute("error", e.getMessage());
 			// TODO: handle exception
 		}
-		return "tipomodular/listaTipoModular";
+		return "tipoModular/listTipoModular";
 	}
 
 	@PostMapping("/save")
 	public String saveTipoModular(@Validated TipoModular tipomodular, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "tipomodular/tipomodular";
+			return "tipoModular/tipoModular";
 		} else {
 			int rpta = tmService.insert(tipomodular);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "ya existe");
-				return "tipomodular/tipomodular";
+				return "tipoModular/tipoModular";
 			} else {
 				model.addAttribute("mensaje","Se guardó correctamente");
 				status.setComplete();
 			}
 		}
 		model.addAttribute("tipomodular",new TipoModular());
-		return "redirect:/tipomodular/list";
+		return "redirect:/tipomodulares/list";
 	}
 }
