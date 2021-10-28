@@ -10,6 +10,6 @@ import pe.edu.upc.entities.TipoUsuario;
 @Repository
 public interface ITipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer>{
 
-	@Query("select count (tu.nTipousuario) from TipoUsuario tu where tu.nTipousuario=:tipo")
-	public int TipoUsuarioExistentes(@Param("tipo") String tipo);
+	@Query("select count (tu.nTipousuario) from TipoUsuario tu where tu.nTipousuario=:nTipousuario")
+	public int TipoUsuarioExistentes(@Param("nTipousuario") String nTipousuario);
 }
