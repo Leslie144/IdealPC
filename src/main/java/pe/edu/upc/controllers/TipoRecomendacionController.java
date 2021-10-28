@@ -23,7 +23,7 @@ public class TipoRecomendacionController {
 
 	@GetMapping("/new")
 	public String newTipoRecomendacion(Model model) {
-		model.addAttribute("tiporecomendacion", new TipoRecomendacion());
+		model.addAttribute("tipoRecomendacion", new TipoRecomendacion());
 		return "tiporecomendacion/tiporecomendacion";
 	}
 
@@ -44,6 +44,7 @@ public class TipoRecomendacionController {
 		if (result.hasErrors()) {
 			return "tiporecomendacion/tiporecomendacion";
 		} else {
+			model.addAttribute("tipoRecomendacion", tiporecomendacion);
 			int rpta = trService.insert(tiporecomendacion);
 			if (rpta > 0) {
 				model.addAttribute("mensaje", "Ya existe");
