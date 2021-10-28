@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Tienda;
 import pe.edu.upc.entities.Usuario;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -45,6 +43,8 @@ public class UsuarioController {
 
 	@GetMapping("/new")
 	public String newMarca(Model model) {
+		model.addAttribute("listaDistritos", dService.list());
+		model.addAttribute("listaTipos", tService.list());
 		model.addAttribute("usuario", new Usuario());
 		return "usuario/usuario";
 	}
@@ -65,7 +65,7 @@ public class UsuarioController {
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
-			model.addAttribute("listaDistritos", tService.list());
+			model.addAttribute("listaTipos", tService.list());
 			return "usuario/usuario";
 		} else {
 			if (!foto.isEmpty()) {
@@ -91,7 +91,7 @@ public class UsuarioController {
 				return "redirect:/store/list";
 			} else {
 				model.addAttribute("mensaje", "Ocurrió un error");
-				return "redirect:/store/new";
+				return "redirect:/usuario/new";
 
 			}
 		}
@@ -120,6 +120,18 @@ public class UsuarioController {
 		model.put("usuario", usuario);
 		model.put("titulo", "Detalle de usuario: " + usuario.getNombreUsuario());
 		return "usuario/ver";
+	}
+	
+	@RequestMapping("/list")
+	public String listUsuarios(Map<String, Object> model) {
+		model.put("listaUsuario", uService.list());
+		return "tienda/listUsuario";
+	}
+
+	@RequestMapping("/listarId")
+	public String listarId(Map<String, Object> model, @ModelAttribute Usuario usuario) {
+		uService.listarId(usuario.getIdUsuario());
+		return "usuario/listUsuario";
 	}
 
 }

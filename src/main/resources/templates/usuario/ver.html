@@ -26,17 +26,15 @@
 		<div class="content container">
 
 			<div class="detail">
-				<img class="detailimg" th:if="${#strings.length(tienda.fotoUsuario)> 0}"
-					th:src="@{'/store/uploads/' + ${tienda.fotoUsuario}}"
-					th:alt="${tienda.fotoUsuario}">
+				<img class="detailimg" th:if="${#strings.length(usuario.fotoUsuario)> 0}"
+					th:src="@{'/usuario/uploads/' + ${usuario.fotoUsuario}}"
+					th:alt="${usuario.fotoUsuario}">
 				<div class="blend"></div>
 
 				<div class="detalles">
-					<a th:href="@{/store/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
-					<h2 th:text="${tienda.nombreUsuario}" class="prodnombre"></h2>
-
-					<p th:text="${tienda.webUsuario}" class="prodprecio"></p>
-					<p th:text="'Ubicado en '+${tienda.distrito.nombreUsuario}"
+					
+					<p th:text="${usuario.tipoUsuario.nTipousuario}" class="prodprecio"></p>
+					<p th:text="'Ubicado en '+${usuario.distrito.nombreDistrito}"
 						class="prodproveedor"></p>
 				</div>
 			</div>
