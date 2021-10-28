@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.Marca;
-import pe.edu.upc.entities.TamanoMB;
 import pe.edu.upc.repositories.IMarcaRepository;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 

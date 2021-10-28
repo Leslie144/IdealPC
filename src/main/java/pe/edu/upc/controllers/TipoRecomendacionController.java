@@ -1,5 +1,7 @@
 package pe.edu.upc.controllers;
 
+import java.util.Map;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entities.TipoRecomendacion;
 import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
@@ -44,18 +50,38 @@ public class TipoRecomendacionController {
 		if (result.hasErrors()) {
 			return "tiporecomendacion/tiporecomendacion";
 		} else {
-			model.addAttribute("tipoRecomendacion", tiporecomendacion);
-			int rpta = trService.insert(tiporecomendacion);
-			if (rpta > 0) {
-				model.addAttribute("mensaje", "Ya existe");
-				return "tiporecomendacion/tiporecomendacion";
+			boolean flag = trService.insert(tiporecomendacion);
+			if (flag) {
+				return "redirect:/tipoderecomendaciones/list";
 			} else {
-				model.addAttribute("mensaje", "Se guardó correctamente");
-				status.setComplete();
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/tipoderecomendaciones/new";
 			}
 		}
-		model.addAttribute("tiporecomendacion", new TipoRecomendacion());
+	}
+	
+	@RequestMapping("/listarId")
+	public String listarId(Map<String, Object> model, @ModelAttribute TipoRecomendacion tiporecomendacion) {
+		trService.listarId(tiporecomendacion.getIdTipoRecomendacion());
+		return "tiporecomendacion/listTipoRecomendacion";
+	}
 
-		return "redirect:/tipoderecomendaciones/list";
+	@RequestMapping("/update/{id}")
+	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+		TipoRecomendacion objTipoRecomendacion = trService.listarId(id);
+		if (objTipoRecomendacion == null) {
+			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
+			return "redirect:/tipoderecomendaciones/list";
+		} else {
+			model.addAttribute("tipoRecomendacion", objTipoRecomendacion);
+			return "tiporecomendacion/tiporecomendacion";
+		}
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
+		trService.delete(id);
+		model.addAttribute("listaTipoRecomendacion", trService.list());
+		return "tiporecomendacion/listTipoRecomendacion";
 	}
 }
