@@ -35,7 +35,7 @@ public class TipoRecomendacionController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "tiporecomendacion/listTipoRecomendaciones";
+		return "tiporecomendacion/listTipoRecomendacion";
 	}
 
 	@PostMapping("/save")

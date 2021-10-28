@@ -1,5 +1,6 @@
 package pe.edu.upc.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,14 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 
-import pe.edu.upc.entities.TipoModular;
 import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 @Controller
 @RequestMapping("/tipousuarios")
 public class TipoUsuarioController {
-
+	@Autowired
 	private ITipoUsuarioService tuService;
 	
 	@GetMapping("/new")
@@ -34,25 +34,26 @@ public class TipoUsuarioController {
 			model.addAttribute("error", e.getMessage());
 			// TODO: handle exception
 		}
-		return "tipousuario/listaTipoUsuario";
+		return "tipousuario/listTipoUsuario";
 	}
 	
 	@PostMapping("/save")
 	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
-		if (result.hasErrors()) {
-			return "tipousuario/tipousuario";
+		if (result.hasErrors()) {			
+			return "tipoUsario/tipoUsuario";
 		} else {
 			int rpta = tuService.insert(tipousuario);
 			if (rpta > 0) {
+				model.addAttribute("tipousuario", tipousuario);
 				model.addAttribute("mensaje", "ya existe");
-				return "tipousuario/tipousuario";
+				return "tipoUsuario/tipoUsuario";
 			} else {
 				model.addAttribute("mensaje","Se guardó correctamente");
 				status.setComplete();
 			}
 		}
 		model.addAttribute("tipousuario",new TipoUsuario());
-		return "redirect:/tipousuario/list";
+		return "redirect:/tipousuarios/list";
 	}	
 }
