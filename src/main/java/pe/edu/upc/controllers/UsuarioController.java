@@ -114,7 +114,7 @@ public class UsuarioController {
 	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
 		Usuario usuario = uService.listarId(id);
 		if (usuario == null) {
-			flash.addFlashAttribute("error", "La tienda no existe en la base de datos");
+			flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
 			return "usuario/listUsuario";
 		}
 		model.put("usuario", usuario);
