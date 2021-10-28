@@ -32,7 +32,7 @@
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
-						<th scope="col" class="text-center">Nombre</th>
+						<th scope="col" class="text-center">Distrito</th>
 						<th scope="col" class="text-center">OPERACION</th>
 					</tr>
 				</thead>
@@ -41,7 +41,6 @@
 						<td class="text-center" th:text="${cat.idDistrito}"></td>
 						<td class="text-center" th:text="${cat.nombreDistrito}"></td>
 						<td class="text-center">
-						<!--  <a th:href="@{/distritos/delete?id=}+${cat.idDistrito}">Eliminar</a>-->
 						
 						<a class="btn btn-default btn-sm" th:href="@{'/distritos/update/' + ${cat.idDistrito}}">  <i class="fa fa-cog"></i> Update</a>
 						<a class="btn btn-danger" th:href="@{/distritos/delete?id=}+${cat.idDistrito}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>

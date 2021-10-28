@@ -28,8 +28,8 @@ public class Hardware {
 	@Column(name = "nombreHardware", nullable = false)
 	private String nombreHardware;
 
-	@Pattern(regexp = "[^!\"#$%&'()*+,./:;<=>?@^`{|}~]+", message = "El nombre del MODELO no puede contener caracteres especiales")
-	@Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede contener un número")
+	@Pattern(regexp = "[^!\"$%&'()*+,./:;<=>?@^`{|}~]+", message = "El nombre del MODELO no puede contener caracteres especiales")
+	//@Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede contener un número")
 	@NotNull(message = "El nombre del MODELO no puede estar vacio")
 	@Column(name = "modeloHardware", nullable = false)
 	private String modeloHardware;

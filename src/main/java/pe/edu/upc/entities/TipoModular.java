@@ -32,12 +32,11 @@ public class TipoModular  {
 		this.nTipoModular = nTipoModular;
 	}
 
-	// Getters and setters
-	public int getidTipoModular() {
+	public int getIdTipoModular() {
 		return idTipoModular;
 	}
 
-	public void setidTipoModular(int idTipoModular) {
+	public void setIdTipoModular(int idTipoModular) {
 		this.idTipoModular = idTipoModular;
 	}
 
@@ -48,4 +47,6 @@ public class TipoModular  {
 	public void setnTipoModular(String nTipoModular) {
 		this.nTipoModular = nTipoModular;
 	}
+
+	
 }
