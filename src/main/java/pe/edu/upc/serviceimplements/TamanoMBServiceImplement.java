@@ -18,12 +18,13 @@ public class TamanoMBServiceImplement implements ITamanoMBService{
 	private ITamanoMBRepository tmbR;
 
 	@Override
-	public Integer insert(TamanoMB tamanomb) {
-		int rpta = tmbR.TamanosMBExistentes(tamanomb.getnTamanoMB());
-		if(rpta ==0) {
-			tmbR.save(tamanomb);
+	public boolean insert(TamanoMB tamanomb) {
+		TamanoMB rpta=tmbR.save(tamanomb);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 
 	@Override

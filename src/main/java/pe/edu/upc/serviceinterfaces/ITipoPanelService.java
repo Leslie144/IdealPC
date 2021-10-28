@@ -6,7 +6,9 @@ import pe.edu.upc.entities.TipoPanel;
 
 public interface ITipoPanelService {
 
-		public Integer insert(TipoPanel tipopanel);
+		public boolean insert(TipoPanel tipopanel);
 		
 		List<TipoPanel> list();		
+		TipoPanel listarId(int idTamanoMB);
+		public void delete(int idTamanoMB);
 }

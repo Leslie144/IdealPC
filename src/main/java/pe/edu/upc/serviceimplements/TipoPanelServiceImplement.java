@@ -1,9 +1,11 @@
 package pe.edu.upc.serviceimplements;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.TipoPanel;
 import pe.edu.upc.repositories.ITipoPanelRepository;
@@ -16,16 +18,30 @@ public class TipoPanelServiceImplement implements ITipoPanelService {
 	private ITipoPanelRepository tpR;
 	
 	@Override
-	public Integer insert(TipoPanel tipopanel) {
-		int rpta = tpR.TiposPanelExistentes(tipopanel.getnTipoPanel());
-		if(rpta ==0) {
-			tpR.save(tipopanel);
+	public boolean insert(TipoPanel tipopanel) {
+		TipoPanel rpta=tpR.save(tipopanel);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 		@Override
 		public List<TipoPanel> list(){
 			return tpR.findAll();
+		}
+		
+		@Override
+
+		@Transactional(readOnly=true)
+		public TipoPanel listarId(int idTamanoMB) {
+			Optional<TipoPanel>op=tpR.findById(idTamanoMB);
+			return op.isPresent()?op.get():new TipoPanel();
+		}
+		@Override
+		public void delete(int idTamanoMB) {
+			// TODO Auto-generated method stub
+			tpR.deleteById(idTamanoMB);
 		}
 		
 	}
