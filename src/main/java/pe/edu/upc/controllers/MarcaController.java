@@ -48,18 +48,14 @@ public class MarcaController {
 		if (result.hasErrors()) {
 			return "marca/marca";
 		} else {
-			int rpta = mService.insert(marca);
-			if (rpta > 0) {
-				model.addAttribute("marca", marca);
-				model.addAttribute("menssaje", "Ya existe");
-				return "marca/marca";
+			boolean flag = mService.insert(marca);
+			if (flag) {
+				return "redirect:/marca/list";
 			} else {
-				model.addAttribute("mensaje", "Se guardo correctamente");
-				status.setComplete();
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/marca/new";
 			}
 		}
-		model.addAttribute("marca", new Marca());
-		return "redirect:/marca/list";
 	}
 
 	@RequestMapping("/listarId")
