@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.TamanoMB;
 import pe.edu.upc.repositories.IMarcaRepository;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 
@@ -18,13 +19,13 @@ public class MarcaServiceImplement implements IMarcaService {
 	private IMarcaRepository mR;
 
 	@Override
-	public Integer insert(Marca marca) {
-
-		int rpta = mR.MarcasExistentes(marca.getnMarca());
-		if (rpta == 0) {
-			mR.save(marca);
+	public boolean insert(Marca marca) {
+		Marca rpta=mR.save(marca);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 
 	@Override
