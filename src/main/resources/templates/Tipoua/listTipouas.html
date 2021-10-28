@@ -25,20 +25,20 @@
 		<div class="content container">
 
 			<div class="d-flex">
-				<h3 class="title-content">Lista de Tipo de Recomendación</h3>
-				<a th:href="@{/tipoderecomendaciones/new}" class="btn btn-warning">Nuevo</a>
+				<h3 class="title-content">Lista de Tipo UAs</h3>
+				<a th:href="@{/tipouas/new}" class="btn btn-warning">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
-						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">Nombre</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="tip : ${listaTipoRecomendacion}">
-						<td class="text-center" th:text="${tip.idTipoRecomendacion}"></td>
-						<td class="text-center" th:text="${tip.tRecomendacion}"></td>
+					<tr th:each="cat : ${listaTipouas}">
+						<td class="text-center" th:text="${cat.idTipoua"></td>
+						<td class="text-center" th:text="${cat.nameTipoua}"></td>
 					</tr>
 				</tbody>
 			</table>
