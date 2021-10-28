@@ -27,12 +27,12 @@ public class Tienda {
 	private String fotoTienda;
 	
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
-	@Pattern(regexp = "[^0-9]+", message = "El nombre del producto no puede contener un número")
+	//@Pattern(regexp = "[^0-9]+", message = "El nombre del producto no puede contener un número")
 	@NotNull(message = "El nombre del producto no puede estar vacio")
 	@Column(name = "direccionTienda",nullable = false)
 	private String direccionTienda;
 
-	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
+	@Pattern(regexp = "[^!\"#%'()*+,-./:;<=>?@^`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El nombre de la TIENDA no puede contener un número")
 	@NotNull(message = "El nombre de la TIENDA no puede estar vacio")
 	@Column(name = "nombreTienda",nullable = false)
@@ -61,10 +61,7 @@ public class Tienda {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Tienda(int idTienda, String fotoTienda,
-			String direccionTienda,
-			String nombreTienda,
-			double telefonoTienda,
+	public Tienda(int idTienda, String fotoTienda,String direccionTienda,String nombreTienda, int telefonoTienda,
 			String webTienda, Distrito distrito, Date fechaRegistro) {
 		super();
 		this.idTienda = idTienda;
@@ -109,11 +106,11 @@ public class Tienda {
 		this.nombreTienda = nombreTienda;
 	}
 
-	public double getTelefonoTienda() {
+	public int getTelefonoTienda() {
 		return telefonoTienda;
 	}
 
-	public void setTelefonoTienda(double telefonoTienda) {
+	public void setTelefonoTienda(int telefonoTienda) {
 		this.telefonoTienda = telefonoTienda;
 	}
 
@@ -140,6 +137,8 @@ public class Tienda {
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
+
+	
 
 	
 	
