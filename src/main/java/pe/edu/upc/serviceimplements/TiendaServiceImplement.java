@@ -38,4 +38,9 @@ public class TiendaServiceImplement implements ITiendaService{
 		Optional<Tienda>op=tR.findById(idTienda);
 		return op.isPresent()?op.get():new Tienda();
 	}
+	@Override
+	public void delete(int idTienda) {
+		// TODO Auto-generated method stub
+		tR.deleteById(idTienda);
+	}
 }

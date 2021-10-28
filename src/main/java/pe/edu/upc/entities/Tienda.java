@@ -26,23 +26,23 @@ public class Tienda {
 	@Column(name = "fotoTienda", nullable = true)
 	private String fotoTienda;
 	
-	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre del producto no puede contener un número")
+	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El nombre del producto no puede contener un número")
 	@NotNull(message = "El nombre del producto no puede estar vacio")
 	@Column(name = "direccionTienda",nullable = false)
 	private String direccionTienda;
 
-	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre del producto no puede contener un número")
-	@Pattern(regexp = "[^0-9]+", message = "El nombre del producto no puede contener un número")
-	@NotNull(message = "El nombre del producto no puede estar vacio")
+	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
+	@Pattern(regexp = "[^0-9]+", message = "El nombre de la TIENDA no puede contener un número")
+	@NotNull(message = "El nombre de la TIENDA no puede estar vacio")
 	@Column(name = "nombreTienda",nullable = false)
 	private String nombreTienda;
 	
-	@NotNull
-	@Positive
-	@Min(value = 1, message = "El precio no debe ser menor a 1")
-    @Max(value = 999999999, message = "El precio no debe ser mayor a 100")
-	@Column(name = "telefonoTienda", columnDefinition = "Decimal(8,2)", nullable = false)
+	@NotNull(message = "Debes poner un numero de contacto")
+	@Positive(message = "El telefono no puede ser negativo")
+	@Min(value = 100000000, message = "El telefono debe tener 9 digitos")
+    @Max(value = 999999999, message = "El telefono no debe ser mayor a 9 digitos")
+	@Column(name = "telefonoTienda", nullable = false)
 	private double telefonoTienda;
 	
 	@Column(name = "webTienda",nullable = false)
