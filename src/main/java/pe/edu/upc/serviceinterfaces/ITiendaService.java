@@ -8,5 +8,6 @@ public interface ITiendaService {
 	public boolean insert(Tienda tienda);
 	List<Tienda>list();
 	Tienda listarId(int idTienda);
+	public void delete(int idTienda);
 
 }

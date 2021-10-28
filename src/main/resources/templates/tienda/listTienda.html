@@ -26,7 +26,7 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Tiendas</h3>
-				<a th:href="@{/store/new}" class="btnnew btn btn-warning">Nuevo</a>
+				<a th:href="@{/store/new}" class="btn btn-success">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
@@ -53,7 +53,11 @@
 						<td class="text-center" th:text="${p.telefonoTienda}"></td>
 						<td class="text-center" th:text="${p.webTienda}"></td>
 						<td class="text-center" th:text="${p.fechaRegistro}"></td>
-						<td class="text-center"><a th:href="@{'/store/update/' + ${p.idTienda}}"><i class="fa fa-edit" style="color: rgb(240, 184, 15)ing;"></i></a></td>
+						<td class="text-center">
+						<a class="btn btn-default btn-sm" th:href="@{'/store/update/' + ${p.idTienda}}">  <i class="fa fa-cog"></i> Update</a>
+						<a class="btn btn-danger" th:href="@{/store/delete?id=}+${p.idTienda}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+						
+						</td>
 						<td class="text-center" align="center"><a
 							th:href="@{/store/view/} + ${p.idTienda}">
 							

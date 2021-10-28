@@ -94,11 +94,11 @@ public class TiendaController {
 		}
 	}
 
-	@GetMapping(value= "/uploads/{filename:.+}")
-	public ResponseEntity<Resource>verFoto(@PathVariable String filename){
-		Resource recurso=null;
+	@GetMapping(value = "/uploads/{filename:.+}")
+	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
+		Resource recurso = null;
 		try {
-			recurso=subirarchivoService.load(filename);
+			recurso = subirarchivoService.load(filename);
 		} catch (MalformedURLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -107,31 +107,31 @@ public class TiendaController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
 				.body(recurso);
 	}
-	
-	@GetMapping(value="/view/{id}")
-	public String view(@PathVariable(value="id") int id,Map<String, Object> model, RedirectAttributes flash) {
-		Tienda tienda=tService.listarId(id);
-		if(tienda==null) {
-			flash.addFlashAttribute("error","La tienda no existe en la base de datos");
+
+	@GetMapping(value = "/view/{id}")
+	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
+		Tienda tienda = tService.listarId(id);
+		if (tienda == null) {
+			flash.addFlashAttribute("error", "La tienda no existe en la base de datos");
 			return "tienda/listTienda";
 		}
 		model.put("tienda", tienda);
-		model.put("titulo", "Detalle de tienda: "+tienda.getNombreTienda());
+		model.put("titulo", "Detalle de tienda: " + tienda.getNombreTienda());
 		return "tienda/ver";
 	}
-	
+
 	@RequestMapping("/list")
-	public String listTiendas(Map<String,Object>model) {
+	public String listTiendas(Map<String, Object> model) {
 		model.put("listaTiendas", tService.list());
 		return "tienda/listTienda";
 	}
-	
+
 	@RequestMapping("/listarId")
-	public String listarId(Map<String,Object>model,@ModelAttribute Tienda tiend) {
+	public String listarId(Map<String, Object> model, @ModelAttribute Tienda tiend) {
 		tService.listarId(tiend.getIdTienda());
 		return "tienda/listTienda";
 	}
-	
+
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
@@ -141,9 +141,15 @@ public class TiendaController {
 			return "redirect:/store/list";
 		} else {
 			model.addAttribute("listaDistritos", dService.list());
-			model.addAttribute("product", objTienda);
+			model.addAttribute("tienda", objTienda);
 			return "tienda/tienda";
 		}
 	}
-	
+
+	@RequestMapping("/delete")
+	public String deleteTienda(Model model, @RequestParam(value = "id") Integer id) {
+		tService.delete(id);
+		model.addAttribute("listaTiendas", tService.list());
+		return "tienda/listTienda";
+	}
 }
