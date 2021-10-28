@@ -41,7 +41,7 @@
 
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Hardware:</label> <input type="text" required
 								th:field="*{nombreHardware}" class="form-control" id="nombre"></input>
 						</div>
 						<div class="alert alert-danger"
@@ -50,7 +50,7 @@
 
 
 						<div class="form-group">
-							<label for="modelo">MODELO:</label> <input type="text" required
+							<label for="modelo">Modelo:</label> <input type="text" required
 								th:field="*{modeloHardware}" class="form-control" id="modelo"></input>
 						</div>
 						<div class="alert alert-danger"
@@ -59,7 +59,7 @@
 
 
 						<div class="form-group">
-							<label for="price">PRECIO:</label>
+							<label for="price">Precio:</label>
 							<div class="input-group mb-3">
 								<div class="input-group-prepend">
 									<span class="input-group-text">S/.</span>
@@ -81,7 +81,7 @@
 
 					<div class="col-6">
 						<div class="form-group">
-							<label for="marca">MARCA:</label> <select
+							<label for="marca">Marca:</label> <select
 								class="form-control" th:field="*{marca.idMarca}">
 								<option th:each="c: ${listaMarcas}"
 									th:value="${c.idMarca}" th:text="${c.nMarca}"
@@ -102,7 +102,7 @@
 							th:errors="*{fechaRegistro}"></div> -->
 
 						<div class="form-group">
-							<label for="file" class="">FOTO:</label>
+							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control"
 									th:text="${hardware.fotoHardware}" />
@@ -113,7 +113,7 @@
 					</div>
 
 					<button style="margin: 0px 30px;" type="submit"
-						class="btnadd btn btn-primary">Aceptar</button>
+						class="btnadd btn btn-primary">Grabar</button>
 					<a href="/hardware/list" class="btn btn-danger">Cancelar</a>
 				</form>
 

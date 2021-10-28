@@ -37,7 +37,7 @@
 							readonly th:field="*{idTipoRecomendacion}"></input>
 
 						<div class="form-group">
-							<label for="tipo">TIPO:</label> <input type="text" required
+							<label for="tipo">Tipo:</label> <input type="text" required
 								th:field="*{tRecomendacion}" class="form-control" id="tipo"></input>
 							<div class="alert alert-danger"
 								th:if="${#fields.hasErrors('tRecomendacion')}"
@@ -46,7 +46,7 @@
 						</div>
 
 					</div>
-					<button type="submit" class="btn btn-warning">Aceptar</button>
+					<button type="submit" class="btn btn-warning">Grabar</button>
 					<a href="/tipoderecomendaciones/list" class="btn btn-light">Cancelar</a>
 
 				</form>
