@@ -1,9 +1,11 @@
 package pe.edu.upc.serviceimplements;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.repositories.IDistritoRepository;
@@ -26,4 +28,17 @@ public class DistritoServiceImplement implements IDistritoService{
 		// TODO Auto-generated method stub
 		return dR.findAll();
 	}
+	@Override
+	@Transactional(readOnly=true)
+	public Distrito listarId(int idDistrito) {
+		Optional<Distrito>op=dR.findById(idDistrito);
+		return op.isPresent()?op.get():new Distrito();
+	}
+	@Override
+	public void delete(int idDistrito) {
+		// TODO Auto-generated method stub
+		dR.deleteById(idDistrito);
+	}
+	
+	
 }

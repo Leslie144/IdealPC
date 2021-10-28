@@ -26,19 +26,27 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Distritos</h3>
-				<a th:href="@{/distritos/new}" class="btn btn-warning">Nuevo</a>
+				<a th:href="@{/distritos/new}" class="btn btn-primary">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Nombre</th>
+						<th scope="col" class="text-center">OPERACION</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="cat : ${listaDistritos}">
 						<td class="text-center" th:text="${cat.idDistrito}"></td>
 						<td class="text-center" th:text="${cat.nombreDistrito}"></td>
+						<td class="text-center">
+						<!--  <a th:href="@{/distritos/delete?id=}+${cat.idDistrito}">Eliminar</a>-->
+						
+						<a class="btn btn-default btn-sm" th:href="@{'/distritos/update/' + ${cat.idDistrito}}">  <i class="fa fa-cog"></i> Update</a>
+						<a class="btn btn-danger" th:href="@{/distritos/delete?id=}+${cat.idDistrito}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+						
+						 </td>
 					</tr>
 				</tbody>
 			</table>
