@@ -32,13 +32,19 @@
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
-						<th scope="col" class="text-center">Nombre</th>
+						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">OPERACION</th>
+
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="cat : ${listaTipouas}">
 						<td class="text-center" th:text="${cat.idTipoua}"></td>
 						<td class="text-center" th:text="${cat.nameTipoua}"></td>
+
+						<a class="btn btn-default btn-sm" th:href="@{'/tipouas/update/' + ${cat.idTipoua}}"> <i class="fa fa-cog"></i> Update
+						</a>
+
 					</tr>
 				</tbody>
 			</table>
