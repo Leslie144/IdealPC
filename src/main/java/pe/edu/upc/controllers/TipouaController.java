@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -68,15 +69,21 @@ public class TipouaController {
 	}
 
 	@RequestMapping("/update/{id}")
-	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
+	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		Tipoua objTipoua = cService.listarId(id);
-		if(objTipoua==null) {
+		if (objTipoua == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipouas/list";
-		}
-		else {
+		} else {
 			model.addAttribute("tipoua", objTipoua);
 			return "tipoua/tipoua";
 		}
+	}
+
+	@RequestMapping("/delete")
+	public String deleteTipoua(Model model, @RequestParam(value = "id") Integer id) {
+		cService.delete(id);
+		model.addAttribute("listaTipouas", cService.list());
+		return "tipoua/listTipouas";
 	}
 }

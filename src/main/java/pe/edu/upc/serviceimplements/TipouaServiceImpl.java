@@ -39,4 +39,10 @@ public class TipouaServiceImpl implements ITipouaService {
 		return op.isPresent()?op.get():new Tipoua();
 	}
 
+	@Override
+	public void delete(int idTipoua) {
+		// TODO Auto-generated method stub
+		cR.deleteById(idTipoua);
+	}
+
 }

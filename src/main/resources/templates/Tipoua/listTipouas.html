@@ -25,13 +25,13 @@
 		<div class="content container">
 
 			<div class="d-flex">
-				<h3 class="title-content">Lista de Tipo UAs</h3>
+				<h3 class="title-content">Lista de Tipo de Unidad de Almacenamiento</h3>
 				<a th:href="@{/tipouas/new}" class="btn btn-warning">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
-						<th scope="col" class="text-center">Código</th>
+						<th scope="col" class="text-center">ID</th>
 						<th scope="col" class="text-center">Tipo</th>
 						<th scope="col" class="text-center">OPERACION</th>
 
@@ -41,10 +41,10 @@
 					<tr th:each="cat : ${listaTipouas}">
 						<td class="text-center" th:text="${cat.idTipoua}"></td>
 						<td class="text-center" th:text="${cat.nameTipoua}"></td>
-
-						<a class="btn btn-default btn-sm" th:href="@{'/tipouas/update/' + ${cat.idTipoua}}"> <i class="fa fa-cog"></i> Update
-						</a>
-
+						<td class="text-center">
+							<a class="btn btn-default btn-sm" th:href="@{'/tipouas/update/' + ${cat.idTipoua}}"> <i class="fa fa-cog"></i> Update </a> 
+							<a class="btn btn-danger" th:href="@{/tipouas/delete?id=}+${cat.idTipoua}"> <i class="fa fa-trash-o fa-lg"></i> Delete </a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
