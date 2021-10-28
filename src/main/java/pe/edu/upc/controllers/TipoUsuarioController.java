@@ -33,7 +33,7 @@ public class TipoUsuarioController {
 			model.addAttribute("error", e.getMessage());
 			// TODO: handle exception
 		}
-		return "tipousuario/listaTipoUsuario";
+		return "tipousuario/listTipoUsuario";
 	}
 	
 	@PostMapping("/save")
@@ -52,6 +52,6 @@ public class TipoUsuarioController {
 			}
 		}
 		model.addAttribute("tipousuario",new TipoUsuario());
-		return "redirect:/tipousuario/list";
+		return "redirect:/tipousuarios/list";
 	}	
 }

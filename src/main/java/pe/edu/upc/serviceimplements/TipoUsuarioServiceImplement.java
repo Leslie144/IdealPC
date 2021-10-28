@@ -2,12 +2,15 @@ package pe.edu.upc.serviceimplements;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.repositories.ITipoUsuarioRepository;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
 
+	@Autowired
 	private ITipoUsuarioRepository tuR;
 	@Override
 	public Integer insert(TipoUsuario tipousuario) {
