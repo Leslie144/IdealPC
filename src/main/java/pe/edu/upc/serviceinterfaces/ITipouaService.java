@@ -10,4 +10,6 @@ public interface ITipouaService {
 	List<Tipoua> list();
 
 	Tipoua listarId(int idTipoua);
+
+	public void delete(int idTipoua);
 }
