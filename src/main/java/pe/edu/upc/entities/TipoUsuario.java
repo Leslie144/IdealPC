@@ -1,6 +1,5 @@
 package pe.edu.upc.entities;
 
-import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
