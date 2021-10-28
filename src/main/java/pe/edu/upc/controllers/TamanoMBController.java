@@ -62,7 +62,7 @@ public class TamanoMBController {
 	@RequestMapping("/listarId")
 	public String listarId(Map<String,Object>model,@ModelAttribute TamanoMB tmb) {
 		mService.listarId(tmb.getIdTamanoMB());
-		return "distrito/listTamanoMB";
+		return "tamanomb/listTamanoMB";
 	}
 	
 	@RequestMapping("/update/{id}")
@@ -79,9 +79,8 @@ public class TamanoMBController {
 	
 	@RequestMapping("/delete")
 	public String deleteTamanoMB(Model model, @RequestParam(value="id")Integer id) {
-		
 		mService.delete(id);
-		model.addAttribute("listaTamanosMB", mService.list());
+		model.addAttribute("listaTamanoMB", mService.list());
 		return "tamanomb/listTamanoMB";
 	}
 }

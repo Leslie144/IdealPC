@@ -34,6 +34,7 @@
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Nombre</th>
 						<th scope="col" class="text-center">URL</th>
+						<th scope="col" class="text-center">OPERACIONES</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -41,6 +42,12 @@
 						<td class="text-center" th:text="${cat.idTipoPanel}"></td>
 						<td class="text-center" th:text="${cat.nTipoPanel}"></td>
 						<td class="text-center" th:text="${cat.urlTipoPanel}"></td>
+						<td class="text-center">
+						
+						<a class="btn btn-default btn-sm" th:href="@{'/tipopanel/update/' + ${cat.idTipoPanel}}">  <i class="fa fa-cog"></i> Update</a>
+						<a class="btn btn-danger" th:href="@{/tipopanel/delete?id=}+${cat.idTipoPanel}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+						
+						</td>
 					</tr>
 				</tbody>
 			</table>
