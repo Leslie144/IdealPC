@@ -39,24 +39,23 @@
 						<th scope="col" class="text-center">Fecha</th>
 						<th scope="col" class="text-center">Distrito</th>
 						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">Detalle</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="cat : ${listaUsuarios}">
 						<td class="text-center"><a class="btn btn-warning btn-xs"
-							th:href="@{/store/view/} + ${p.idUsuario}"
-							th:text="${p.idUsuario}"></a></td>
+							th:href="@{/usuario/view/} + ${cat.idUsuario}"
+							th:text="${cat.idUsuario}"></a></td>
 						<td class="text-center" th:text="${cat.nombreUsuario}"></td>
 						<td class="text-center" th:text="${cat.tContrasena}"></td>
 						<td class="text-center" th:text="${cat.tTelefono}"></td>
 						<td class="text-center" th:text="${cat.tCorreo}"></td>
 						<td class="text-center" th:text="${cat.fechaRegistro}"></td>
+						<td class="text-center" th:text="${cat.distrito.nombreDistrito}"></td>
+						<td class="text-center" th:text="${cat.tipoUsuario.nTipousuario}"></td>
 						<td class="text-center" align="center"><a
-							th:href="@{/store/view/} + ${p.idDistrito}"> <i
-								class="fa fa-eye" style="color: gray;"></i>
-						</a></td>
-						<td class="text-center" align="center"><a
-							th:href="@{/store/view/} + ${p.idTipousuario}"> <i
+							th:href="@{/store/view/} + ${cat.idUsuario}"> <i
 								class="fa fa-eye" style="color: gray;"></i>
 						</a></td>
 					</tr>
