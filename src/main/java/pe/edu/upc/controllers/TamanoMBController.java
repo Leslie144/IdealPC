@@ -84,29 +84,5 @@ public class TamanoMBController {
 		return "tamanomb/listTamanoMB";
 	}
 	
-	@RequestMapping("/listarId")
-	public String listarId(Map<String,Object>model,@ModelAttribute TamanoMB tmb) {
-		mService.listarId(tmb.getIdTamanoMB());
-		return "distrito/listTamanoMB";
-	}
 	
-	@RequestMapping("/update/{id}")
-	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
-		TamanoMB objTamanoMB=mService.listarId(id);
-		if(objTamanoMB==null) {
-			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
-			return "redirect:/tamanomb/list";
-		}else {
-			model.addAttribute("tamanomb",objTamanoMB);
-			return "tamanomb/tamanomb";
-		}
-	}
-	
-	@RequestMapping("/delete")
-	public String deleteTamanoMB(Model model, @RequestParam(value="id")Integer id) {
-		
-		mService.delete(id);
-		model.addAttribute("listaTamanoMB", mService.list());
-		return "tamanomb/listTamanoMB";
-	}
 }
