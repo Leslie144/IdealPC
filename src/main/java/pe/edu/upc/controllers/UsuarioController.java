@@ -88,7 +88,7 @@ public class UsuarioController {
 			}
 			boolean flag = uService.insert(usuario);
 			if (flag) {
-				return "redirect:/store/list";
+				return "redirect:/usuario/list";
 			} else {
 				model.addAttribute("mensaje", "Ocurrió un error");
 				return "redirect:/usuario/new";
@@ -114,8 +114,8 @@ public class UsuarioController {
 	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
 		Usuario usuario = uService.listarId(id);
 		if (usuario == null) {
-			flash.addFlashAttribute("error", "La tienda no existe en la base de datos");
-			return "tienda/listTienda";
+			flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
+			return "usuario/listUsuario";
 		}
 		model.put("usuario", usuario);
 		model.put("titulo", "Detalle de usuario: " + usuario.getNombreUsuario());
@@ -125,7 +125,7 @@ public class UsuarioController {
 	@RequestMapping("/list")
 	public String listUsuarios(Map<String, Object> model) {
 		model.put("listaUsuario", uService.list());
-		return "tienda/listUsuario";
+		return "usuario/listUsuario";
 	}
 
 	@RequestMapping("/listarId")
