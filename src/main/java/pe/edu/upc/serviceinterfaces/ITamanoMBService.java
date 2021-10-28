@@ -6,7 +6,7 @@ import pe.edu.upc.entities.TamanoMB;
 
 public interface ITamanoMBService {
 
-	public Integer insert (TamanoMB tamanomb);
+	public boolean insert (TamanoMB tamanomb);
 	
 	List<TamanoMB> list();
 	TamanoMB listarId(int idTamanoMB);
