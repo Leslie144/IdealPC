@@ -5,13 +5,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.Usuario;
 
 @Repository
-public interface IMarcaRepository extends JpaRepository<Marca, Integer>{
+public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>{
 	
-	@Query("select count (m.nMarca) from Marca m where m.nMarca=:name")
-	public int MarcasExistentes(@Param("name") String nombre);
-	
-
+	@Query("select count (u.nombreUsuario) from Usuario u where u.nombreUsuario=:name")
+	public int UsuarioExistentes(@Param("name") String nombre);
 }
