@@ -51,7 +51,7 @@ public class TipoUsuario {
 		this.nTipousuario = nTipousuario;
 	}
 
-	@Override
+	/*@Override
 	public int hashCode() {
 		return Objects.hash(idTipousuario, nTipousuario);
 	}
@@ -66,7 +66,7 @@ public class TipoUsuario {
 			return false;
 		TipoUsuario other = (TipoUsuario) obj;
 		return idTipousuario == other.idTipousuario && Objects.equals(nTipousuario, other.nTipousuario);
-	}
+	}*/
 
 	
 	

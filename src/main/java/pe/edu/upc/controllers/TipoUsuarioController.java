@@ -40,13 +40,14 @@ public class TipoUsuarioController {
 	@PostMapping("/save")
 	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
-		if (result.hasErrors()) {
-			return "tipousuario/tipousuario";
+		if (result.hasErrors()) {			
+			return "tipoUsario/tipoUsuario";
 		} else {
 			int rpta = tuService.insert(tipousuario);
 			if (rpta > 0) {
+				model.addAttribute("tipousuario", tipousuario);
 				model.addAttribute("mensaje", "ya existe");
-				return "tipousuario/tipousuario";
+				return "tipoUsuario/tipoUsuario";
 			} else {
 				model.addAttribute("mensaje","Se guardó correctamente");
 				status.setComplete();
