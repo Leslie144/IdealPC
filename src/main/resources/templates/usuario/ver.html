@@ -32,6 +32,8 @@
 				<div class="blend"></div>
 
 				<div class="detalles">
+					<a th:href="@{/usuario/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
+					<h2 th:text="${usuario.nombreUsuario}" class="prodnombre"></h2>
 					
 					<p th:text="${usuario.tipoUsuario.nTipousuario}" class="prodprecio"></p>
 					<p th:text="'Ubicado en '+${usuario.distrito.nombreDistrito}"
