@@ -1,9 +1,11 @@
 package pe.edu.upc.serviceimplements;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.Tipoua;
 import pe.edu.upc.repositories.ITipouaRepository;
@@ -28,6 +30,19 @@ public class TipouaServiceImpl implements ITipouaService {
 	public List<Tipoua> list() {
 		// TODO Auto-generated method stub
 		return cR.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Tipoua listarId(int idTipoua) {
+		Optional<Tipoua>op=cR.findById(idTipoua);
+		return op.isPresent()?op.get():new Tipoua();
+	}
+
+	@Override
+	public void delete(int idTipoua) {
+		// TODO Auto-generated method stub
+		cR.deleteById(idTipoua);
 	}
 
 }

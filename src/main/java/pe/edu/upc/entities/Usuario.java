@@ -46,7 +46,7 @@ public class Usuario {
 	
 	@ManyToOne
 	@JoinColumn(name = "idTipousuario",nullable = false)
-	private Distrito tipousuario;
+	private TipoUsuario tipoUsuario;
 
 	public Usuario() {
 		super();
@@ -56,7 +56,7 @@ public class Usuario {
 	public Usuario(int idUsuario,
 			String nombreUsuario,
 			String tContrasena, String tTelefono, String tCorreo, String fotoUsuario, Date fechaRegistro,
-			Distrito distrito, Distrito tipousuario) {
+			Distrito distrito, TipoUsuario tipoUsuario) {
 		super();
 		this.idUsuario = idUsuario;
 		this.nombreUsuario = nombreUsuario;
@@ -66,7 +66,7 @@ public class Usuario {
 		this.fotoUsuario = fotoUsuario;
 		this.fechaRegistro = fechaRegistro;
 		this.distrito = distrito;
-		this.tipousuario = tipousuario;
+		this.tipoUsuario = tipoUsuario;
 	}
 
 	public int getIdUsuario() {
@@ -133,15 +133,13 @@ public class Usuario {
 		this.distrito = distrito;
 	}
 
-	public Distrito getTipousuario() {
-		return tipousuario;
+	public TipoUsuario getTipoUsuario() {
+		return tipoUsuario;
 	}
 
-	public void setTipousuario(Distrito tipousuario) {
-		this.tipousuario = tipousuario;
+	public void setTipoUsuario(TipoUsuario tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
 	}
 
-	
-	
-	
+		
 }

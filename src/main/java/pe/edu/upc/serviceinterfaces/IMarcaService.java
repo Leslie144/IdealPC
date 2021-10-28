@@ -9,4 +9,8 @@ public interface IMarcaService {
 	public Integer insert(Marca marca);
 	
 	List<Marca> list();
+	
+	Marca listarId(int idMarca);
+	
+	public void delete(int idMarca);
 }
