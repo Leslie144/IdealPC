@@ -2,12 +2,17 @@ package pe.edu.upc.serviceimplements;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import pe.edu.upc.entities.TipoModular;
 import pe.edu.upc.repositories.ITipoModularRepository;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 
+@Service
 public class TipoModularServiceImplement implements ITipoModularService {
 
+	@Autowired
 	private ITipoModularRepository tmR;
 	@Override
 	public Integer insert(TipoModular tipomodular) {
