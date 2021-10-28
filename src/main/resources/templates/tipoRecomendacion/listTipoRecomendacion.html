@@ -33,12 +33,17 @@
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">OPERACION</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoRecomendacion}">
 						<td class="text-center" th:text="${tip.idTipoRecomendacion}"></td>
 						<td class="text-center" th:text="${tip.tRecomendacion}"></td>
+						<td class="text-center">
+							<a class="btn btn-default btn-sm" th:href="@{'/tipoderecomendaciones/update/' + ${tip.idTipoRecomendacion}}"> <i class="fa fa-cog"></i> Update </a> 
+							<a class="btn btn-danger" th:href="@{/tipoderecomendaciones/delete?id=}+${tip.idTipoRecomendacion}"> <i class="fa fa-trash-o fa-lg"></i> Delete </a>
+						</td>
 					</tr>
 				</tbody>
 			</table>
