@@ -1,15 +1,22 @@
 package pe.edu.upc.controllers;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.TamanoMB;
 import pe.edu.upc.entities.TipoPanel;
 import pe.edu.upc.serviceinterfaces.ITipoPanelService;
 
@@ -40,20 +47,42 @@ public class TipoPanelController {
 	public String saveTipoPanel(@Validated TipoPanel tipopanel, BindingResult result, Model model, SessionStatus status)
 	throws Exception{
 		if(result.hasErrors()) {
+			model.addAttribute("listaDistritos", tpService.list());
 			return "tipopanel/tipopanel";
 		}else {
-			int rpta = tpService.insert(tipopanel);
-			if(rpta>0) {
-				model.addAttribute("tipopanel", tipopanel);
-				model.addAttribute("menssaje", "Ya existe");
-				return "tipopanel/tipopanel";
-			}else {
-				model.addAttribute("mensaje", "Se guardo correctamente");
-				status.setComplete();
+			boolean flag = tpService.insert(tipopanel);
+			if (flag) {
+				return "redirect:/tipopanel/list";
+			} else {
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/tipopanel/new";
 			}
 		}
-		model.addAttribute("tipopanel", new TipoPanel());
-		return "redirect:/tipopanel/list";
+	}
+	
+	@RequestMapping("/listarId")
+	public String listarId(Map<String,Object>model,@ModelAttribute TamanoMB tmb) {
+		tpService.listarId(tmb.getIdTamanoMB());
+		return "tipopanel/listTipoPanel";
+	}
+	
+	@RequestMapping("/update/{id}")
+	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
+		TipoPanel objTipoPanel=tpService.listarId(id);
+		if(objTipoPanel==null) {
+			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
+			return "redirect:/tipopanel/list";
+		}else {
+			model.addAttribute("tipopanel",objTipoPanel);
+			return "tipopanel/tipopanel";
+		}
+	}
+	
+	@RequestMapping("/delete")
+	public String deleteTipoPanel(Model model, @RequestParam(value="id")Integer id) {
+		tpService.delete(id);
+		model.addAttribute("listaTiposPanel", tpService.list());
+		return "tipopanel/listTipoPanel";
 	}
 	
 }

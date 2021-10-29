@@ -27,7 +27,7 @@
 				<h3></h3>
 			</div>
 			<div class="col-3">
-				<h3>Registrar Tipo UA</h3>
+				<h3>Registrar Tipo Unudad de Alamacenamiento</h3>
 			</div>
 			<div class="col-8 frm-registro">
 				<form th:action="@{/tipouas/save}" method="post"
@@ -37,7 +37,7 @@
 							readonly th:field="*{idTipoua}"></input>
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Tipo:</label> <input type="text" required
 								th:field="*{nameTipoua}" class="form-control" id="nombre"></input>
 							<div class="alert alert-danger"
 								th:if="${#fields.hasErrors('nameTipoua')}"
@@ -46,7 +46,7 @@
 						</div>
 
 					</div>
-					<button type="submit" class="btn btn-warning">Aceptar</button>
+					<button type="submit" class="btn btn-warning">Grabar</button>
 					<a href="/tipouas/list" class="btn btn-light">Cancelar</a>
 
 				</form>

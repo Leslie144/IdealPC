@@ -37,7 +37,7 @@
 							readonly th:field="*{idDistrito}"></input>
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Distrito:</label> <input type="text" required
 								th:field="*{nombreDistrito}" class="form-control" id="nombre"></input>
 							<div class="alert alert-danger"
 								th:if="${#fields.hasErrors('nombreDistrito')}"
@@ -46,7 +46,7 @@
 						</div>
 
 					</div>
-					<button type="submit" class="btnadd btn btn-primary">Aceptar</button>
+					<button type="submit" class="btnadd btn btn-primary">Grabar</button>
 					<a href="/distritos/list" class="btn btn-danger">Cancelar</a>
 
 				</form>

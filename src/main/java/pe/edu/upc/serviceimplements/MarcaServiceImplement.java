@@ -18,13 +18,13 @@ public class MarcaServiceImplement implements IMarcaService {
 	private IMarcaRepository mR;
 
 	@Override
-	public Integer insert(Marca marca) {
-
-		int rpta = mR.MarcasExistentes(marca.getnMarca());
-		if (rpta == 0) {
-			mR.save(marca);
+	public boolean insert(Marca marca) {
+		Marca rpta=mR.save(marca);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 
 	@Override
