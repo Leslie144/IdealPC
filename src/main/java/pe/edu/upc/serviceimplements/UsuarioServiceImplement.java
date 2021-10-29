@@ -1,6 +1,7 @@
 package pe.edu.upc.serviceimplements;
 
 import java.util.List;
+import java.util.Locale.Category;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,11 @@ public class UsuarioServiceImplement implements IUsuarioService{
 	public Usuario listarId(int idUsuario) {
 		Optional<Usuario>op=uR.findById(idUsuario);
 		return op.isPresent()?op.get():new Usuario();
+	}
+
+	@Override
+	public List<Usuario> findBynombreUsuario(String name) {
+		// TODO Auto-generated method stub
+		return uR.findBynombreUsuario(name);
 	}
 }
