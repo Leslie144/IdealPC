@@ -2,6 +2,7 @@ package pe.edu.upc.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -134,4 +135,12 @@ public class UsuarioController {
 		return "usuario/listUsuario";
 	}
 
+	@RequestMapping("/search")
+	public String findUsuario(@ModelAttribute Usuario usuario, Model model) {
+		
+		List<Usuario> listaUsuarios;
+		listaUsuarios=uService.findBynombreUsuario(usuario.getNombreUsuario());
+		model.addAttribute("listaUsuarios", listaUsuarios);
+		return "usuario/listUsuario";
+	}
 }

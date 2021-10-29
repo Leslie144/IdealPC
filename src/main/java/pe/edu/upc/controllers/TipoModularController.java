@@ -46,6 +46,7 @@ public class TipoModularController {
 		} else {
 			int rpta = tmService.insert(tipomodular);
 			if (rpta > 0) {
+				model.addAttribute("tipomodular", tipomodular);
 				model.addAttribute("mensaje", "ya existe");
 				return "tipoModular/tipoModular";
 			} else {
