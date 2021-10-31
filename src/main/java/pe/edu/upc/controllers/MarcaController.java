@@ -1,5 +1,6 @@
 package pe.edu.upc.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +81,14 @@ public class MarcaController {
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		mService.delete(id);
 		model.addAttribute("listaMarcas", mService.list());
+		return "marca/listMarca";
+	}
+	
+	@RequestMapping("/search")
+	public String findCategory(@ModelAttribute Marca marca, Model model) {
+		List<Marca> listaMarcas;
+		listaMarcas=mService.findBynMarca(marca.getnMarca());
+		model.addAttribute("listaMarcas", listaMarcas);
 		return "marca/listMarca";
 	}
 }
