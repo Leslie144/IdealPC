@@ -10,4 +10,5 @@ public interface IHardwareService {
 	List<Hardware>list();
 	Hardware listarId(int idHardware);
 	public void delete(int idHardware);
+	List<Hardware> findBynombreHardware(String name);
 }

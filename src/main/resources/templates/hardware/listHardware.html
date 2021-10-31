@@ -26,7 +26,17 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Hardwares</h3>
-				<a th:href="@{/hardware/new}" class="btn btn-danger">Nuevo</a>
+				
+							<form th:action="@{/hardware/search}" method="post"
+					th:object="${hardware}">
+					<label for="nombreHardware">Buscar:</label> <input type="text"
+						required="required" class="form-control"
+						th:field="*{nombreHardware}" id="nombreHardware"></input>
+					<button type="submit" class="btn btn-danger">Buscar por hardware</button>
+					<a href="/hardware/list" class="btn btn-light">Limpiar</a>
+				</form>
+				
+				<a th:href="@{/hardware/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
