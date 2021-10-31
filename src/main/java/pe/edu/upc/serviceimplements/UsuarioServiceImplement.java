@@ -12,32 +12,39 @@ import pe.edu.upc.repositories.IUsuarioRepository;
 import pe.edu.upc.serviceinterfaces.IUsuarioService;
 
 @Service
-public class UsuarioServiceImplement implements IUsuarioService{
+public class UsuarioServiceImplement implements IUsuarioService {
 
 	@Autowired
 	private IUsuarioRepository uR;
-	
+
 	@Override
 	public boolean insert(Usuario usuario) {
-		
+
 		Usuario rpta = uR.save(usuario);
-		if(rpta==null) {
+		if (rpta == null) {
 			return false;
-		}else {
+		} else {
 			return true;
 		}
 	}
-	
+
 	@Override
-	public List<Usuario> list(){
+	public List<Usuario> list() {
 		return uR.findAll();
 	}
-	@Override
-	//@Transactional(readOnly=true)
 
-	@Transactional(readOnly=true)
+	@Override
+	// @Transactional(readOnly=true)
+
+	@Transactional(readOnly = true)
 	public Usuario listarId(int idUsuario) {
-		Optional<Usuario>op=uR.findById(idUsuario);
-		return op.isPresent()?op.get():new Usuario();
+		Optional<Usuario> op = uR.findById(idUsuario);
+		return op.isPresent() ? op.get() : new Usuario();
+	}
+
+	@Override
+	public List<Usuario> findBynombreUsuario(String name) {
+		// TODO Auto-generated method stub
+		return uR.findBynombreUsuario(name);
 	}
 }

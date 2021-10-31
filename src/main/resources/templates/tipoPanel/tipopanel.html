@@ -37,7 +37,7 @@
 							readonly th:field="*{idTipoPanel}"></input>
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Tipo:</label> <input type="text" required
 								th:field="*{nTipoPanel}" class="form-control" id="nombre"></input>
 							<div class="alert alert-danger"
 								th:if="${#fields.hasErrors('nTipoPanel')}"
@@ -54,7 +54,7 @@
 						</div>
 
 					</div>
-					<button type="submit" class="btnadd btn btn-primary">Aceptar</button>
+					<button type="submit" class="btnadd btn btn-primary">Grabar</button>
 					<a href="/tipopanel/list" class="btn btn-danger">Cancelar</a>
 
 				</form>

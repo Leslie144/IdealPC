@@ -43,4 +43,9 @@ public class TiendaServiceImplement implements ITiendaService{
 		// TODO Auto-generated method stub
 		tR.deleteById(idTienda);
 	}
+	@Override
+	public List<Tienda> findBynombreTienda(String name) {
+		// TODO Auto-generated method stub
+		return tR.findBynombreTienda(name);
+	}
 }

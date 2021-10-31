@@ -25,8 +25,17 @@
 		<div class="content container">
 
 			<div class="d-flex">
-				<h3 class="title-content">Lista de Marcas</h3>
-				<a th:href="@{/marca/new}" class="btn btn-info">Nuevo</a>
+
+				<h3 class="title-content">Lista de Categorias</h3>
+				<form th:action="@{/marca/search}" method="post"
+					th:object="${marca}">
+					<label for="nameMarca">Buscar:</label> <input type="text"
+						required="required" class="form-control"
+						th:field="*{nMarca}" id="nameMarca"></input>
+					<button type="submit" class="btn btn-danger">Buscar</button>
+					<a href="/marca/list" class="btn btn-light">Limpiar</a>
+				</form>
+				<a th:href="@{/marca/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
@@ -34,8 +43,7 @@
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Marca</th>
 						<th scope="col" class="text-center">URL</th>
-						<th scope="col" class="text-center">OPERACION</th>
-						
+						<th scope="col" class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -43,12 +51,15 @@
 						<td class="text-center" th:text="${cat.idMarca}"></td>
 						<td class="text-center" th:text="${cat.nMarca}"></td>
 						<td class="text-center" th:text="${cat.urlMarca}"></td>
-						
-						<td class="text-center">
-							<a class="btn btn-default btn-sm" th:href="@{'/marca/update/' + ${cat.idMarca}}"> <i class="fa fa-cog"></i> Update </a> 
-							<a class="btn btn-danger" th:href="@{/marca/delete?id=}+${cat.idMarca}"> <i class="fa fa-trash-o fa-lg"></i> Delete </a>
-						</td>
-					
+
+						<td class="text-center"><a class="btn btn-default btn-sm"
+							th:href="@{'/marca/update/' + ${cat.idMarca}}"> <i
+								class="fa fa-cog"></i> Update
+						</a> <a class="btn btn-danger"
+							th:href="@{/marca/delete?id=}+${cat.idMarca}"> <i
+								class="fa fa-trash-o fa-lg"></i> Delete
+						</a></td>
+
 					</tr>
 				</tbody>
 			</table>

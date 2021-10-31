@@ -4,14 +4,14 @@ import java.util.List;
 
 import pe.edu.upc.entities.Usuario;
 
-
 public interface IUsuarioService {
-	
+
 	public boolean insert(Usuario usuario);
-	
+
 	List<Usuario> list();
-	
+
 	Usuario listarId(int idUsuario);
-	
+
+	List<Usuario> findBynombreUsuario(String name);
 
 }

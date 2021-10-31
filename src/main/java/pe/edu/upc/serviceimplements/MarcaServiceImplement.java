@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.entities.Marca;
-import pe.edu.upc.entities.TamanoMB;
 import pe.edu.upc.repositories.IMarcaRepository;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 
@@ -44,6 +43,12 @@ public class MarcaServiceImplement implements IMarcaService {
 	public void delete(int idMarca) {
 		// TODO Auto-generated method stub
 		mR.deleteById(idMarca);
+	}
+
+	@Override
+	public List<Marca> findBynMarca(String name) {
+		// TODO Auto-generated method stub
+		return mR.findBynMarca(name);
 	}
 
 }

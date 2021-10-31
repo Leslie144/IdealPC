@@ -7,7 +7,7 @@
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <link rel="icon"
 	href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKoAAACqCAMAAAAKqCSwAAAAb1BMVEUAAAD////8/PxdXV0WFhbf39+Dg4MEBATr6+uxsbEtLS1cXFz29vYRERE4ODimpqZFRUXHx8fNzc3Y2NiLi4shISHo6OhAQEDT09O5ublVVVWTk5MbGxujo6Nvb28SEhI0NDQmJiZra2uYmJh+fn794qvdAAADhElEQVR4nO2bXXOqMBCGSRTBGhUQED+r1v//G09ATy/ObHAk7+bgzD4XnU6r6eOSJptNEkWCIAiCIAiCIAiCIAiCIAiCIAiCMIwk+Q9/c/om38tfzaC6SbSv4/fYNPluXZ73X8uQoq3qRGk1iLRZn1cBdZNo8b6qbum+M0W5CtULPKKqHr5mNwkTWh/Vh6790txCyPqqPm2LBX83AKh2snr+9RGqnWx6Zg4sSFW1jcyPrHMCTLWVbVaMpkhV206dfYiqbSjdf4iqxfC5glVtXNn6ADqqWsVcAyxa1TaWM82ycFXb2uFTVK0sz78Wg6pWm+OHqHJ1gUGqf9cATgzHDOtQNakbo5+x6wnrPJSqVj/Vl5NVtrivG9MvyzAROFTvr9K5aVZu3LJarYOpzvpUk0fJ4nhrlLPTMvTWIarPN1rZ0jjDWo5H9WGbxXQnsGPrdEyq7buvhavDLtCrFz9V+6qqIV21OmFFvVXtyy415WqTQXQP8FXtGqBBD63eqpY5HdbZCFW31JCl1W6EqmRY8Z0VoNqWaCnQExYkqkd6IgCPrBDVaE32gDtSFKOaRGdS9Wd8qnYMIEcr8BCAUa1iSjXHJgEY1SWRtGjVfI9QNdpRjcTYNTZIlRoCVD1K1ROpWokqQwcYpSqZB47y3yrJqUbAK0GM6nFDNVJga8IY1QuRXNuJdXyzFb28gheDMFE9kJkVuMACUaVSAPuT2whTayoHxBcuIarU84fPABDVilpawdNViGpJlyzQexeAQtAqpXoqvhToH9UlMal2XfUKFUVE9cdRtETXgbxLwcmBfvpanUdWCv4+0aZKpejn76HavmCbO0Q5doMGqna/vR5cGywsu9eDo7rcHmLnHhvL+QW3qptltVoc8v6dyxvc1LUdvJk72eVFbB4fyPn0VYEtrPSpvuLVNvsEb+pU1T28/BzopUq/qhdmy2DKc3YFvQ3EpWofP89BK4YjYfWFxZQhqmwHGPGqZyZT/ElL/OkKHlW7oOI7bY09wKxKxnPh0GPhhvW8PU5Vq5jxoDVQ1baxY75vgVG1KUzNfdkComrfb07sV1j8Vduc0MyzAPfD/FS73DVdhxD1UH2m2LqYXQLduOvuBr7Jr22dz7Jw9xiHHWA26SY/3ffXwNduq8mbLPbZ6jr9D5eDPQhv21OccBBcURAEQRAEQRAEQRAEQRAEQRAEQfiHP/sXNtQqYCthAAAAAElFTkSuQmCC">
-<title>TIENDA</title>
+<title>Usuario</title>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -40,7 +40,7 @@
 						</div>
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Usuario:</label> <input type="text" required
 								th:field="*{nombreUsuario}" class="form-control" id="nombre"></input>
 						</div>
 						<div class="alert alert-danger"
@@ -49,7 +49,7 @@
 
 
 						<div class="form-group">
-							<label for="tContrasena">CONTRASENA:</label> <input type="text"
+							<label for="tContrasena">Contraseña:</label> <input type="text"
 								required th:field="*{tContrasena}" class="form-control"
 								id="tContrasena"></input>
 						</div>
@@ -58,7 +58,7 @@
 							th:errors="*{tContrasena}"></div>
 
 						<div class="form-group">
-							<label for="tTelefono">TELEFONO:</label> <input type="text"
+							<label for="tTelefono">Teléfono:</label> <input type="text"
 								required th:field="*{tTelefono}" class="form-control"
 								id="tTelefono"></input>
 						</div>
@@ -67,7 +67,7 @@
 							th:errors="*{tTelefono}"></div>
 
 						<div class="form-group">
-							<label for="tCorreo">CORREO:</label> <input type="text" required
+							<label for="tCorreo">Correo:</label> <input type="text" required
 								th:field="*{tCorreo}" class="form-control" id="tCorreo"></input>
 						</div>
 						<div class="alert alert-danger"
@@ -83,7 +83,7 @@
 
 					<div class="col-6">
 						<div class="form-group">
-							<label for="distrito">DISTRITO:</label> <select
+							<label for="distrito">Distrito:</label> <select
 								class="form-control" th:field="*{distrito.idDistrito}">
 								<option th:each="c: ${listaDistritos}"
 									th:value="${c.idDistrito}" th:text="${c.nombreDistrito}"
@@ -93,7 +93,7 @@
 
 
 						<div class="form-group">
-							<label for="tipousuario">TIPO:</label> <select
+							<label for="tipousuario">Tipo usuario:</label> <select
 								class="form-control" th:field="*{TipoUsuario.idTipousuario}">
 								<option th:each="c: ${listaTipos}" th:value="${c.idTipousuario}"
 									th:text="${c.nTipousuario}"
@@ -103,7 +103,7 @@
 
 
 						<div class="form-group">
-							<label for="fechaUsuario">FECHA REGISTRO:</label> <input
+							<label for="fechaUsuario">Fecha Rwgistro:</label> <input
 								type="date" required th:field="*{fechaRegistro}" id="start"
 								name="trip-start" value="*{fechaRegistro}" min="2018-01-01"
 								max="2058-12-31">
@@ -113,7 +113,7 @@
 							th:errors="*{fechaRegistro}"></div>
 
 						<div class="form-group">
-							<label for="file" class="">FOTO:</label>
+							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control"
 									th:text="${usuario.fotoUsuario}" />
@@ -124,8 +124,8 @@
 					</div>
 
 					<button style="margin: 0px 30px;" type="submit"
-						class="btnadd btn btn-primary">Aceptar</button>
-					<a href="/store/list" class="btn btn-danger">Cancelar</a>
+						class="btnadd btn btn-primary">Grabar</button>
+					<a href="/usuario/list" class="btn btn-danger">Cancelar</a>
 				</form>
 
 				<div th:if="${mensaje}" class="alert alert-danger">

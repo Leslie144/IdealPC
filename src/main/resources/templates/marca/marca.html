@@ -37,7 +37,7 @@
 							readonly th:field="*{idMarca}"></input>
 
 						<div class="form-group">
-							<label for="nombre">NOMBRE:</label> <input type="text" required
+							<label for="nombre">Marca:</label> <input type="text" required
 								th:field="*{nMarca}" class="form-control" id="nombre"></input>
 							<div class="alert alert-danger"
 								th:if="${#fields.hasErrors('nMarca')}"
@@ -54,7 +54,7 @@
 						</div>
 
 					</div>
-					<button type="submit" class="btnadd btn btn-primary">Aceptar</button>
+					<button type="submit" class="btnadd btn btn-primary">Grabar</button>
 					<a href="/marca/list" class="btn btn-danger">Cancelar</a>
 
 				</form>
