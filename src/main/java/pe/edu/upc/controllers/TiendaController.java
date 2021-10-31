@@ -24,6 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.Tienda;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -158,6 +159,13 @@ public class TiendaController {
 	public String findTienda(@ModelAttribute Tienda tienda, Model model) {
 		List<Tienda> listaTiendas;
 		listaTiendas = tService.findBynombreTienda(tienda.getNombreTienda());
+		model.addAttribute("listaTiendas", listaTiendas);
+		return "tienda/listTienda";
+	}
+	@RequestMapping("/search2")
+	public String findTienda2(@ModelAttribute Tienda tienda, Model model) {
+		List<Tienda> listaTiendas;
+		listaTiendas = tService.findByDistritoNombreDistrito(tienda.getDistrito().getNombreDistrito());
 		model.addAttribute("listaTiendas", listaTiendas);
 		return "tienda/listTienda";
 	}
