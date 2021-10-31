@@ -14,5 +14,7 @@ public interface ITiendaService {
 	public void delete(int idTienda);
 
 	List<Tienda> findBynombreTienda(String name);
+	
+	List<Tienda> findByDistritoNombreDistrito(String distrito);
 
 }

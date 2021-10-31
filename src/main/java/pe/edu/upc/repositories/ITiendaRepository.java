@@ -14,5 +14,8 @@ public interface ITiendaRepository extends JpaRepository<Tienda, Integer> {
 	@Query("select count(t.nombreTienda) from Tienda t where t.nombreTienda=:name")
 	public int buscarTienda(@Param("name") String nombre);
 
+	//@Query(value="select * from Tienda t where t.id_distrito = (select idDistrito from Distrito where nombreDistrito =:ndistrito)", nativeQuery = true)
+	List<Tienda> findByDistritoNombreDistrito(String nombreDistrito);;
+	
 	List<Tienda> findBynombreTienda(String name);
 }
