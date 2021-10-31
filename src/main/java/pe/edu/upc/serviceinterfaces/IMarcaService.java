@@ -13,4 +13,6 @@ public interface IMarcaService {
 	Marca listarId(int idMarca);
 	
 	public void delete(int idMarca);
+	
+	List<Marca> findBynMarca(String name);
 }

@@ -45,4 +45,10 @@ public class MarcaServiceImplement implements IMarcaService {
 		mR.deleteById(idMarca);
 	}
 
+	@Override
+	public List<Marca> findBynMarca(String name) {
+		// TODO Auto-generated method stub
+		return mR.findBynMarca(name);
+	}
+
 }
