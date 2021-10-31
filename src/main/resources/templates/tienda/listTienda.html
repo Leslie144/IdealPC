@@ -24,10 +24,22 @@
 
 		<div class="content container">
 
+		
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Tiendas</h3>
-				<a th:href="@{/store/new}" class="btn btn-success">Nuevo</a>
+				<form th:action="@{/store/search}" method="post"
+					th:object="${tienda}">
+					<label for="nombreTienda">Buscar:</label> <input type="text"
+						required="required" class="form-control"
+						th:field="*{nombreTienda}" id="nombreTienda"></input>
+					<button type="submit" class="btn btn-danger">Buscar</button>
+					<a href="/store/list" class="btn btn-light">Limpiar</a>
+				</form>
+
+				<a th:href="@{/store/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
+			
+			
 			<table class="table">
 				<thead class="thead-light">
 					<tr>

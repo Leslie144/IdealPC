@@ -3,6 +3,7 @@ package pe.edu.upc.controllers;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -150,6 +151,14 @@ public class TiendaController {
 	public String deleteTienda(Model model, @RequestParam(value = "id") Integer id) {
 		tService.delete(id);
 		model.addAttribute("listaTiendas", tService.list());
+		return "tienda/listTienda";
+	}
+
+	@RequestMapping("/search")
+	public String findTienda(@ModelAttribute Tienda tienda, Model model) {
+		List<Tienda> listaTiendas;
+		listaTiendas = tService.findBynombreTienda(tienda.getNombreTienda());
+		model.addAttribute("listaTiendas", listaTiendas);
 		return "tienda/listTienda";
 	}
 }
