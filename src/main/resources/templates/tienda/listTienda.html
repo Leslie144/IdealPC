@@ -37,9 +37,9 @@
 				</form>
 				<form th:action="@{/store/search2}" method="post"
 					th:object="${tienda}">
-					<label for="nombreTienda2">Buscar:</label> <input type="text"
+					<label for="nombreDistrito">Buscar:</label> <input type="text"
 						required="required" class="form-control"
-						th:field="*{distrito.nombreDistrito}" id="nombreTienda2"></input>
+						th:field="*{distrito.nombreDistrito}" id="nombreDistrito"></input>
 					<button type="submit" class="btn btn-danger">Buscar</button>
 					<a href="/store/list" class="btn btn-light">Limpiar</a>
 				</form>
