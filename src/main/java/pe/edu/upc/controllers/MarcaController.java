@@ -80,6 +80,7 @@ public class MarcaController {
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		mService.delete(id);
+		model.addAttribute("marca", new Marca());
 		model.addAttribute("listaMarcas", mService.list());
 		return "marca/listMarca";
 	}
