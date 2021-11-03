@@ -24,7 +24,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.Tienda;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -151,6 +150,7 @@ public class TiendaController {
 	@RequestMapping("/delete")
 	public String deleteTienda(Model model, @RequestParam(value = "id") Integer id) {
 		tService.delete(id);
+		model.addAttribute("tienda", new Tienda());
 		model.addAttribute("listaTiendas", tService.list());
 		return "tienda/listTienda";
 	}

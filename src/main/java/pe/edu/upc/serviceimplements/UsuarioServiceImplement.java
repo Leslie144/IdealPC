@@ -47,4 +47,10 @@ public class UsuarioServiceImplement implements IUsuarioService {
 		// TODO Auto-generated method stub
 		return uR.findBynombreUsuario(name);
 	}
+
+	@Override
+	public void delete(int idUsuario) {
+		// TODO Auto-generated method stub
+		uR.deleteById(idUsuario);
+	}
 }

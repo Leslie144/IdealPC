@@ -32,6 +32,7 @@
 						th:field="*{nombreUsuario}" id="nombreUsuario"></input>
 					<button type="submit" class="btn btn-danger">Buscar</button>
 					<a href="/usuario/list" class="btn btn-light">Limpiar</a>
+					
 				</form>
 
 				<a th:href="@{/usuario/new}" class="btnnew btn btn-danger">Nuevo</a>
@@ -48,23 +49,28 @@
 						<th scope="col" class="text-center">Fecha de Registro</th>
 						<th scope="col" class="text-center">Distrito</th>
 						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">Operaciones</th>
 						<th scope="col" class="text-center">Detalle</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="cat : ${listaUsuarios}">
+					<tr th:each="usu : ${listaUsuarios}">
 						<td class="text-center"><a class="btn btn-warning btn-xs"
-							th:href="@{/usuario/view/} + ${cat.idUsuario}"
-							th:text="${cat.idUsuario}"></a></td>
-						<td class="text-center" th:text="${cat.nombreUsuario}"></td>
-						<td class="text-center" th:text="${cat.tContrasena}"></td>
-						<td class="text-center" th:text="${cat.tTelefono}"></td>
-						<td class="text-center" th:text="${cat.tCorreo}"></td>
-						<td class="text-center" th:text="${cat.fechaRegistro}"></td>
-						<td class="text-center" th:text="${cat.distrito.nombreDistrito}"></td>
-						<td class="text-center" th:text="${cat.tipoUsuario.nTipousuario}"></td>
+							th:href="@{/usuario/view/} + ${usu.idUsuario}"
+							th:text="${usu.idUsuario}"></a></td>
+						<td class="text-center" th:text="${usu.nombreUsuario}"></td>
+						<td class="text-center" th:text="${usu.tContrasena}"></td>
+						<td class="text-center" th:text="${usu.tTelefono}"></td>
+						<td class="text-center" th:text="${usu.tCorreo}"></td>
+						<td class="text-center" th:text="${usu.fechaRegistro}"></td>
+						<td class="text-center" th:text="${usu.distrito.nombreDistrito}"></td>
+						<td class="text-center" th:text="${usu.tipoUsuario.nTipousuario}"></td>
+						<td class="text-center">
+						<a class="btn btn-default btn-sm" th:href="@{'/usuario/update/' + ${usu.idUsuario}}">  <i class="fa fa-cog"></i> Update</a>
+						<a class="btn btn-danger" th:href="@{/usuario/delete?id=}+${usu.idUsuario}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>									
+						</td>
 						<td class="text-center" align="center"><a
-							th:href="@{/usuario/view/} + ${cat.idUsuario}"> <i
+							th:href="@{/usuario/view/} + ${usu.idUsuario}"> <i
 								class="fa fa-eye" style="color: gray;"></i>
 						</a></td>
 					</tr>
