@@ -2,6 +2,7 @@ package pe.edu.upc.controllers;
 
 import java.net.MalformedURLException;
 import java.text.ParseException;
+import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -142,5 +143,12 @@ public class HardwareController {
 		return "hardware/listHardware";
 	}
 	
+	@RequestMapping("/search")
+	public String findCategory(@ModelAttribute Hardware hardware, Model model) {
+	List<Hardware> listaHardwares;
+	listaHardwares=hService.findBynombreHardware(hardware.getNombreHardware());
+	model.addAttribute("listaHardwares",listaHardwares);
+	return "hardware/listHardware";
+	}
 	
 	}

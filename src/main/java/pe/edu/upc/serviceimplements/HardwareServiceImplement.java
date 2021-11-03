@@ -47,5 +47,9 @@ public class HardwareServiceImplement implements IHardwareService{
 		hR.deleteById(idHardware);
 	}
 
+	@Override
+	public List<Hardware> findBynombreHardware(String name){
+	return hR.findBynombreHardware(name);	
+	}
 	
 }
