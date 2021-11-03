@@ -43,7 +43,7 @@ public class UsuarioController {
 	private ITipoUsuarioService tService;
 
 	@GetMapping("/new")
-	public String newMarca(Model model) {
+	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
 		model.addAttribute("listaTipos", tService.list());
 		model.addAttribute("usuario", new Usuario());
@@ -51,7 +51,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/list")
-	public String listMarcas(Model model) {
+	public String listUsuarios(Model model) {
 		try {
 			model.addAttribute("usuario", new Usuario());
 			model.addAttribute("listaUsuarios", uService.list());
@@ -134,10 +134,32 @@ public class UsuarioController {
 		uService.listarId(usuario.getIdUsuario());
 		return "usuario/listUsuario";
 	}
+	
+	@RequestMapping("/update/{id}")
+	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+
+		Usuario objUsuario = uService.listarId(id);
+		if (objUsuario == null) {
+			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
+			return "redirect:/usuario/list";
+		} else {
+			model.addAttribute("listaDistritos", dService.list());
+			model.addAttribute("listaTipos", tService.list());
+			model.addAttribute("usuario", objUsuario);
+			return "usuario/usuario";
+		}
+	}
+
+	@RequestMapping("/delete")
+	public String deleteUsuario(Model model, @RequestParam(value = "id") Integer id) {
+		uService.delete(id);
+		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("listaUsuarios", uService.list());
+		return "usuario/listUsuario";
+	}
 
 	@RequestMapping("/search")
 	public String findUsuario(@ModelAttribute Usuario usuario, Model model) {
-		
 		List<Usuario> listaUsuarios;
 		listaUsuarios=uService.findBynombreUsuario(usuario.getNombreUsuario());
 		model.addAttribute("listaUsuarios", listaUsuarios);
