@@ -17,7 +17,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entities.TipoModular;
-import pe.edu.upc.entities.TipoRecomendacion;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 
 @Controller
