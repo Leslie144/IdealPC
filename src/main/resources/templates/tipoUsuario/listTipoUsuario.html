@@ -33,12 +33,19 @@
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Tipo</th>
+						<th scope="col" class="text-center">Operacion</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoUsuario}">
 						<td class="text-center" th:text="${tip.idTipousuario}"></td>
 						<td class="text-center" th:text="${tip.nTipousuario}"></td>
+						<td class="text-center">
+						
+						<a class="btn btn-default btn-sm" th:href="@{'/tipousuarios/update/' + ${tip.idTipousuario}}">  <i class="fa fa-cog"></i> Update</a>
+						<a class="btn btn-danger" th:href="@{/tipousuarios/delete?id=}+${tip.idTipousuario}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
+						
+						 </td>
 					</tr>
 				</tbody>
 			</table>

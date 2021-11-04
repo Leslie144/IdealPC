@@ -7,4 +7,6 @@ import pe.edu.upc.entities.TipoModular;
 public interface ITipoModularService {
 	public Integer insert(TipoModular tipomodular);
 	List<TipoModular> list();
+	TipoModular listarId(int idTipoModular);
+	public void delete (int idTipoModular);
 }
