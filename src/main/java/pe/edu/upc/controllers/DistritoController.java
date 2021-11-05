@@ -1,5 +1,6 @@
 package pe.edu.upc.controllers;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,6 +84,13 @@ public class DistritoController {
 		
 		dService.delete(id);
 		model.addAttribute("listaDistritos", dService.list());
+		return "distrito/listDistrito";
+	}
+	@RequestMapping("/search")
+	public String findDistrito(@ModelAttribute Distrito distri,Model model) {
+		List<Distrito> listaDistritos;
+		listaDistritos=dService.findBynombreDistrito(distri.getNombreDistrito());
+		model.addAttribute("listaDistritos",listaDistritos);
 		return "distrito/listDistrito";
 	}
 }
