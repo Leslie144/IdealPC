@@ -9,4 +9,5 @@ public interface IDistritoService {
 	List<Distrito> list();
 	Distrito listarId(int idDistrito);
 	public void delete(int idDistrito);
+	List<Distrito>findBynombreDistrito(String name);
 }

@@ -39,6 +39,11 @@ public class DistritoServiceImplement implements IDistritoService{
 		// TODO Auto-generated method stub
 		dR.deleteById(idDistrito);
 	}
+	@Override
+	public List<Distrito> findBynombreDistrito(String name) {
+		// TODO Auto-generated method stub
+		return dR.findBynombreDistrito(name);
+	}
 	
 	
 }
