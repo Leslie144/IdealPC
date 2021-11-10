@@ -2,18 +2,19 @@ package pe.edu.upc.serviceinterfaces;
 
 import java.util.List;
 
-import pe.edu.upc.entities.Usuario;
+import pe.edu.upc.entities.Users;
+
 
 public interface IUsuarioService {
 
-	public boolean insert(Usuario usuario);
+	public boolean insert(Users usuario);
 
-	List<Usuario> list();
+	List<Users> list();
 
-	Usuario listarId(int idUsuario);
+	Users listarId(Long idUsuario);
 	
-	public void delete(int idUsuarioidUsuario);
+	public void delete(Long idUsuarioidUsuario);
 
-	List<Usuario> findBynombreUsuario(String name);
+	List<Users> findBynombreUsuario(String name);
 
 }

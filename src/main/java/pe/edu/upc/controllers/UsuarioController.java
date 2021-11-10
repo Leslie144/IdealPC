@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Usuario;
+import pe.edu.upc.entities.Users;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
@@ -46,14 +46,14 @@ public class UsuarioController {
 	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
 		model.addAttribute("listaTipos", tService.list());
-		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("usuario", new Users());
 		return "usuario/usuario";
 	}
 
 	@GetMapping("/list")
 	public String listUsuarios(Model model) {
 		try {
-			model.addAttribute("usuario", new Usuario());
+			model.addAttribute("usuario", new Users());
 			model.addAttribute("listaUsuarios", uService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -62,7 +62,7 @@ public class UsuarioController {
 	}
 
 	@PostMapping("/save")
-	public String saveUsuario(@ModelAttribute @Valid Usuario usuario, BindingResult result, Model model,
+	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
@@ -71,10 +71,10 @@ public class UsuarioController {
 		} else {
 			if (!foto.isEmpty()) {
 
-				if (usuario.getIdUsuario() > 0 && usuario.getFotoUsuario() != null
-						&& usuario.getFotoUsuario().length() > 0) {
+				if (usuario.getId() > 0 && usuario.getPhoto() != null
+						&& usuario.getPhoto().length() > 0) {
 
-					subirarchivoService.delete(usuario.getFotoUsuario());
+					subirarchivoService.delete(usuario.getPhoto());
 				}
 
 				String uniqueFilename = null;
@@ -85,7 +85,7 @@ public class UsuarioController {
 				}
 
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
-				usuario.setFotoUsuario(uniqueFilename);
+				usuario.setPhoto(uniqueFilename);
 			}
 			boolean flag = uService.insert(usuario);
 			if (flag) {
@@ -112,14 +112,14 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/view/{id}")
-	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
-		Usuario usuario = uService.listarId(id);
+	public String view(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+		Users usuario = uService.listarId(id);
 		if (usuario == null) {
 			flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
 			return "usuario/listUsuario";
 		}
 		model.put("usuario", usuario);
-		model.put("titulo", "Detalle de usuario: " + usuario.getNombreUsuario());
+		model.put("titulo", "Detalle de usuario: " + usuario.getUsername());
 		return "usuario/ver";
 	}
 	
@@ -130,15 +130,15 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Usuario usuario) {
-		uService.listarId(usuario.getIdUsuario());
+	public String listarId(Map<String, Object> model, @ModelAttribute Users usuario) {
+		uService.listarId(usuario.getId());
 		return "usuario/listUsuario";
 	}
 	
 	@RequestMapping("/update/{id}")
-	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+	public String update(@PathVariable Long id, Model model, RedirectAttributes objRedir) {
 
-		Usuario objUsuario = uService.listarId(id);
+		Users objUsuario = uService.listarId(id);
 		if (objUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
 			return "redirect:/usuario/list";
@@ -151,17 +151,17 @@ public class UsuarioController {
 	}
 
 	@RequestMapping("/delete")
-	public String deleteUsuario(Model model, @RequestParam(value = "id") Integer id) {
+	public String deleteUsuario(Model model, @RequestParam(value = "id") Long id) {
 		uService.delete(id);
-		model.addAttribute("usuario", new Usuario());
+		model.addAttribute("usuario", new Users());
 		model.addAttribute("listaUsuarios", uService.list());
 		return "usuario/listUsuario";
 	}
 
 	@RequestMapping("/search")
-	public String findUsuario(@ModelAttribute Usuario usuario, Model model) {
-		List<Usuario> listaUsuarios;
-		listaUsuarios=uService.findBynombreUsuario(usuario.getNombreUsuario());
+	public String findUsuario(@ModelAttribute Users usuario, Model model) {
+		List<Users> listaUsuarios;
+		listaUsuarios=uService.findBynombreUsuario(usuario.getUsername());
 		model.addAttribute("listaUsuarios", listaUsuarios);
 		return "usuario/listUsuario";
 	}

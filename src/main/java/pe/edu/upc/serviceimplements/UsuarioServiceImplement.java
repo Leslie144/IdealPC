@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entities.Usuario;
+import pe.edu.upc.entities.Users;
 import pe.edu.upc.repositories.IUsuarioRepository;
 import pe.edu.upc.serviceinterfaces.IUsuarioService;
 
@@ -18,9 +18,9 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	private IUsuarioRepository uR;
 
 	@Override
-	public boolean insert(Usuario usuario) {
+	public boolean insert(Users usuario) {
 
-		Usuario rpta = uR.save(usuario);
+		Users rpta = uR.save(usuario);
 		if (rpta == null) {
 			return false;
 		} else {
@@ -29,7 +29,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	}
 
 	@Override
-	public List<Usuario> list() {
+	public List<Users> list() {
 		return uR.findAll();
 	}
 
@@ -37,19 +37,19 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	// @Transactional(readOnly=true)
 
 	@Transactional(readOnly = true)
-	public Usuario listarId(int idUsuario) {
-		Optional<Usuario> op = uR.findById(idUsuario);
-		return op.isPresent() ? op.get() : new Usuario();
+	public Users listarId(Long idUsuario) {
+		Optional<Users> op = uR.findById(idUsuario);
+		return op.isPresent() ? op.get() : new Users();
 	}
 
 	@Override
-	public List<Usuario> findBynombreUsuario(String name) {
+	public List<Users> findBynombreUsuario(String name) {
 		// TODO Auto-generated method stub
-		return uR.findBynombreUsuario(name);
+		return uR.findByUsername(name);
 	}
 
 	@Override
-	public void delete(int idUsuario) {
+	public void delete(Long idUsuario) {
 		// TODO Auto-generated method stub
 		uR.deleteById(idUsuario);
 	}
