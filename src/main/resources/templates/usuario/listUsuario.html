@@ -49,7 +49,6 @@
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Usuario</th>
-						<th scope="col" class="text-center">Contraseña</th>
 						<th scope="col" class="text-center">Teléfono</th>
 						<th scope="col" class="text-center">Correo</th>
 						<th scope="col" class="text-center">Fecha de Registro</th>
@@ -64,7 +63,6 @@
 						<td class="text-center"><a class="btn btn-warning btn-xs"
 							th:href="@{/usuario/view/} + ${usu.id}" th:text="${usu.id}"></a></td>
 						<td class="text-center" th:text="${usu.username}"></td>
-						<td class="text-center" th:text="${usu.password}"></td>
 						<td class="text-center" th:text="${usu.phone}"></td>
 						<td class="text-center" th:text="${usu.email}"></td>
 						<td class="text-center" th:text="${usu.registrationdate}"></td>
