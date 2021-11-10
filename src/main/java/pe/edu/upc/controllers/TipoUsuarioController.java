@@ -49,18 +49,14 @@ public class TipoUsuarioController {
 		if (result.hasErrors()) {			
 			return "tipoUsuario/tipoUsuario";
 		} else {
-			int rpta = tuService.insert(tipousuario);
-			if (rpta > 0) {
-				model.addAttribute("tipousuario", tipousuario);
-				model.addAttribute("mensaje", "ya existe");
-				return "tipoUsuario/tipoUsuario";
+			boolean flag = tuService.insert(tipousuario);
+			if (flag) {
+				return "redirect:/tipousuarios/list";
 			} else {
-				model.addAttribute("mensaje","Se guardó correctamente");
-				status.setComplete();
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/tipousuarios/new";
 			}
 		}
-		model.addAttribute("tipousuario",new TipoUsuario());
-		return "redirect:/tipousuarios/list";
 	}	
 	
 	@RequestMapping("/listarId")
@@ -84,7 +80,7 @@ public class TipoUsuarioController {
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tuService.delete(id);
-		model.addAttribute("listTipoUsuario", tuService.list());
+		model.addAttribute("listaTipoUsuario", tuService.list());
 		return "tipoUsuario/listTipoUsuario";
 	}
 }

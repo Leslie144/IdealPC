@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import pe.edu.upc.entities.TipoRecomendacion;
 import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.repositories.ITipoUsuarioRepository;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
@@ -16,12 +17,13 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
 	@Autowired
 	private ITipoUsuarioRepository tuR;
 	@Override
-	public Integer insert(TipoUsuario tipousuario) {
-		int rpta=tuR.TipoUsuarioExistentes(tipousuario.getnTipousuario());
-		if(rpta==0) {
-			tuR.save(tipousuario);
+	public boolean insert(TipoUsuario tipousuario) {
+		TipoUsuario rpta=tuR.save(tipousuario);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 
 	@Override
