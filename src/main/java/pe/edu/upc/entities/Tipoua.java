@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Tipoua")
@@ -15,8 +14,6 @@ public class Tipoua {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idTipoua;
 	
-	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre de la Tipoua no puede contener caracteres especiales")
-	@Pattern(regexp = "[^0-9]+", message = "El nombre de la Tipoua no puede contener un número")
 	@Column(name = "nameTipoua", nullable = false, length = 20)
 	private String nameTipoua;
 
