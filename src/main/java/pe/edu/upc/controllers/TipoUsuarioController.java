@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.Role;
 import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
@@ -24,13 +25,13 @@ import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 public class TipoUsuarioController {
 	@Autowired
 	private ITipoUsuarioService tuService;
-	
+
 	@GetMapping("/new")
 	public String newTipoUsuario(Model model) {
 		model.addAttribute("tipousuario", new TipoUsuario());
 		return "tipousuario/tipousuario";
 	}
-	
+
 	@GetMapping("/list")
 	public String listTipoUsuario(Model model) {
 		try {
@@ -42,11 +43,11 @@ public class TipoUsuarioController {
 		}
 		return "tipousuario/listTipoUsuario";
 	}
-	
+
 	@PostMapping("/save")
-	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
-		if (result.hasErrors()) {			
+	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model,
+			SessionStatus status) throws Exception {
+		if (result.hasErrors()) {
 			return "tipoUsuario/tipoUsuario";
 		} else {
 			boolean flag = tuService.insert(tipousuario);
@@ -57,8 +58,10 @@ public class TipoUsuarioController {
 				return "redirect:/tipousuarios/new";
 			}
 		}
-	}	
-	
+		model.addAttribute("tipousuario", new Role());
+		return "redirect:/tipousuarios/list";
+	}
+
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object> model, @ModelAttribute TipoUsuario tipousuario) {
 		tuService.listarId(tipousuario.getIdTipousuario());
@@ -76,7 +79,7 @@ public class TipoUsuarioController {
 			return "tipoUsuario/tipoUsuario";
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tuService.delete(id);
