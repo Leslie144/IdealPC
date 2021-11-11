@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,7 +39,7 @@ public class TiendaController {
 	private IDistritoService dService;
 	@Autowired
 	private ISubirFotoService subirarchivoService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTienda(Model model) {
 		model.addAttribute("tienda", new Tienda());
@@ -58,7 +59,7 @@ public class TiendaController {
 		}
 		return "tienda/listTienda";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String insertProduct(@ModelAttribute @Valid Tienda objTiend, BindingResult binRes, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status)
@@ -148,7 +149,7 @@ public class TiendaController {
 			return "tienda/tienda";
 		}
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteTienda(Model model, @RequestParam(value = "id") Integer id) {
 		tService.delete(id);

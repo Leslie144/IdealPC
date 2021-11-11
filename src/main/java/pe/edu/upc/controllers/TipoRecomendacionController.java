@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +27,7 @@ public class TipoRecomendacionController {
 
 	@Autowired
 	private ITipoRecomendacionService trService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoRecomendacion(Model model) {
 		model.addAttribute("tipoRecomendacion", new TipoRecomendacion());
@@ -43,7 +44,7 @@ public class TipoRecomendacionController {
 		}
 		return "tiporecomendacion/listTipoRecomendacion";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveTipoRecomendacion(@Valid TipoRecomendacion tiporecomendacion, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
@@ -77,7 +78,7 @@ public class TipoRecomendacionController {
 			return "tiporecomendacion/tiporecomendacion";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		trService.delete(id);

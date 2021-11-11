@@ -3,6 +3,7 @@ package pe.edu.upc.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ public class TipoModularController {
 
 	@Autowired
 	private ITipoModularService tmService;
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoModular(Model model) {
 		model.addAttribute("tipomodular", new TipoModular());
@@ -43,7 +44,7 @@ public class TipoModularController {
 		}
 		return "tipoModular/listTipoModular";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveTipoModular(@Validated TipoModular tipomodular, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -77,7 +78,7 @@ public class TipoModularController {
 			return "tipoModular/tipoModular";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tmService.delete(id);
