@@ -27,7 +27,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		try {
-			http.authorizeRequests().antMatchers("/", "/css/**", "/js/**", "/img/**").permitAll().anyRequest()
+			http.authorizeRequests().antMatchers("/race/**", "/css/**", "/js/**", "/img/**").permitAll().anyRequest()
 			.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll().and()
 			.exceptionHandling().accessDeniedPage("/error");
 
@@ -37,8 +37,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 					.access("hasRole('ROLE_ADMIN') or hasRole('ROLE_USER')").and().formLogin()
 					.successHandler(sucessHandler).loginPage("/login").loginProcessingUrl("/login")
 					.defaultSuccessUrl("/welcome/bienvenido").permitAll().and().logout().logoutSuccessUrl("/login")
-					.permitAll().and().exceptionHandling().accessDeniedPage("/error_403");
-*/
+					.permitAll().and().exceptionHandling().accessDeniedPage("/error_403");*/
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
