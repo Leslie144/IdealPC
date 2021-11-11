@@ -27,7 +27,7 @@ public class JpaUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("Nombre: "+username);
 		Users user = userRepository.findByUsername(username).get(0);
-
+		System.out.println("Password: "+user.getPassword());
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 
 		//for (Role role : user.getRoles()) {

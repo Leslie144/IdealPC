@@ -32,7 +32,7 @@
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Usuarios</h3>
 				<form th:action="@{/usuario/search}" method="post"
-					th:object="${usuario}">
+					th:object="${users}">
 					<label for="nombreUsuario">Buscar:</label> <input type="text"
 						required="required" class="form-control" th:field="*{username}"
 						id="nombreUsuario"></input>
