@@ -11,9 +11,9 @@ public interface IUsuarioService {
 
 	List<Users> list();
 
-	Users listarId(Long idUsuario);
+	Users listarId(int idUsuario);
 	
-	public void delete(Long idUsuarioidUsuario);
+	public void delete(int idUsuarioidUsuario);
 
 	List<Users> findBynombreUsuario(String name);
 

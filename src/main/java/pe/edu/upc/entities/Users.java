@@ -22,7 +22,7 @@ private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 	
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre del Usuario no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El nombre del Usuario no puede contener un número")
@@ -61,7 +61,7 @@ private static final long serialVersionUID = 1L;
 		// TODO Auto-generated constructor stub
 	}
 
-	public Users(Long id,
+	public Users(int id,
 			String username,
 			String password, String phone, String email, String photo,
 			Boolean enabled, Date registrationdate, Distrito distrito, Role roles) {
@@ -78,11 +78,11 @@ private static final long serialVersionUID = 1L;
 		this.roles = roles;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -157,6 +157,10 @@ private static final long serialVersionUID = 1L;
 	public void setRoles(Role roles) {
 		this.roles = roles;
 	}
+	
+	
+
+	
 
 	
 	

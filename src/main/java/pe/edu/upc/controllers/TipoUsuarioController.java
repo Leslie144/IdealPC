@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.TipoUsuario;
+import pe.edu.upc.entities.Role;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 @Controller
@@ -27,14 +27,14 @@ public class TipoUsuarioController {
 	
 	@GetMapping("/new")
 	public String newTipoUsuario(Model model) {
-		model.addAttribute("tipousuario", new TipoUsuario());
+		model.addAttribute("tipousuario", new Role());
 		return "tipousuario/tipousuario";
 	}
 	
 	@GetMapping("/list")
 	public String listTipoUsuario(Model model) {
 		try {
-			model.addAttribute("tipousuario", new TipoUsuario());
+			model.addAttribute("tipousuario", new Role());
 			model.addAttribute("listaTipoUsuario", tuService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -44,7 +44,7 @@ public class TipoUsuarioController {
 	}
 	
 	@PostMapping("/save")
-	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model, SessionStatus status)
+	public String saveTipoUsuario(@Validated Role tipousuario, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {			
 			return "tipoUsuario/tipoUsuario";
@@ -59,19 +59,19 @@ public class TipoUsuarioController {
 				status.setComplete();
 			}
 		}
-		model.addAttribute("tipousuario",new TipoUsuario());
+		model.addAttribute("tipousuario",new Role());
 		return "redirect:/tipousuarios/list";
 	}	
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute TipoUsuario tipousuario) {
-		tuService.listarId(tipousuario.getIdTipousuario());
+	public String listarId(Map<String, Object> model, @ModelAttribute Role tipousuario) {
+		tuService.listarId(Math.toIntExact(tipousuario.getId_role()));
 		return "tipoUsuario/listTipoUsuario";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
-		TipoUsuario objTipoUsuario = tuService.listarId(id);
+		Role objTipoUsuario = tuService.listarId(id);
 		if (objTipoUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipousuarios/list";
