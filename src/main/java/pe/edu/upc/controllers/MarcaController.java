@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ import pe.edu.upc.serviceinterfaces.IMarcaService;
 public class MarcaController {
 	@Autowired
 	private IMarcaService mService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newMarca(Model model) {
 		model.addAttribute("marca", new Marca());
@@ -42,7 +43,7 @@ public class MarcaController {
 		}
 		return "marca/listMarca";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveMarca(@Validated Marca marca, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -76,7 +77,7 @@ public class MarcaController {
 			return "marca/marca";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		mService.delete(id);

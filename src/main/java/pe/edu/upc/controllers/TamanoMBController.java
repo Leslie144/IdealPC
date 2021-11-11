@@ -3,6 +3,7 @@ package pe.edu.upc.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,7 +25,7 @@ import pe.edu.upc.serviceinterfaces.ITamanoMBService;
 public class TamanoMBController {
 	@Autowired
 	private ITamanoMBService mService;
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTamanoMB(Model model) {
 		model.addAttribute("tamanomb", new TamanoMB());
@@ -41,7 +42,7 @@ public class TamanoMBController {
 		}
 		return "tamanomb/listTamanoMB";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveTamanoMB(@Validated TamanoMB tamanomb, BindingResult result, Model model, SessionStatus status)
 	throws Exception{
@@ -76,7 +77,7 @@ public class TamanoMBController {
 			return "tamanomb/tamanomb";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteTamanoMB(Model model, @RequestParam(value="id")Integer id) {
 		mService.delete(id);

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,7 +45,7 @@ public class UsuarioController {
 	private IDistritoService dService;
 	@Autowired
 	private ITipoUsuarioService tService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
@@ -63,7 +64,7 @@ public class UsuarioController {
 		}
 		return "usuario/listUsuario";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
 			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status) throws Exception {
@@ -151,7 +152,7 @@ public class UsuarioController {
 			return "usuario/usuario";
 		}
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteUsuario(Model model, @RequestParam(value = "id") int id) {
 		uService.delete(id);

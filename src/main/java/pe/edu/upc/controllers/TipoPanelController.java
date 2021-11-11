@@ -3,6 +3,7 @@ package pe.edu.upc.controllers;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ import pe.edu.upc.serviceinterfaces.ITipoPanelService;
 public class TipoPanelController {
 	@Autowired
 	private ITipoPanelService tpService;
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoPanel(Model model) {
 		model.addAttribute("tipopanel", new TipoPanel());
@@ -42,7 +43,7 @@ public class TipoPanelController {
 		}
 		return "tipopanel/listTipoPanel";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveTipoPanel(@Validated TipoPanel tipopanel, BindingResult result, Model model, SessionStatus status)
 	throws Exception{
@@ -77,7 +78,7 @@ public class TipoPanelController {
 			return "tipopanel/tipopanel";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteTipoPanel(Model model, @RequestParam(value="id")Integer id) {
 		tpService.delete(id);

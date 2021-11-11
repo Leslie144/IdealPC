@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ import pe.edu.upc.serviceinterfaces.ITipouaService;
 public class TipouaController {
 	@Autowired
 	private ITipouaService cService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoua(Model model) {
 		model.addAttribute("tipoua", new Tipoua());
@@ -42,7 +43,7 @@ public class TipouaController {
 		}
 		return "tipoua/listTipouas";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveMarca(@Valid Tipoua tipoua, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -79,7 +80,7 @@ public class TipouaController {
 			return "tipoua/tipoua";
 		}
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteTipoua(Model model, @RequestParam(value = "id") Integer id) {
 		cService.delete(id);
