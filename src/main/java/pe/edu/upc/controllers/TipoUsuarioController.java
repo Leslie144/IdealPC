@@ -44,7 +44,7 @@ public class TipoUsuarioController {
 	}
 
 	@PostMapping("/save")
-	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model,
+	public String saveTipoUsuario(@Validated Role tipousuario, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {			
 			return "tipoUsuario/tipoUsuario";
@@ -60,13 +60,13 @@ public class TipoUsuarioController {
 	}
 
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute TipoUsuario tipousuario) {
-		tuService.listarId(tipousuario.getIdTipousuario());
+	public String listarId(Map<String, Object> model, @ModelAttribute Role tipousuario) {
+		tuService.listarId(tipousuario.getId_role());
 		return "tipoUsuario/listTipoUsuario";
 	}
 
 	@RequestMapping("/update/{id}")
-	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
+	public String update(@PathVariable Long id, Model model, RedirectAttributes objRedir) {
 		Role objTipoUsuario = tuService.listarId(id);
 		if (objTipoUsuario == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
@@ -78,7 +78,7 @@ public class TipoUsuarioController {
 	}
 
 	@RequestMapping("/delete")
-	public String delete(Model model, @RequestParam(value = "id") Integer id) {
+	public String delete(Model model, @RequestParam(value = "id") Long id) {
 		tuService.delete(id);
 		model.addAttribute("listaTipoUsuario", tuService.list());
 		return "tipoUsuario/listTipoUsuario";

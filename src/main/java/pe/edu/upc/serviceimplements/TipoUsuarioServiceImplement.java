@@ -34,7 +34,7 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 	}
 
 	@Override
-	public Role listarId(int idTipousuario) {
+	public Role listarId(Long idTipousuario) {
 		// TODO Auto-generated method stub
 		Optional<Role>op=tuR.findById(idTipousuario);
 
@@ -42,7 +42,7 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 	}
 
 	@Override
-	public void delete(int idTipousuario) {
+	public void delete(Long idTipousuario) {
 		// TODO Auto-generated method stub
 		tuR.deleteById(idTipousuario);
 	}
