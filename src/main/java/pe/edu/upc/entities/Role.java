@@ -21,6 +21,8 @@ public class Role implements Serializable {
 
 	private String rol;
 
+
+
 	public Role() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -30,6 +32,12 @@ public class Role implements Serializable {
 		super();
 		this.id_role = id_role;
 		this.rol = rol;
+	}
+
+
+
+	public String getRol() {
+		return rol;
 	}
 
 	public Long getId_role() {
@@ -48,7 +56,7 @@ public class Role implements Serializable {
 		this.rol = rol;
 	}
 
-	
+
 	//@JoinColumn(name = "user_id", nullable = false)
 	//private Users user;
 
@@ -59,7 +67,7 @@ public class Role implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}*/
-	
+
 
 	/*public Users getUser() {
 		return user;

@@ -26,16 +26,16 @@
 		<div class="content container">
 
 			<div class="detail">
-				<img class="detailimg" th:if="${#strings.length(usuario.fotoUsuario)> 0}"
-					th:src="@{'/usuario/uploads/' + ${usuario.fotoUsuario}}"
-					th:alt="${usuario.fotoUsuario}">
+				<img class="detailimg" th:if="${#strings.length(usuario.photo)> 0}"
+					th:src="@{'/usuario/uploads/' + ${usuario.photo}}"
+					th:alt="${usuario.photo}">
 				<div class="blend"></div>
 
 				<div class="detalles">
 					<a th:href="@{/usuario/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
-					<h2 th:text="${usuario.nombreUsuario}" class="prodnombre"></h2>
+					<h2 th:text="${usuario.username}" class="prodnombre"></h2>
 					
-					<p th:text="${usuario.tipoUsuario.nTipousuario}" class="prodprecio"></p>
+					<p th:text="${usuario.roles.rol}" class="prodprecio"></p>
 					<p th:text="'Ubicado en '+${usuario.distrito.nombreDistrito}"
 						class="prodproveedor"></p>
 				</div>

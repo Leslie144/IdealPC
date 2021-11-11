@@ -37,7 +37,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	// @Transactional(readOnly=true)
 
 	@Transactional(readOnly = true)
-	public Users listarId(Long idUsuario) {
+	public Users listarId(int idUsuario) {
 		Optional<Users> op = uR.findById(idUsuario);
 		return op.isPresent() ? op.get() : new Users();
 	}
@@ -49,7 +49,7 @@ public class UsuarioServiceImplement implements IUsuarioService {
 	}
 
 	@Override
-	public void delete(Long idUsuario) {
+	public void delete(int idUsuario) {
 		// TODO Auto-generated method stub
 		uR.deleteById(idUsuario);
 	}

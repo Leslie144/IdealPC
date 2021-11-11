@@ -11,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
@@ -34,6 +34,9 @@ import pe.edu.upc.serviceinterfaces.IUsuarioService;
 @RequestMapping("/usuario")
 public class UsuarioController {
 	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private IUsuarioService uService;
 	@Autowired
 	private ISubirFotoService subirarchivoService;
@@ -46,7 +49,7 @@ public class UsuarioController {
 	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
 		model.addAttribute("listaTipos", tService.list());
-		model.addAttribute("usuario", new Users());
+		model.addAttribute("users", new Users());
 		return "usuario/usuario";
 	}
 
@@ -61,25 +64,22 @@ public class UsuarioController {
 		return "usuario/listUsuario";
 	}
 
-	@PostMapping("/save")
+	@RequestMapping("/save")
 	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
-			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status) throws Exception {
+			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
 			return "usuario/usuario";
 		} else {
-			if (!foto.isEmpty()) {
-
-				if (usuario.getId() > 0 && usuario.getPhoto() != null
+			if (!photo.isEmpty()) {
+				if (Math.toIntExact(usuario.getId()) > 0 && usuario.getPhoto() != null
 						&& usuario.getPhoto().length() > 0) {
-
 					subirarchivoService.delete(usuario.getPhoto());
 				}
-
 				String uniqueFilename = null;
 				try {
-					uniqueFilename = subirarchivoService.copy(foto);
+					uniqueFilename = subirarchivoService.copy(photo);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -87,6 +87,8 @@ public class UsuarioController {
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				usuario.setPhoto(uniqueFilename);
 			}
+			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
+			usuario.setPassword(bcryptPassword);
 			boolean flag = uService.insert(usuario);
 			if (flag) {
 				return "redirect:/usuario/list";
@@ -112,7 +114,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/view/{id}")
-	public String view(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
 		Users usuario = uService.listarId(id);
 		if (usuario == null) {
 			flash.addFlashAttribute("error", "El usuario no existe en la base de datos");
@@ -136,7 +138,7 @@ public class UsuarioController {
 	}
 	
 	@RequestMapping("/update/{id}")
-	public String update(@PathVariable Long id, Model model, RedirectAttributes objRedir) {
+	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
 		Users objUsuario = uService.listarId(id);
 		if (objUsuario == null) {
@@ -145,13 +147,13 @@ public class UsuarioController {
 		} else {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
-			model.addAttribute("usuario", objUsuario);
+			model.addAttribute("users", objUsuario);
 			return "usuario/usuario";
 		}
 	}
 
 	@RequestMapping("/delete")
-	public String deleteUsuario(Model model, @RequestParam(value = "id") Long id) {
+	public String deleteUsuario(Model model, @RequestParam(value = "id") int id) {
 		uService.delete(id);
 		model.addAttribute("usuario", new Users());
 		model.addAttribute("listaUsuarios", uService.list());

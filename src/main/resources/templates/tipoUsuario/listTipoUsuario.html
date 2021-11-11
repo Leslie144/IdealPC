@@ -38,14 +38,15 @@
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoUsuario}">
-						<td class="text-center" th:text="${tip.idTipousuario}"></td>
-						<td class="text-center" th:text="${tip.nTipousuario}"></td>
-						<td class="text-center">
-						
-						<a class="btn btn-default btn-sm" th:href="@{'/tipousuarios/update/' + ${tip.idTipousuario}}">  <i class="fa fa-cog"></i> Update</a>
-						<a class="btn btn-danger" th:href="@{/tipousuarios/delete?id=}+${tip.idTipousuario}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-						
-						 </td>
+						<td class="text-center" th:text="${tip.id_role}"></td>
+						<td class="text-center" th:text="${tip.rol}"></td>
+						<td class="text-center"><a class="btn btn-default btn-sm"
+							th:href="@{'/tipousuarios/update/' + ${tip.id_role}}">
+								<i class="fa fa-cog"></i> Update
+						</a> <a class="btn btn-danger"
+							th:href="@{/tipousuarios/delete?id=}+${tip.id_role}"> <i
+								class="fa fa-trash-o fa-lg"></i> Delete
+						</a></td>
 					</tr>
 				</tbody>
 			</table>
@@ -55,6 +56,7 @@
 		</div>
 
 	</div>
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 	<script src="/js/popper.min.js"></script>
