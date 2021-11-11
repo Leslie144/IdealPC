@@ -35,7 +35,7 @@ import pe.edu.upc.serviceinterfaces.IUsuarioService;
 public class UsuarioController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private IUsuarioService uService;
 	@Autowired
@@ -56,7 +56,7 @@ public class UsuarioController {
 	@GetMapping("/list")
 	public String listUsuarios(Model model) {
 		try {
-			model.addAttribute("usuario", new Users());
+			model.addAttribute("users", new Users());
 			model.addAttribute("listaUsuarios", uService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -66,7 +66,8 @@ public class UsuarioController {
 
 	@RequestMapping("/save")
 	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
-			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status) throws Exception {
+			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status)
+			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
@@ -79,13 +80,15 @@ public class UsuarioController {
 				}
 				String uniqueFilename = null;
 				try {
+					System.out.println("Aqui");
 					uniqueFilename = subirarchivoService.copy(photo);
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				usuario.setPhoto(uniqueFilename);
+
 			}
 			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
 			usuario.setPassword(bcryptPassword);
@@ -99,6 +102,7 @@ public class UsuarioController {
 			}
 		}
 	}
+
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 		Resource recurso = null;
@@ -112,7 +116,7 @@ public class UsuarioController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
 				.body(recurso);
 	}
-	
+
 	@GetMapping(value = "/view/{id}")
 	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
 		Users usuario = uService.listarId(id);
@@ -124,7 +128,7 @@ public class UsuarioController {
 		model.put("titulo", "Detalle de usuario: " + usuario.getUsername());
 		return "usuario/ver";
 	}
-	
+
 	@RequestMapping("/list")
 	public String listUsuarios(Map<String, Object> model) {
 		model.put("listaUsuario", uService.list());
@@ -136,7 +140,7 @@ public class UsuarioController {
 		uService.listarId(usuario.getId());
 		return "usuario/listUsuario";
 	}
-	
+
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
@@ -163,7 +167,7 @@ public class UsuarioController {
 	@RequestMapping("/search")
 	public String findUsuario(@ModelAttribute Users usuario, Model model) {
 		List<Users> listaUsuarios;
-		listaUsuarios=uService.findBynombreUsuario(usuario.getUsername());
+		listaUsuarios = uService.findBynombreUsuario(usuario.getUsername());
 		model.addAttribute("listaUsuarios", listaUsuarios);
 		return "usuario/listUsuario";
 	}
