@@ -10,6 +10,7 @@ public interface ITipoUsuarioService {
 	public Integer insert(Role tipousuario);
 	List<Role> list();
 	Role listarId(int idTipousuario);
+
 	public void delete(int idTipousuario);
-	
+
 }

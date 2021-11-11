@@ -17,6 +17,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entities.Role;
+import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 @Controller
@@ -24,13 +25,13 @@ import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 public class TipoUsuarioController {
 	@Autowired
 	private ITipoUsuarioService tuService;
-	
+
 	@GetMapping("/new")
 	public String newTipoUsuario(Model model) {
 		model.addAttribute("tipousuario", new Role());
 		return "tipousuario/tipousuario";
 	}
-	
+
 	@GetMapping("/list")
 	public String listTipoUsuario(Model model) {
 		try {
@@ -42,27 +43,25 @@ public class TipoUsuarioController {
 		}
 		return "tipousuario/listTipoUsuario";
 	}
-	
+
 	@PostMapping("/save")
 	public String saveTipoUsuario(@Validated Role tipousuario, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {			
 			return "tipoUsuario/tipoUsuario";
 		} else {
-			int rpta = tuService.insert(tipousuario);
-			if (rpta > 0) {
-				model.addAttribute("tipousuario", tipousuario);
-				model.addAttribute("mensaje", "ya existe");
-				return "tipoUsuario/tipoUsuario";
+			boolean flag = tuService.insert(tipousuario);
+			if (flag) {
+				return "redirect:/tipousuarios/list";
 			} else {
-				model.addAttribute("mensaje","Se guardó correctamente");
-				status.setComplete();
+				model.addAttribute("mensaje", "Ocurrió un error");
+				return "redirect:/tipousuarios/new";
 			}
 		}
 		model.addAttribute("tipousuario",new Role());
 		return "redirect:/tipousuarios/list";
-	}	
-	
+	}
+
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object> model, @ModelAttribute Role tipousuario) {
 		tuService.listarId(Math.toIntExact(tipousuario.getId_role()));
@@ -80,11 +79,11 @@ public class TipoUsuarioController {
 			return "tipoUsuario/tipoUsuario";
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tuService.delete(id);
-		model.addAttribute("listTipoUsuario", tuService.list());
+		model.addAttribute("listaTipoUsuario", tuService.list());
 		return "tipoUsuario/listTipoUsuario";
 	}
 }

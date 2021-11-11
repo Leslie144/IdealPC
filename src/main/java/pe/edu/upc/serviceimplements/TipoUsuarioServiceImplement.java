@@ -12,10 +12,11 @@ import pe.edu.upc.repositories.ITipoUsuarioRepository;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 @Service
-public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
+public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 
 	@Autowired
 	private ITipoUsuarioRepository tuR;
+
 	@Override
 	public Integer insert(Role tipousuario) {
 		int rpta=tuR.TipoUsuarioExistentes(tipousuario.getRol());
@@ -35,6 +36,7 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
 	public Role listarId(int idTipousuario) {
 		// TODO Auto-generated method stub
 		Optional<Role>op=tuR.findById(idTipousuario);
+
 		return op.isPresent() ? op.get() : new Role();
 	}
 
@@ -43,4 +45,5 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
 		// TODO Auto-generated method stub
 		tuR.deleteById(idTipousuario);
 	}
+
 }

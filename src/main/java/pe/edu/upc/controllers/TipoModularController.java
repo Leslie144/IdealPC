@@ -50,18 +50,14 @@ public class TipoModularController {
 		if (result.hasErrors()) {
 			return "tipoModular/tipoModular";
 		} else {			
-			int rpta = tmService.insert(tipomodular);
-			if (rpta > 0) {
-				model.addAttribute("tipomodular", tipomodular);
-				model.addAttribute("mensaje", "ya existe");
-				return "tipoModular/tipoModular";
+			boolean flag = tmService.insert(tipomodular);
+			if (flag) {
+				return "redirect:/tipomodulares/list";
 			} else {
-				model.addAttribute("mensaje","Se guardó correctamente");
-				status.setComplete();
+				model.addAttribute("mensaje","Ocurrió un error");
+				return "redirect:/tipomodulares/list";
 			}
-		}
-		model.addAttribute("tipomodular",new TipoModular());
-		return "redirect:/tipomodulares/list";
+		}		
 	}
 	
 	@RequestMapping("/listarId")
@@ -85,7 +81,7 @@ public class TipoModularController {
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tmService.delete(id);
-		model.addAttribute("listTipoModular", tmService.list());
+		model.addAttribute("listaTipoModular", tmService.list());
 		return "tipoModular/listTipoModular";
 	}
 }
