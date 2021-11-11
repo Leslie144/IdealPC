@@ -162,6 +162,7 @@ public class UsuarioController {
 		uService.delete(id);
 		model.addAttribute("usuario", new Users());
 		model.addAttribute("listaUsuarios", uService.list());
+		model.addAttribute("users", new Users());
 		return "usuario/listUsuario";
 	}
 
