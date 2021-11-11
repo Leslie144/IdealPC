@@ -84,6 +84,7 @@ public class DistritoController {
 		
 		dService.delete(id);
 		model.addAttribute("listaDistritos", dService.list());
+		model.addAttribute("distrito", new Distrito());
 		return "distrito/listDistrito";
 	}
 	@RequestMapping("/search")

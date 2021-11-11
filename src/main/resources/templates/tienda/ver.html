@@ -27,13 +27,15 @@
 		<div class="content container">
 
 			<div class="detail">
-				<img class="detailimg" th:if="${#strings.length(tienda.fotoTienda)> 0}"
+				<img class="detailimg"
+					th:if="${#strings.length(tienda.fotoTienda)> 0}"
 					th:src="@{'/store/uploads/' + ${tienda.fotoTienda}}"
 					th:alt="${tienda.fotoTienda}">
 				<div class="blend"></div>
 
 				<div class="detalles">
-					<a th:href="@{/store/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
+					<a th:href="@{/store/list}" class="volverdet" href=""><i
+						class="fa fa-arrow-left"></i></a>
 					<h2 th:text="${tienda.nombreTienda}" class="prodnombre"></h2>
 
 					<p th:text="${tienda.webTienda}" class="prodprecio"></p>
@@ -44,6 +46,7 @@
 		</div>
 
 	</div>
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 

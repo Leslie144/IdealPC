@@ -24,7 +24,7 @@
 
 		<div class="content container">
 
-		
+
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Tiendas</h3>
 				<form th:action="@{/store/search}" method="post"
@@ -35,12 +35,12 @@
 					<button type="submit" class="btn btn-danger">Buscar</button>
 					<a href="/store/list" class="btn btn-light">Limpiar</a>
 				</form>
-				
+
 
 				<a th:href="@{/store/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
-			
-			
+
+
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
@@ -58,34 +58,35 @@
 				<tbody>
 					<tr th:each="p: ${listaTiendas}">
 						<td class="text-center"><a class="btn btn-warning btn-xs"
-							th:href="@{/store/view/} + ${p.idTienda}"
-							th:text="${p.idTienda}"></a></td>
+							th:href="@{/store/view/} + ${p.idTienda}" th:text="${p.idTienda}"></a></td>
 						<td class="text-center" th:text="${p.nombreTienda}"></td>
 						<td class="text-center" th:text="${p.direccionTienda}"></td>
 						<td class="text-center" th:text="${p.distrito.nombreDistrito}"></td>
 						<td class="text-center" th:text="${p.telefonoTienda}"></td>
 						<td class="text-center" th:text="${p.webTienda}"></td>
 						<td class="text-center" th:text="${p.fechaRegistro}"></td>
-						<td class="text-center">
-						<a class="btn btn-default btn-sm" th:href="@{'/store/update/' + ${p.idTienda}}">  <i class="fa fa-cog"></i> Update</a>
-						<a class="btn btn-danger" th:href="@{/store/delete?id=}+${p.idTienda}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-						
-						</td>
+						<td class="text-center"><a class="btn btn-default btn-sm"
+							th:href="@{'/store/update/' + ${p.idTienda}}"> <i
+								class="fa fa-cog"></i> Update
+						</a> <a class="btn btn-danger"
+							th:href="@{/store/delete?id=}+${p.idTienda}"> <i
+								class="fa fa-trash-o fa-lg"></i> Delete
+						</a></td>
 						<td class="text-center" align="center"><a
-							th:href="@{/store/view/} + ${p.idTienda}">
-							
-							<i class="fa fa-eye" style="color: gray;"></i>
-							</a></td>
+							th:href="@{/store/view/} + ${p.idTienda}"> <i
+								class="fa fa-eye" style="color: gray;"></i>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>
 			<div th:if="${mensaje}" class="alert alert-danger">
-			<p th:text="${mensaje}"></p>
+				<p th:text="${mensaje}"></p>
+			</div>
 		</div>
-		</div>
-		
+
 
 	</div>
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 	<script src="/js/popper.min.js"></script>

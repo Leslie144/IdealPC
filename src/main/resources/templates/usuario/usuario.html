@@ -69,6 +69,12 @@
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
+						<div>
+							<input type="checkbox" id="cbox2" value="second_checkbox">
+							<label for="cbox2"  th:field="*{enabled}">Enabled?</label>
+						</div>
+						<div class="alert alert-danger"
+							th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}"></div>
 
 
 
@@ -110,11 +116,14 @@
 						</div>
 
 
+
+
+
 						<div class="form-group">
 							<label for="fechaUsuario">Fecha Registro:</label> <input
-								type="date" required th:field="*{registrationdate}" id="fechaUsuario"
-								name="trip-start" value="*{registrationdate}" min="2018-01-01"
-								max="2058-12-31">
+								type="date" required th:field="*{registrationdate}"
+								id="fechaUsuario" name="trip-start" value="*{registrationdate}"
+								min="2018-01-01" max="2058-12-31">
 						</div>
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('registrationdate')}"
