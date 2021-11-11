@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,9 @@ import pe.edu.upc.serviceinterfaces.IUsuarioService;
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	@Autowired
 	private IUsuarioService uService;
 	@Autowired
@@ -69,13 +73,10 @@ public class UsuarioController {
 			return "usuario/usuario";
 		} else {
 			if (!photo.isEmpty()) {
-			System.out.println("Foto: "+photo.getName());
-
 				if (Math.toIntExact(usuario.getId()) > 0 && usuario.getPhoto() != null
 						&& usuario.getPhoto().length() > 0) {
 					subirarchivoService.delete(usuario.getPhoto());
 				}
-
 				String uniqueFilename = null;
 				try {
 					uniqueFilename = subirarchivoService.copy(photo);
@@ -86,6 +87,8 @@ public class UsuarioController {
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				usuario.setPhoto(uniqueFilename);
 			}
+			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
+			usuario.setPassword(bcryptPassword);
 			boolean flag = uService.insert(usuario);
 			if (flag) {
 				return "redirect:/usuario/list";
