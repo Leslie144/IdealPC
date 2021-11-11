@@ -26,16 +26,17 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Hardwares</h3>
-				
-							<form th:action="@{/hardware/search}" method="post"
+
+				<form th:action="@{/hardware/search}" method="post"
 					th:object="${hardware}">
 					<label for="nombreHardware">Buscar:</label> <input type="text"
 						required="required" class="form-control"
 						th:field="*{nombreHardware}" id="nombreHardware"></input>
-					<button type="submit" class="btn btn-danger">Buscar por hardware</button>
+					<button type="submit" class="btn btn-danger">Buscar por
+						hardware</button>
 					<a href="/hardware/list" class="btn btn-light">Limpiar</a>
 				</form>
-				
+
 				<a th:href="@{/hardware/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
@@ -55,31 +56,33 @@
 						<td class="text-center"><a class="btn btn-warning btn-xs"
 							th:href="@{/hardware/view/} + ${p.idHardware}"
 							th:text="${p.idHardware}"></a></td>
-						
+
 						<td class="text-center" th:text="${p.nombreHardware}"></td>
 						<td class="text-center" th:text="${p.modeloHardware}"></td>
 						<td class="text-center" th:text="${p.precioHardware}"></td>
 						<td class="text-center" th:text="${p.marca.nMarca}"></td>
-						<td class="text-center">
-						<a class="btn btn-default btn-sm" th:href="@{'/hardware/update/' + ${p.idHardware}}">  <i class="fa fa-cog"></i> Update</a>
-						<a class="btn btn-danger" th:href="@{/hardware/delete?id=}+${p.idHardware}">  <i class="fa fa-trash-o fa-lg"></i> Delete</a>
-						
-						</td>
+						<td class="text-center"><a class="btn btn-default btn-sm"
+							th:href="@{'/hardware/update/' + ${p.idHardware}}"> <i
+								class="fa fa-cog"></i> Update
+						</a> <a class="btn btn-danger"
+							th:href="@{/hardware/delete?id=}+${p.idHardware}"> <i
+								class="fa fa-trash-o fa-lg"></i> Delete
+						</a></td>
 						<td class="text-center" align="center"><a
-							th:href="@{/hardware/view/} + ${p.idHardware}">
-							
-							<i class="fa fa-eye" style="color: gray;"></i>
-							</a></td>
+							th:href="@{/hardware/view/} + ${p.idHardware}"> <i
+								class="fa fa-eye" style="color: gray;"></i>
+						</a></td>
 					</tr>
 				</tbody>
 			</table>
 			<div th:if="${mensaje}" class="alert alert-danger">
-			<p th:text="${mensaje}"></p>
+				<p th:text="${mensaje}"></p>
+			</div>
 		</div>
-		</div>
-		
+
 
 	</div>
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 	<script src="/js/popper.min.js"></script>

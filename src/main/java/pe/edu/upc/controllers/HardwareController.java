@@ -140,6 +140,7 @@ public class HardwareController {
 	public String deleteHardware(Model model, @RequestParam(value = "id") Integer id) {
 		hService.delete(id);
 		model.addAttribute("listaHardwares",hService.list());
+		model.addAttribute("hardware",new Hardware());
 		return "hardware/listHardware";
 	}
 	

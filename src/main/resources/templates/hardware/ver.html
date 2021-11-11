@@ -27,13 +27,15 @@
 		<div class="content container">
 
 			<div class="detail">
-				<img class="detailimg" th:if="${#strings.length(hardware.fotoHardware)> 0}"
+				<img class="detailimg"
+					th:if="${#strings.length(hardware.fotoHardware)> 0}"
 					th:src="@{'/hardware/uploads/' + ${hardware.fotoHardware}}"
 					th:alt="${hardware.fotoHardware}">
 				<div class="blend"></div>
 
 				<div class="detalles">
-					<a th:href="@{/hardware/list}" class="volverdet" href=""><i class="fa fa-arrow-left"></i></a>
+					<a th:href="@{/hardware/list}" class="volverdet" href=""><i
+						class="fa fa-arrow-left"></i></a>
 					<h2 th:text="${hardware.nombreHardware}" class="prodnombre"></h2>
 
 					<p th:text="${hardware.precioHardware}" class="prodprecio"></p>
@@ -45,6 +47,7 @@
 
 	</div>
 
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 

@@ -81,10 +81,10 @@
 
 					<div class="col-6">
 						<div class="form-group">
-							<label for="marca">Marca:</label> <select
-								class="form-control" th:field="*{marca.idMarca}">
-								<option th:each="c: ${listaMarcas}"
-									th:value="${c.idMarca}" th:text="${c.nMarca}"
+							<label for="marca">Marca:</label> <select class="form-control"
+								th:field="*{marca.idMarca}">
+								<option th:each="c: ${listaMarcas}" th:value="${c.idMarca}"
+									th:text="${c.nMarca}"
 									th:selected="(${c.idMarca} == *{marca.idMarca})"></option>
 							</select>
 						</div>
@@ -124,6 +124,7 @@
 
 		</div>
 	</div>
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 	<script src="/js/popper.min.js"></script>
