@@ -69,10 +69,7 @@
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
-						<div>
-							<input type="checkbox" id="cbox2" value="second_checkbox">
-							<label for="cbox2"  th:field="*{enabled}">Enabled?</label>
-						</div>
+						
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}"></div>
 
