@@ -7,7 +7,7 @@ import pe.edu.upc.entities.Role;
 
 
 public interface ITipoUsuarioService {
-	public Integer insert(Role tipousuario);
+	public boolean insert(Role tipousuario);
 	List<Role> list();
 	Role listarId(int idTipousuario);
 
