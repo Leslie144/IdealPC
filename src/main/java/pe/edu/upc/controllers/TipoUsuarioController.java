@@ -44,8 +44,8 @@ public class TipoUsuarioController {
 	}
 
 	@PostMapping("/save")
-	public String saveTipoUsuario(@Validated Role tipousuario, BindingResult result, Model model, SessionStatus status)
-			throws Exception {
+	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model,
+			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {			
 			return "tipoUsuario/tipoUsuario";
 		} else {
@@ -60,8 +60,8 @@ public class TipoUsuarioController {
 	}
 
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Role tipousuario) {
-		tuService.listarId(Math.toIntExact(tipousuario.getId_role()));
+	public String listarId(Map<String, Object> model, @ModelAttribute TipoUsuario tipousuario) {
+		tuService.listarId(tipousuario.getIdTipousuario());
 		return "tipoUsuario/listTipoUsuario";
 	}
 
