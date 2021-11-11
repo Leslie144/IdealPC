@@ -1,15 +1,17 @@
 package pe.edu.upc.repositories;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.entities.TipoUsuario;
+import pe.edu.upc.entities.Role;
+
 
 @Repository
-public interface ITipoUsuarioRepository extends JpaRepository<TipoUsuario, Integer>{
+public interface ITipoUsuarioRepository extends JpaRepository<Role, Long>{
 
-	@Query("select count (tu.nTipousuario) from TipoUsuario tu where tu.nTipousuario=:nTipousuario")
+	@Query("select count (tu.rol) from Role tu where tu.rol=:nTipousuario")
 	public int TipoUsuarioExistentes(@Param("nTipousuario") String nTipousuario);
 }

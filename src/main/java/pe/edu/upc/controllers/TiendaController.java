@@ -68,6 +68,8 @@ public class TiendaController {
 			return "tienda/tienda";
 		} else {
 			if (!foto.isEmpty()) {
+				System.out.println("Foto: "+foto.getName());
+
 
 				if (objTiend.getIdTienda() > 0 && objTiend.getFotoTienda() != null
 						&& objTiend.getFotoTienda().length() > 0) {

@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pe.edu.upc.entities.Users;
 
 @Repository
-public interface IUsuarioRepository extends JpaRepository<Users, Long> {
+public interface IUsuarioRepository extends JpaRepository<Users, Integer> {
 
 	@Query("select count(u.username) from Users u where u.username=:name")
 	public int UsuarioExistentes(@Param("name") String nombre);

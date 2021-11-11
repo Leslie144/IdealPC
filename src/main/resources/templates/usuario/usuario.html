@@ -29,49 +29,45 @@
 			</div>
 			<div class="col-6 frm-registro">
 				<form th:action="@{/usuario/save}" method="post" class="row"
-					th:object="${usuario}" enctype="multipart/form-data">
+					th:object="${users}" enctype="multipart/form-data">
 
 					<div class="col-6">
 
 
 						<div class="form-group">
 							<label for="idrace">ID:</label> <input type="text" readonly
-								class="form-control" th:field="*{idUsuario}"></input>
+								class="form-control" th:field="*{id}"></input>
 						</div>
 
 						<div class="form-group">
-							<label for="nombre">Usuario:</label> <input type="text" required
-								th:field="*{nombreUsuario}" class="form-control" id="nombre"></input>
+							<label for="nombre">Username:</label> <input type="text" required
+								th:field="*{username}" class="form-control" id="nombre"></input>
 						</div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('nombreUsuario')}"
-							th:errors="*{nombreUsuario}"></div>
+							th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 
 
 						<div class="form-group">
 							<label for="tContrasena">Contraseña:</label> <input type="text"
-								required th:field="*{tContrasena}" class="form-control"
+								required th:field="*{password}" class="form-control"
 								id="tContrasena"></input>
 						</div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('tContrasena')}"
-							th:errors="*{tContrasena}"></div>
+							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 
 						<div class="form-group">
 							<label for="tTelefono">Teléfono:</label> <input type="text"
-								required th:field="*{tTelefono}" class="form-control"
-								id="tTelefono"></input>
+								required th:field="*{phone}" class="form-control" id="tTelefono"></input>
 						</div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('tTelefono')}"
-							th:errors="*{tTelefono}"></div>
+							th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}"></div>
 
 						<div class="form-group">
 							<label for="tCorreo">Correo:</label> <input type="text" required
-								th:field="*{tCorreo}" class="form-control" id="tCorreo"></input>
+								th:field="*{email}" class="form-control" id="tCorreo"></input>
 						</div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('tCorreo')}" th:errors="*{tCorreo}"></div>
+							th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
 
 
@@ -94,29 +90,29 @@
 
 						<div class="form-group">
 							<label for="tipousuario">Tipo usuario:</label> <select
-								class="form-control" th:field="*{TipoUsuario.idTipousuario}">
-								<option th:each="c: ${listaTipos}" th:value="${c.idTipousuario}"
-									th:text="${c.nTipousuario}"
-									th:selected="(${c.idTipousuario} == *{tipoUsuario.idTipousuario})"></option>
+								class="form-control" th:field="*{roles.id_role}">
+								<option th:each="c: ${listaTipos}" th:value="${c.id_role}"
+									th:text="${c.rol}"
+									th:selected="(${c.id_role} == *{roles.id_role})"></option>
 							</select>
 						</div>
 
 
 						<div class="form-group">
-							<label for="fechaUsuario">Fecha Rwgistro:</label> <input
-								type="date" required th:field="*{fechaRegistro}" id="start"
-								name="trip-start" value="*{fechaRegistro}" min="2018-01-01"
+							<label for="fechaUsuario">Fecha Registro:</label> <input
+								type="date" required th:field="*{registrationdate}" id="fechaUsuario"
+								name="trip-start" value="*{registrationdate}" min="2018-01-01"
 								max="2058-12-31">
 						</div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('fechaRegistro')}"
-							th:errors="*{fechaRegistro}"></div>
+							th:if="${#fields.hasErrors('registrationdate')}"
+							th:errors="*{registrationdate}"></div>
 
 						<div class="form-group">
 							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control"
-									th:text="${usuario.fotoUsuario}" />
+									th:text="${users.photo}" />
 							</div>
 
 						</div>

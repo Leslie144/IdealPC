@@ -33,14 +33,14 @@
 					th:object="${tipousuario}">
 					<div class="form-group">
 						<label>ID:</label> <input type="text" class="form-control"
-							readonly th:field="*{idTipousuario}"></input>
+							readonly th:field="*{id_role}"></input>
 
 						<div class="form-group">
 							<label for="tipo">Tipo:</label> <input type="text" required
-								th:field="*{nTipousuario}" class="form-control" id="tipo"></input>
+								th:field="*{rol}" class="form-control" id="tipo"></input>
 							<div class="alert alert-danger"
-								th:if="${#fields.hasErrors('nTipousuario')}"
-								th:errors="*{nTipousuario}"></div>
+								th:if="${#fields.hasErrors('rol')}"
+								th:errors="*{rol}"></div>
 
 						</div>
 
