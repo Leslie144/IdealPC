@@ -21,6 +21,33 @@ public class Role implements Serializable {
 
 	private String rol;
 
+	public Role() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Role(Long id_role, String rol) {
+		super();
+		this.id_role = id_role;
+		this.rol = rol;
+	}
+
+	public Long getId_role() {
+		return id_role;
+	}
+
+	public void setId_role(Long id_role) {
+		this.id_role = id_role;
+	}
+
+	public String getRol() {
+		return rol;
+	}
+
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+
 	
 	//@JoinColumn(name = "user_id", nullable = false)
 	//private Users user;
@@ -33,22 +60,6 @@ public class Role implements Serializable {
 		this.id = id;
 	}*/
 	
-
-	public String getRol() {
-		return rol;
-	}
-
-	public Long getId_role() {
-		return id_role;
-	}
-
-	public void setId_role(Long id_role) {
-		this.id_role = id_role;
-	}
-
-	public void setRol(String rol) {
-		this.rol = rol;
-	}
 
 	/*public Users getUser() {
 		return user;

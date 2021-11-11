@@ -85,7 +85,9 @@
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"><span>Bienvenido: </span><span
-								th:text="${#authentication.getPrincipal().getUsername()}"></span>
+								th:text="${#authentication.getPrincipal().getUsername()}"></span><span>
+									con rol(es) de </span><span
+								th:text="${#authentication.getPrincipal().authorities}"></span>
 								<span class="mr-2 d-none d-lg-inline text-gray-600 small"><img
 									th:src="@{/img/logout.png}" width="30" height="30" alt="logo"
 									align="middle"></img></span> </a> <!-- Dropdown - User Information -->
