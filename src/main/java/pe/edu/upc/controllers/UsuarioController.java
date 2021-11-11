@@ -144,7 +144,7 @@ public class UsuarioController {
 		} else {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
-			model.addAttribute("usuario", objUsuario);
+			model.addAttribute("users", objUsuario);
 			return "usuario/usuario";
 		}
 	}
