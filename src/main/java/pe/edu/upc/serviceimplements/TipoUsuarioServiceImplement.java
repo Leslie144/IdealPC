@@ -18,12 +18,13 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 	private ITipoUsuarioRepository tuR;
 
 	@Override
-	public Integer insert(Role tipousuario) {
-		int rpta=tuR.TipoUsuarioExistentes(tipousuario.getRol());
-		if(rpta==0) {
-			tuR.save(tipousuario);
+	public boolean insert(Role tipousuario) {
+		Role rpta=tuR.save(tipousuario);
+		if(rpta==null) {
+			return false;
+		}else {
+			return true;
 		}
-		return rpta;
 	}
 
 	@Override

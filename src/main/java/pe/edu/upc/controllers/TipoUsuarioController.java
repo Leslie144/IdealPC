@@ -17,7 +17,6 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entities.Role;
-import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
 @Controller
@@ -58,8 +57,6 @@ public class TipoUsuarioController {
 				return "redirect:/tipousuarios/new";
 			}
 		}
-		model.addAttribute("tipousuario",new Role());
-		return "redirect:/tipousuarios/list";
 	}
 
 	@RequestMapping("/listarId")
