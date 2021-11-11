@@ -9,8 +9,8 @@ import pe.edu.upc.entities.Role;
 public interface ITipoUsuarioService {
 	public boolean insert(Role tipousuario);
 	List<Role> list();
-	Role listarId(int idTipousuario);
+	Role listarId(Long idTipousuario);
 
-	public void delete(int idTipousuario);
+	public void delete(Long idTipousuario);
 
 }

@@ -10,7 +10,7 @@ import pe.edu.upc.entities.Role;
 
 
 @Repository
-public interface ITipoUsuarioRepository extends JpaRepository<Role, Integer>{
+public interface ITipoUsuarioRepository extends JpaRepository<Role, Long>{
 
 	@Query("select count (tu.rol) from Role tu where tu.rol=:nTipousuario")
 	public int TipoUsuarioExistentes(@Param("nTipousuario") String nTipousuario);
