@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,6 +26,7 @@ import pe.edu.upc.serviceinterfaces.IDistritoService;
 public class DistritoController {
 	@Autowired
 	private IDistritoService dService;
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newDistrito(Model model) {
 		model.addAttribute("distrito", new Distrito());
@@ -42,7 +44,7 @@ public class DistritoController {
 		}
 		return "distrito/listDistrito";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveDistrito(@Validated Distrito distrito, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -66,7 +68,7 @@ public class DistritoController {
 		dService.listarId(dis.getIdDistrito());
 		return "distrito/listDistrito";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
 		Distrito objDistrito=dService.listarId(id);
@@ -78,12 +80,13 @@ public class DistritoController {
 			return "distrito/distrito";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteDistrito(Model model, @RequestParam(value="id")Integer id) {
 		
 		dService.delete(id);
 		model.addAttribute("listaDistritos", dService.list());
+		model.addAttribute("distrito", new Distrito());
 		return "distrito/listDistrito";
 	}
 	@RequestMapping("/search")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -27,7 +27,7 @@
 				</a>
 				<p>Inicio</p>
 			</div>
-			<div class="panelitem">
+			<div sec:authorize="hasRole('ROLE_ADMIN')"  class="panelitem">
 				<a th:href="@{/usuario/list}"> <i
 					class="fa fa-user-circle-o" style="color: #CD2B2B;"></i>
 				</a>
@@ -65,7 +65,7 @@
 				<p>Marcasㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</p>
 			</div>
 
-			<div class="panelitem">
+			<div sec:authorize="hasRole('ROLE_ADMIN')"  class="panelitem">
 				<a th:href="@{/tipousuarios/list}"> <i
 					class="fa fa-address-book" style="color: #CDB02B;"></i>
 				</a>

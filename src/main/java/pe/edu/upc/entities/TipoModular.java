@@ -18,7 +18,7 @@ public class TipoModular  {
 
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El Tipo Modular no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El Tipo Modular no puede contener un número")
-	@Column(name = "nTipoModular", length = 100, nullable = false)
+	@Column(name = "nTipoModular",nullable = false,length = 100)
 	private String nTipoModular;
 
 	public TipoModular() {

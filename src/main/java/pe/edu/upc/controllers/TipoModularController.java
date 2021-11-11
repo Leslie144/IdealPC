@@ -2,11 +2,13 @@ package pe.edu.upc.controllers;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +27,7 @@ public class TipoModularController {
 
 	@Autowired
 	private ITipoModularService tmService;
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoModular(Model model) {
 		model.addAttribute("tipomodular", new TipoModular());
@@ -33,19 +35,19 @@ public class TipoModularController {
 	}
 
 	@GetMapping("/list")
-	public String listTipoModular(Model model) {
+	public String listTipoModulares(Model model) {
 		try {
 			model.addAttribute("tipomodular", new TipoModular());
 			model.addAttribute("listaTipoModular", tmService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
-			// TODO: handle exception
+			// TODO: handle exceptionSS
 		}
 		return "tipoModular/listTipoModular";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveTipoModular(@Validated TipoModular tipomodular, BindingResult result, Model model, SessionStatus status)
+	public String saveTipoModular(@Valid TipoModular tipomodular, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "tipoModular/tipoModular";
@@ -55,7 +57,7 @@ public class TipoModularController {
 				return "redirect:/tipomodulares/list";
 			} else {
 				model.addAttribute("mensaje","Ocurrió un error");
-				return "redirect:/tipomodulares/list";
+				return "redirect:/tipomodulares/new";
 			}
 		}		
 	}
@@ -77,7 +79,7 @@ public class TipoModularController {
 			return "tipoModular/tipoModular";
 		}
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String delete(Model model, @RequestParam(value = "id") Integer id) {
 		tmService.delete(id);

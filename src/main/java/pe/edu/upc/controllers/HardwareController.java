@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,7 +38,7 @@ public class HardwareController {
 	private IMarcaService mService;
 	@Autowired
 	private ISubirFotoService subirarchivoService;
-	
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newHardware(Model model) {
 		model.addAttribute("hardware",new Hardware());
@@ -57,6 +58,7 @@ public class HardwareController {
 		}
 		return "hardware/listHardware";
 	}
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String insertHardware(@ModelAttribute @Valid Hardware objHard, BindingResult binRes, Model model,
 	@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status)
@@ -89,7 +91,6 @@ public class HardwareController {
 			}
 		}
 	}
-	
 	@GetMapping(value="/uploads/{filename:.+}")
 	public ResponseEntity<Resource>verFoto(@PathVariable String filename){
 		Resource recurso=null;
@@ -136,10 +137,12 @@ public class HardwareController {
 			return "hardware/hardware";
 		}
 	}
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteHardware(Model model, @RequestParam(value = "id") Integer id) {
 		hService.delete(id);
 		model.addAttribute("listaHardwares",hService.list());
+		model.addAttribute("hardware",new Hardware());
 		return "hardware/listHardware";
 	}
 	
