@@ -3,6 +3,7 @@ package pe.edu.upc.serviceimplements;
 import java.util.List;
 import java.util.Optional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,8 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 
 	@Override
 	public Integer insert(Role tipousuario) {
-		int rpta = tuR.TipoUsuarioExistentes(tipousuario.getRol());
-		if (rpta == 0) {
+		int rpta=tuR.TipoUsuarioExistentes(tipousuario.getRol());
+		if(rpta==0) {
 			tuR.save(tipousuario);
 		}
 		return rpta;
@@ -34,7 +35,8 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 	@Override
 	public Role listarId(int idTipousuario) {
 		// TODO Auto-generated method stub
-		Optional<Role> op = tuR.findById(idTipousuario);
+		Optional<Role>op=tuR.findById(idTipousuario);
+
 		return op.isPresent() ? op.get() : new Role();
 	}
 
