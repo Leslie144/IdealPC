@@ -38,13 +38,13 @@
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoUsuario}">
-						<td class="text-center" th:text="${tip.idTipousuario}"></td>
-						<td class="text-center" th:text="${tip.nTipousuario}"></td>
+						<td class="text-center" th:text="${tip.id_role}"></td>
+						<td class="text-center" th:text="${tip.rol}"></td>
 						<td class="text-center"><a class="btn btn-default btn-sm"
-							th:href="@{'/tipousuarios/update/' + ${tip.idTipousuario}}">
+							th:href="@{'/tipousuarios/update/' + ${tip.id_role}}">
 								<i class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"
-							th:href="@{/tipousuarios/delete?id=}+${tip.idTipousuario}"> <i
+							th:href="@{/tipousuarios/delete?id=}+${tip.id_role}"> <i
 								class="fa fa-trash-o fa-lg"></i> Delete
 						</a></td>
 					</tr>
