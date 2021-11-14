@@ -15,6 +15,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+
 @Entity
 @Table(name = "users")
 public class Users implements Serializable {
