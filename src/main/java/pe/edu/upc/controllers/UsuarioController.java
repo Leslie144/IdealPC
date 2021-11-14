@@ -45,6 +45,9 @@ public class UsuarioController {
 	private IDistritoService dService;
 	@Autowired
 	private ITipoUsuarioService tService;
+	
+	boolean update= false;
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newUsuario(Model model) {
@@ -64,6 +67,7 @@ public class UsuarioController {
 		}
 		return "usuario/listUsuario";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
@@ -81,7 +85,6 @@ public class UsuarioController {
 				}
 				String uniqueFilename = null;
 				try {
-					System.out.println("Aqui");
 					uniqueFilename = subirarchivoService.copy(photo);
 
 				} catch (IOException e) {
@@ -93,11 +96,16 @@ public class UsuarioController {
 			}
 			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
 			usuario.setPassword(bcryptPassword);
-			boolean flag = uService.insert(usuario);
-			if (flag) {
+
+			//boolean flag = uService.insert(usuario);
+			if (uService.findBynombreUsuario(usuario.getUsername()).isEmpty() || update) {
+				uService.insert(usuario);
+				update = false;
 				return "redirect:/usuario/list";
 			} else {
-				model.addAttribute("mensaje", "Ocurrió un error");
+			    //System.out.println("Aqui");
+				//model.addAttribute("mensaje", "Ocurrió un error");
+				flash.addFlashAttribute("error", "Ya existe un usuario con el username ingresado");
 				return "redirect:/usuario/new";
 
 			}
@@ -153,9 +161,11 @@ public class UsuarioController {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
 			model.addAttribute("users", objUsuario);
+			update = true;
 			return "usuario/usuario";
 		}
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteUsuario(Model model, @RequestParam(value = "id") int id) {
