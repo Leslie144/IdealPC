@@ -92,7 +92,6 @@ public class UsuarioController {
 				}
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				usuario.setPhoto(uniqueFilename);
-
 			}
 			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
 			usuario.setPassword(bcryptPassword);
@@ -107,7 +106,6 @@ public class UsuarioController {
 				//model.addAttribute("mensaje", "Ocurrió un error");
 				flash.addFlashAttribute("error", "Ya existe un usuario con el username ingresado");
 				return "redirect:/usuario/new";
-
 			}
 		}
 	}
