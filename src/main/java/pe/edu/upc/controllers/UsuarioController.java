@@ -2,6 +2,8 @@ package pe.edu.upc.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import pe.edu.upc.entities.Users;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -47,13 +50,21 @@ public class UsuarioController {
 	private ITipoUsuarioService tService;
 	
 	boolean update= false;
+	
+	Date date = new Date();
+	java.sql.Date date2;
 
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
 		model.addAttribute("listaTipos", tService.list());
-		model.addAttribute("users", new Users());
+		Users newuser = new Users();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String formatdate = formatter.format(date);
+		date2 =  java.sql.Date.valueOf(formatdate);
+		newuser.setRegistrationdate(date2);
+		model.addAttribute("users", newuser);
 		return "usuario/usuario";
 	}
 
@@ -97,6 +108,7 @@ public class UsuarioController {
 			usuario.setPassword(bcryptPassword);
 
 			//boolean flag = uService.insert(usuario);
+			//System.out.println(usuario.getRegistrationdate());
 			if (uService.findBynombreUsuario(usuario.getUsername()).isEmpty() || update) {
 				uService.insert(usuario);
 				update = false;
