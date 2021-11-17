@@ -46,23 +46,26 @@ public class Hardware {
 	private String fotoHardware;
 
 	@ManyToOne
-	@JoinColumn(name = "idMarca", nullable = false)
-	private Marca marca;
+	@JoinColumn(name = "id_company", nullable = false)
+	private Companies companies;
 
 	public Hardware() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Hardware(int idHardware, String nombreHardware, String modeloHardware, Double precioHardware,
-			String fotoHardware, Marca marca) {
+	public Hardware(int idHardware,
+			String nombreHardware,
+			String modeloHardware,
+			Double precioHardware,
+			String fotoHardware, Companies companies) {
 		super();
 		this.idHardware = idHardware;
 		this.nombreHardware = nombreHardware;
 		this.modeloHardware = modeloHardware;
 		this.precioHardware = precioHardware;
 		this.fotoHardware = fotoHardware;
-		this.marca = marca;
+		this.companies = companies;
 	}
 
 	public int getIdHardware() {
@@ -105,12 +108,15 @@ public class Hardware {
 		this.fotoHardware = fotoHardware;
 	}
 
-	public Marca getMarca() {
-		return marca;
+	public Companies getCompanies() {
+		return companies;
 	}
 
-	public void setMarca(Marca marca) {
-		this.marca = marca;
+	public void setCompany(Companies companies) {
+		this.companies = companies;
 	}
+	
+	
+	
 
 }

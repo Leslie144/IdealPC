@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.Companies;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 
 @Controller
@@ -29,14 +29,14 @@ public class MarcaController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newMarca(Model model) {
-		model.addAttribute("marca", new Marca());
+		model.addAttribute("marca", new Companies());
 		return "marca/marca";
 	}
 
 	@GetMapping("/list")
 	public String listMarcas(Model model) {
 		try {
-			model.addAttribute("marca", new Marca());
+			model.addAttribute("companies", new Companies());
 			model.addAttribute("listaMarcas", mService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -45,7 +45,7 @@ public class MarcaController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveMarca(@Validated Marca marca, BindingResult result, Model model, SessionStatus status)
+	public String saveMarca(@Validated Companies marca, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "marca/marca";
@@ -61,14 +61,14 @@ public class MarcaController {
 	}
 
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Marca marca) {
-		mService.listarId(marca.getIdMarca());
+	public String listarId(Map<String, Object> model, @ModelAttribute Companies marca) {
+		mService.listarId(marca.getId_company());
 		return "marca/listMarca";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
-		Marca objMarca = mService.listarId(id);
+		Companies objMarca = mService.listarId(id);
 		if (objMarca == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/marca/list";
@@ -81,15 +81,15 @@ public class MarcaController {
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		mService.delete(id);
-		model.addAttribute("marca", new Marca());
+		model.addAttribute("marca", new Companies());
 		model.addAttribute("listaMarcas", mService.list());
 		return "marca/listMarca";
 	}
 	
 	@RequestMapping("/search")
-	public String findCategory(@ModelAttribute Marca marca, Model model) {
-		List<Marca> listaMarcas;
-		listaMarcas=mService.findBynMarca(marca.getnMarca());
+	public String findMarca(@ModelAttribute Companies marca, Model model) {
+		List<Companies> listaMarcas;
+		listaMarcas=mService.findBynMarca(marca.getNameCompany());
 		model.addAttribute("listaMarcas", listaMarcas);
 		return "marca/listMarca";
 	}

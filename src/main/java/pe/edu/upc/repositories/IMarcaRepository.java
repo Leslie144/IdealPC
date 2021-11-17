@@ -7,13 +7,14 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.Companies;
+
 
 @Repository
-public interface IMarcaRepository extends JpaRepository<Marca, Integer>{
+public interface IMarcaRepository extends JpaRepository<Companies, Integer>{
 	
-	@Query("select count (m.nMarca) from Marca m where m.nMarca=:name")
-	public int MarcasExistentes(@Param("name") String nombre);
-	
-	List<Marca> findBynMarca(String name);
+	/*@Query("select count(co.nCompany) from Companies co where co.nCompany=:nCompany")
+	public int CompanysExistentes(@Param("nCompany") String nCompany);
+	*/
+	List<Companies> findBynameCompany(String name);
 }
