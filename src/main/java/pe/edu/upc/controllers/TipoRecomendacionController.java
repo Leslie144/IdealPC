@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.TipoRecomendacion;
+import pe.edu.upc.entities.TypeRecomendation;
 import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
 
 @Controller
@@ -30,14 +30,14 @@ public class TipoRecomendacionController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoRecomendacion(Model model) {
-		model.addAttribute("tipoRecomendacion", new TipoRecomendacion());
+		model.addAttribute("tipoRecomendacion", new TypeRecomendation());
 		return "tiporecomendacion/tiporecomendacion";
 	}
 
 	@GetMapping("/list")
 	public String listTipoRecomendaciones(Model model) {
 		try {
-			model.addAttribute("tiporecomendacion", new TipoRecomendacion());
+			model.addAttribute("typeRecomendation", new TypeRecomendation());
 			model.addAttribute("listaTipoRecomendacion", trService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -46,7 +46,7 @@ public class TipoRecomendacionController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveTipoRecomendacion(@Valid TipoRecomendacion tiporecomendacion, BindingResult result, Model model,
+	public String saveTipoRecomendacion(@Valid TypeRecomendation tiporecomendacion, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
 			return "tiporecomendacion/tiporecomendacion";
@@ -62,14 +62,14 @@ public class TipoRecomendacionController {
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute TipoRecomendacion tiporecomendacion) {
-		trService.listarId(tiporecomendacion.getIdTipoRecomendacion());
+	public String listarId(Map<String, Object> model, @ModelAttribute TypeRecomendation tiporecomendacion) {
+		trService.listarId(tiporecomendacion.getId());
 		return "tiporecomendacion/listTipoRecomendacion";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
-		TipoRecomendacion objTipoRecomendacion = trService.listarId(id);
+		TypeRecomendation objTipoRecomendacion = trService.listarId(id);
 		if (objTipoRecomendacion == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipoderecomendaciones/list";

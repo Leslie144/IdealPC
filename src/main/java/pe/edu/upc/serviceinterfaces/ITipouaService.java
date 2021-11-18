@@ -2,14 +2,14 @@ package pe.edu.upc.serviceinterfaces;
 
 import java.util.List;
 
-import pe.edu.upc.entities.Tipoua;
+import pe.edu.upc.entities.Typeua;
 
 public interface ITipouaService {
-	public Integer insert(Tipoua tipoua);
+	public Integer insert(Typeua tipoua);
 
-	List<Tipoua> list();
+	List<Typeua> list();
 
-	Tipoua listarId(int idTipoua);
+	Typeua listarId(int idTipoua);
 
 	public void delete(int idTipoua);
 }
