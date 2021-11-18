@@ -26,4 +26,13 @@ public interface IUsuarioRepository extends JpaRepository<Users, Integer> {
 	List<Users> findByUsername(String name);
 	
 	//public Users findBynombreUsuario(String name);
+	
+	//@Query(value = "SELECT * from users us where us.registrationdate >= (CURRENT_DATE - 30)", nativeQuery = true)
+	@Query(value="SELECT us.*, d.nombre_distrito, r.rol\r\n"
+			+ "from users us \r\n"
+			+ "inner join distrito d on us.id_distrito = d.id_distrito\r\n"
+			+ "inner join roles r on us.id_role = r.id_role\r\n"
+			+ "where us.registrationdate >= (CURRENT_DATE - 30)",  nativeQuery = true)
+	public List<String[]> quantityUsers();
+
 }

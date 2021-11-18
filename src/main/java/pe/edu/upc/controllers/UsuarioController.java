@@ -193,4 +193,18 @@ public class UsuarioController {
 		model.addAttribute("listaUsuarios", listaUsuarios);
 		return "usuario/listUsuario";
 	}
+	
+	@GetMapping("/reportes")
+	public String listReports(Model model) {
+
+		return "/reports/reports";
+	}
+	
+	@RequestMapping("/reporte3")
+	public String quantityUsers(Map<String, Object> model) {
+		model.put("listaUsuarios", uService.quantityUsers());
+		System.out.println("cant usu: " + uService.quantityUsers().size());
+		model.put("cantidad", uService.quantityUsers().size());
+		return "reports/quantityUsers";
+	}
 }
