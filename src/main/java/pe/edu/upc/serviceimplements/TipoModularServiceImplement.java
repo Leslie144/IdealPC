@@ -18,13 +18,12 @@ public class TipoModularServiceImplement implements ITipoModularService {
 	private ITipoModularRepository tmR;
 
 	@Override
-	public boolean insert(TipoModular tipomodular) {
-		TipoModular rpta=tmR.save(tipomodular);
-		if(rpta==null) {
-			return false;
-		}else {
-			return true;
+	public int insert(TipoModular tipomodular) {
+		int rpta=tmR.TipoModularExistentes(tipomodular.getnTipoModular());
+		if(rpta==0) {
+			tmR.save(tipomodular);
 		}
+		return rpta;
 	}
 
 	@Override

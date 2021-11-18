@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.TipoUsuario;
 import pe.edu.upc.serviceinterfaces.ITipoUsuarioService;
 
@@ -27,36 +28,40 @@ public class TipoUsuarioController {
 	
 	@GetMapping("/new")
 	public String newTipoUsuario(Model model) {
-		model.addAttribute("tipousuario", new TipoUsuario());
-		return "tipousuario/tipousuario";
+		model.addAttribute("tipoUsuario", new TipoUsuario());
+		return "tipoUsuario/tipoUsuario";
 	}
 	
 	@GetMapping("/list")
 	public String listTipoUsuario(Model model) {
 		try {
-			model.addAttribute("tipousuario", new TipoUsuario());
+			model.addAttribute("tipoUsuario", new TipoUsuario());
 			model.addAttribute("listaTipoUsuario", tuService.list());
 		} catch (Exception e) {
+			
 			model.addAttribute("error", e.getMessage());
 			// TODO: handle exception
 		}
-		return "tipousuario/listTipoUsuario";
+		return "tipoUsuario/listTipoUsuario";
 	}
 	
 	@PostMapping("/save")
 	public String saveTipoUsuario(@Validated TipoUsuario tipousuario, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
-		if (result.hasErrors()) {			
+		if (result.hasErrors()) {
 			return "tipoUsuario/tipoUsuario";
 		} else {
-			boolean flag = tuService.insert(tipousuario);
-			if (flag) {
-				return "redirect:/tipousuarios/list";
+			int rpta = tuService.insert(tipousuario);
+			if (rpta > 0) {
+				model.addAttribute("mensaje", "ya existe");
+				return "tipoUsuario/tipoUsuario";
 			} else {
-				model.addAttribute("mensaje", "Ocurrió un error");
-				return "redirect:/tipousuarios/new";
+				model.addAttribute("mensaje","Se guardó correctamente");
+				status.setComplete();
 			}
 		}
+		model.addAttribute("tipoUsuario",new TipoUsuario());
+		return "redirect:/tipousuarios/list";
 	}	
 	
 	@RequestMapping("/listarId")
@@ -72,7 +77,7 @@ public class TipoUsuarioController {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipousuarios/list";
 		} else {
-			model.addAttribute("tipousuario", objTipoUsuario);
+			model.addAttribute("tipoUsuario", objTipoUsuario);
 			return "tipoUsuario/tipoUsuario";
 		}
 	}

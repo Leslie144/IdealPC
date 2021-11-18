@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.TipoModular;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 
@@ -29,14 +30,14 @@ public class TipoModularController {
 	
 	@GetMapping("/new")
 	public String newTipoModular(Model model) {
-		model.addAttribute("tipomodular", new TipoModular());
+		model.addAttribute("tipoModular", new TipoModular());
 		return "tipoModular/tipoModular";
 	}
 
 	@GetMapping("/list")
 	public String listTipoModulares(Model model) {
 		try {
-			model.addAttribute("tipomodular", new TipoModular());
+			model.addAttribute("tipoModular", new TipoModular());
 			model.addAttribute("listaTipoModular", tmService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -50,15 +51,18 @@ public class TipoModularController {
 			throws Exception {
 		if (result.hasErrors()) {
 			return "tipoModular/tipoModular";
-		} else {			
-			boolean flag = tmService.insert(tipomodular);
-			if (flag) {
-				return "redirect:/tipomodulares/list";
+		} else {
+			int rpta = tmService.insert(tipomodular);
+			if (rpta > 0) {
+				model.addAttribute("mensaje", "ya existe");
+				return "tipoModular/tipoModular";
 			} else {
-				model.addAttribute("mensaje","Ocurrió un error");
-				return "redirect:/tipomodulares/new";
+				model.addAttribute("mensaje","Se guardó correctamente");
+				status.setComplete();
 			}
-		}		
+		}
+		model.addAttribute("tipoModular",new TipoModular());
+		return "redirect:/tipomodulares/list";
 	}
 	
 	@RequestMapping("/listarId")

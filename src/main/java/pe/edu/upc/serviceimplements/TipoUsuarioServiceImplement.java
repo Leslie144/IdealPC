@@ -17,13 +17,12 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService{
 	@Autowired
 	private ITipoUsuarioRepository tuR;
 	@Override
-	public boolean insert(TipoUsuario tipousuario) {
-		TipoUsuario rpta=tuR.save(tipousuario);
-		if(rpta==null) {
-			return false;
-		}else {
-			return true;
+	public int insert(TipoUsuario tipousuario) {
+		int rpta=tuR.TipoUsuarioExistentes(tipousuario.getnTipousuario());
+		if(rpta==0) {
+			tuR.save(tipousuario);
 		}
+		return rpta;
 	}
 
 	@Override
