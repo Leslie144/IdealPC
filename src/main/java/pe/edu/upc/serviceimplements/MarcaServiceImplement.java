@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.Companies;
 import pe.edu.upc.repositories.IMarcaRepository;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 
@@ -18,8 +18,8 @@ public class MarcaServiceImplement implements IMarcaService {
 	private IMarcaRepository mR;
 
 	@Override
-	public boolean insert(Marca marca) {
-		Marca rpta=mR.save(marca);
+	public boolean insert(Companies marca) {
+		Companies rpta=mR.save(marca);
 		if(rpta==null) {
 			return false;
 		}else {
@@ -28,15 +28,15 @@ public class MarcaServiceImplement implements IMarcaService {
 	}
 
 	@Override
-	public List<Marca> list() {
+	public List<Companies> list() {
 		return mR.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Marca listarId(int idMarca) {
-		Optional<Marca> op = mR.findById(idMarca);
-		return op.isPresent() ? op.get() : new Marca();
+	public Companies listarId(int idMarca) {
+		Optional<Companies> op = mR.findById(idMarca);
+		return op.isPresent() ? op.get() : new Companies();
 	}
 
 	@Override
@@ -46,9 +46,9 @@ public class MarcaServiceImplement implements IMarcaService {
 	}
 
 	@Override
-	public List<Marca> findBynMarca(String name) {
+	public List<Companies> findBynMarca(String name) {
 		// TODO Auto-generated method stub
-		return mR.findBynMarca(name);
+		return mR.findBynameCompany(name);
 	}
 
 }

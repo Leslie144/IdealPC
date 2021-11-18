@@ -2,6 +2,8 @@ package pe.edu.upc.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +27,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+
 import pe.edu.upc.entities.Users;
 import pe.edu.upc.serviceinterfaces.IDistritoService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -36,7 +39,7 @@ import pe.edu.upc.serviceinterfaces.IUsuarioService;
 public class UsuarioController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private IUsuarioService uService;
 	@Autowired
@@ -45,29 +48,42 @@ public class UsuarioController {
 	private IDistritoService dService;
 	@Autowired
 	private ITipoUsuarioService tService;
+	
+	boolean update= false;
+	
+	Date date = new Date();
+	java.sql.Date date2;
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newUsuario(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
 		model.addAttribute("listaTipos", tService.list());
-		model.addAttribute("users", new Users());
+		Users newuser = new Users();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String formatdate = formatter.format(date);
+		date2 =  java.sql.Date.valueOf(formatdate);
+		newuser.setRegistrationdate(date2);
+		model.addAttribute("users", newuser);
 		return "usuario/usuario";
 	}
 
 	@GetMapping("/list")
 	public String listUsuarios(Model model) {
 		try {
-			model.addAttribute("usuario", new Users());
+			model.addAttribute("users", new Users());
 			model.addAttribute("listaUsuarios", uService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
 		return "usuario/listUsuario";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String saveUsuario(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
-			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status) throws Exception {
+			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status)
+			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
@@ -81,25 +97,31 @@ public class UsuarioController {
 				String uniqueFilename = null;
 				try {
 					uniqueFilename = subirarchivoService.copy(photo);
+
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				usuario.setPhoto(uniqueFilename);
 			}
 			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
 			usuario.setPassword(bcryptPassword);
-			boolean flag = uService.insert(usuario);
-			if (flag) {
+
+			//boolean flag = uService.insert(usuario);
+			//System.out.println(usuario.getRegistrationdate());
+			if (uService.findBynombreUsuario(usuario.getUsername()).isEmpty() || update) {
+				uService.insert(usuario);
+				update = false;
 				return "redirect:/usuario/list";
 			} else {
-				model.addAttribute("mensaje", "Ocurrió un error");
+			    //System.out.println("Aqui");
+				//model.addAttribute("mensaje", "Ocurrió un error");
+				flash.addFlashAttribute("error", "Ya existe un usuario con el username ingresado");
 				return "redirect:/usuario/new";
-
 			}
 		}
 	}
+
 	@GetMapping(value = "/uploads/{filename:.+}")
 	public ResponseEntity<Resource> verFoto(@PathVariable String filename) {
 		Resource recurso = null;
@@ -113,7 +135,7 @@ public class UsuarioController {
 				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
 				.body(recurso);
 	}
-	
+
 	@GetMapping(value = "/view/{id}")
 	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
 		Users usuario = uService.listarId(id);
@@ -125,7 +147,7 @@ public class UsuarioController {
 		model.put("titulo", "Detalle de usuario: " + usuario.getUsername());
 		return "usuario/ver";
 	}
-	
+
 	@RequestMapping("/list")
 	public String listUsuarios(Map<String, Object> model) {
 		model.put("listaUsuario", uService.list());
@@ -137,7 +159,7 @@ public class UsuarioController {
 		uService.listarId(usuario.getId());
 		return "usuario/listUsuario";
 	}
-	
+
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
@@ -149,22 +171,25 @@ public class UsuarioController {
 			model.addAttribute("listaDistritos", dService.list());
 			model.addAttribute("listaTipos", tService.list());
 			model.addAttribute("users", objUsuario);
+			update = true;
 			return "usuario/usuario";
 		}
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteUsuario(Model model, @RequestParam(value = "id") int id) {
 		uService.delete(id);
 		model.addAttribute("usuario", new Users());
 		model.addAttribute("listaUsuarios", uService.list());
+		model.addAttribute("users", new Users());
 		return "usuario/listUsuario";
 	}
 
 	@RequestMapping("/search")
 	public String findUsuario(@ModelAttribute Users usuario, Model model) {
 		List<Users> listaUsuarios;
-		listaUsuarios=uService.findBynombreUsuario(usuario.getUsername());
+		listaUsuarios = uService.findBynombreUsuario(usuario.getUsername());
 		model.addAttribute("listaUsuarios", listaUsuarios);
 		return "usuario/listUsuario";
 	}
