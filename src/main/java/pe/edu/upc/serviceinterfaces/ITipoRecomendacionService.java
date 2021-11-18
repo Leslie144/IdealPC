@@ -2,14 +2,14 @@ package pe.edu.upc.serviceinterfaces;
 
 import java.util.List;
 
-import pe.edu.upc.entities.TipoRecomendacion;
+import pe.edu.upc.entities.TypeRecomendation;
 
 public interface ITipoRecomendacionService {
-	public boolean insert(TipoRecomendacion tiporecomendacion);
+	public boolean insert(TypeRecomendation tiporecomendacion);
 
-	List<TipoRecomendacion> list();
+	List<TypeRecomendation> list();
 
-	TipoRecomendacion listarId(int idTipoRecomendacion);
+	TypeRecomendation listarId(int idTipoRecomendacion);
 
 	public void delete(int idTipoRecomendacion);
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import pe.edu.upc.entities.TipoModular;
-import pe.edu.upc.entities.TipoRecomendacion;
 import pe.edu.upc.repositories.ITipoModularRepository;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 

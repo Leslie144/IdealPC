@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Tipoua;
+import pe.edu.upc.entities.Typeua;
 import pe.edu.upc.serviceinterfaces.ITipouaService;
 
 @Controller
@@ -29,14 +29,14 @@ public class TipouaController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoua(Model model) {
-		model.addAttribute("tipoua", new Tipoua());
+		model.addAttribute("tipoua", new Typeua());
 		return "tipoua/tipoua";
 	}
 
 	@GetMapping("/list")
 	public String listTipouas(Model model) {
 		try {
-			model.addAttribute("tipoua", new Tipoua());
+			model.addAttribute("typeua", new Typeua());
 			model.addAttribute("listaTipouas", cService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -45,7 +45,7 @@ public class TipouaController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveMarca(@Valid Tipoua tipoua, BindingResult result, Model model, SessionStatus status)
+	public String saveMarca(@Valid Typeua tipoua, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "tipoua/tipoua";
@@ -59,19 +59,19 @@ public class TipouaController {
 				status.setComplete();
 			}
 		}
-		model.addAttribute("tipoua", new Tipoua());
+		model.addAttribute("tipoua", new Typeua());
 		return "redirect:/tipouas/list";
 	}
 
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute Tipoua tipo) {
-		cService.listarId(tipo.getIdTipoua());
+	public String listarId(Map<String, Object> model, @ModelAttribute Typeua tipo) {
+		cService.listarId(tipo.getId());
 		return "tipoua/listTipouas";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
-		Tipoua objTipoua = cService.listarId(id);
+		Typeua objTipoua = cService.listarId(id);
 		if (objTipoua == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipouas/list";

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entities.TipoRecomendacion;
+import pe.edu.upc.entities.TypeRecomendation;
 import pe.edu.upc.repositories.ITipoRecomendacionRepository;
 import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
 
@@ -18,8 +18,8 @@ public class TipoRecomendacionServiceImplement implements ITipoRecomendacionServ
 	private ITipoRecomendacionRepository trR;
 
 	@Override
-	public boolean insert(TipoRecomendacion tiporeco) {
-		TipoRecomendacion rpta=trR.save(tiporeco);
+	public boolean insert(TypeRecomendation tiporeco) {
+		TypeRecomendation rpta=trR.save(tiporeco);
 		if(rpta==null) {
 			return false;
 		}else {
@@ -28,16 +28,16 @@ public class TipoRecomendacionServiceImplement implements ITipoRecomendacionServ
 	}
 
 	@Override
-	public List<TipoRecomendacion> list() {
+	public List<TypeRecomendation> list() {
 		// TODO Auto-generated method stub
 		return trR.findAll();
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public TipoRecomendacion listarId(int idTipoRecomendacion) {
-		Optional<TipoRecomendacion> op = trR.findById(idTipoRecomendacion);
-		return op.isPresent() ? op.get() : new TipoRecomendacion();
+	public TypeRecomendation listarId(int idTipoRecomendacion) {
+		Optional<TypeRecomendation> op = trR.findById(idTipoRecomendacion);
+		return op.isPresent() ? op.get() : new TypeRecomendation();
 	}
 
 	@Override
