@@ -87,6 +87,9 @@ public class TiendaController {
 
 				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
 				objTiend.setFotoTienda(uniqueFilename);
+			}else {
+				String def="def.png";
+				objTiend.setFotoTienda(def);
 			}
 			boolean flag = tService.insert(objTiend);
 			if (flag) {
