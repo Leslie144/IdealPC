@@ -1,5 +1,7 @@
 package pe.edu.upc.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -49,6 +51,9 @@ public class Hardware {
 	@JoinColumn(name = "id_company", nullable = false)
 	private Companies companies;
 
+  	private Date fecha;
+
+	
 	public Hardware() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -58,7 +63,7 @@ public class Hardware {
 			String nombreHardware,
 			String modeloHardware,
 			Double precioHardware,
-			String fotoHardware, Companies companies) {
+			String fotoHardware, Companies companies, Date fecha) {
 		super();
 		this.idHardware = idHardware;
 		this.nombreHardware = nombreHardware;
@@ -66,6 +71,7 @@ public class Hardware {
 		this.precioHardware = precioHardware;
 		this.fotoHardware = fotoHardware;
 		this.companies = companies;
+		this.fecha = fecha;
 	}
 
 	public int getIdHardware() {
@@ -116,7 +122,13 @@ public class Hardware {
 		this.companies = companies;
 	}
 	
-	
-	
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 
 }
+
