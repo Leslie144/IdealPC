@@ -53,4 +53,10 @@ public class UsuarioServiceImplement implements IUsuarioService {
 		// TODO Auto-generated method stub
 		uR.deleteById(idUsuario);
 	}
+
+	@Override
+	public List<String[]> quantityUsers() {
+		// TODO Auto-generated method stub
+		return uR.quantityUsers();
+	}
 }
