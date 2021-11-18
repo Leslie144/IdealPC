@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="/css/bootstrap.min.css">
 <link rel="stylesheet" href="/css/dive.css">
 </head>
-
 <body>
 
 	<div th:replace="fragments/sidebar :: sidebar" id="panel"
@@ -22,41 +21,41 @@
 	<div class="bg row">
 		<div th:replace="fragments/nav :: nav" class="row topbar col-lg-12"></div>
 
-		<div class="content container">
-
-			<div class="d-flex">
-				<h3 class="title-content">Lista de Tipo Modular</h3>
-				<a th:href="@{/tipomodulares/new}" class="btn btn-warning">Nuevo</a>
+		<div class="content container row col-12">
+			<div class="col-1">
+				<h3></h3>
 			</div>
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col" class="text-center">Código</th>
-						<th scope="col" class="text-center">Tipo Modular</th>
-						<th scope="col" class="text-center">Operacion</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="tip : ${listaTipoModular}">
-						<td class="text-center" th:text="${tip.idTipoModular}"></td>
-						<td class="text-center" th:text="${tip.nTipoModular}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
-							th:href="@{'/tipomodulares/update/' + ${tip.idTipoModular}}">
-								<i class="fa fa-cog"></i> Update
-						</a> <a class="btn btn-danger"
-							th:href="@{/tipomodulares/delete?id=}+${tip.idTipoModular}">
-								<i class="fa fa-trash-o fa-lg"></i> Delete
-						</a></td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-		<div th:if="${mensaje}" class="alert alert-danger">
-			<p th:text="${mensaje}"></p>
-		</div>
+			<div class="col-3">
+				<h3>Registrar Tipo Modular</h3>
+			</div>
+			<div class="col-8 frm-registro">
+				<form th:action="@{/modulartypes/save}" method="post"
+					th:object="${modularType}">
+					<div class="form-group">
+						<label>ID:</label> <input type="text" class="form-control"
+							readonly th:field="*{id}"></input>
 
+						<div class="form-group">
+							<label for="tipo">Tipo:</label> <input type="text" required
+								th:field="*{type}" class="form-control" id="tipo"></input>
+							<div class="alert alert-danger"
+								th:if="${#fields.hasErrors('type')}"
+								th:errors="*{type}"></div>
+
+						</div>
+
+					</div>
+					<button type="submit" class="btn btn-warning">Grabar</button>
+					<a href="/modulartypes/list" class="btn btn-light">Cancelar</a>
+
+				</form>
+				<div th:if="${message}" class="alert alert-danger">
+					<p th:text="${message}"></p>
+				</div>
+			</div>
+
+		</div>
 	</div>
-	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 
 	<script src="/js/popper.min.js"></script>
