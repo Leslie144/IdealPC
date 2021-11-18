@@ -1,5 +1,7 @@
 package pe.edu.upc.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -29,7 +31,8 @@ public class Hardware {
 	private String nombreHardware;
 
 	@Pattern(regexp = "[^!\"$%&'()*+,./:;<=>?@^`{|}~]+", message = "El nombre del MODELO no puede contener caracteres especiales")
-	//@Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede contener un número")
+	// @Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede
+	// contener un número")
 	@NotNull(message = "El nombre del MODELO no puede estar vacio")
 	@Column(name = "modeloHardware", nullable = false)
 	private String modeloHardware;
@@ -42,12 +45,14 @@ public class Hardware {
 	@Column(name = "precioHardware", columnDefinition = "Decimal(8,2)", nullable = false)
 	private Double precioHardware;
 
+	@NotNull(message = "funciona :D")
 	@Column(name = "fotoHardware", nullable = true)
 	private String fotoHardware;
 
 	@ManyToOne
 	@JoinColumn(name = "idMarca", nullable = false)
 	private Marca marca;
+	private Date fecha;
 
 	public Hardware() {
 		super();
@@ -55,7 +60,7 @@ public class Hardware {
 	}
 
 	public Hardware(int idHardware, String nombreHardware, String modeloHardware, Double precioHardware,
-			String fotoHardware, Marca marca) {
+			String fotoHardware, Marca marca, Date fecha) {
 		super();
 		this.idHardware = idHardware;
 		this.nombreHardware = nombreHardware;
@@ -63,6 +68,15 @@ public class Hardware {
 		this.precioHardware = precioHardware;
 		this.fotoHardware = fotoHardware;
 		this.marca = marca;
+		this.fecha = fecha;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public int getIdHardware() {

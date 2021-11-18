@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
@@ -32,9 +33,11 @@ public class Tienda {
 	@Column(name = "direccionTienda",nullable = false)
 	private String direccionTienda;
 
+	@NotEmpty(message = "escribe algo paaa")
+	//@NotBlank(message = "escribe algo paaa")
+	@NotNull(message = "El nombre de la TIENDA no puede estar vacio")
 	@Pattern(regexp = "[^!\"#%'()*+,-./:;<=>?@^`{|}~]+", message = "El nombre de la TIENDA no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El nombre de la TIENDA no puede contener un número")
-	@NotNull(message = "El nombre de la TIENDA no puede estar vacio")
 	@Column(name = "nombreTienda",nullable = false)
 	private String nombreTienda;
 	
@@ -53,7 +56,7 @@ public class Tienda {
 	@ManyToOne
 	@JoinColumn(name = "idDistrito",nullable = false)
 	private Distrito distrito;
-	
+	@NotNull(message = "Ingresa la fecha")
 	private Date fechaRegistro;
 
 	public Tienda() {

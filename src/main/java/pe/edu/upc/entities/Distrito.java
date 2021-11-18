@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -16,6 +17,7 @@ public class Distrito {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idDistrito;
+	@NotBlank(message = "Name is mandatory")
 	@NotNull(message = "Debe rellenar el campo")
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El nombre del DISTRITO no puede contener un caracter especial")
 	@Pattern(regexp = "[^0-9]+", message = "El nombre deL DISTRITO no puede contener un número")
