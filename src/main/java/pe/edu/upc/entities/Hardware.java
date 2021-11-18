@@ -59,10 +59,12 @@ public class Hardware {
 		// TODO Auto-generated constructor stub
 	}
 
+	
+
 	public Hardware(int idHardware,
 			String nombreHardware,
 			String modeloHardware,
-			Double precioHardware,
+			 Double precioHardware,
 			String fotoHardware, Companies companies, Date fecha) {
 		super();
 		this.idHardware = idHardware;
@@ -73,6 +75,8 @@ public class Hardware {
 		this.companies = companies;
 		this.fecha = fecha;
 	}
+
+
 
 	public int getIdHardware() {
 		return idHardware;
