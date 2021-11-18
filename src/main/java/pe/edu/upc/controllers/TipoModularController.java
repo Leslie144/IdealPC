@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.TipoModular;
+import pe.edu.upc.entities.TypeModular;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 
 @Controller
@@ -30,14 +30,14 @@ public class TipoModularController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoModular(Model model) {
-		model.addAttribute("tipomodular", new TipoModular());
+		model.addAttribute("tipomodular", new TypeModular());
 		return "tipoModular/tipoModular";
 	}
 
 	@GetMapping("/list")
 	public String listTipoModulares(Model model) {
 		try {
-			model.addAttribute("tipomodular", new TipoModular());
+			model.addAttribute("typeModular", new TypeModular());
 			model.addAttribute("listaTipoModular", tmService.list());
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
@@ -47,7 +47,7 @@ public class TipoModularController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveTipoModular(@Valid TipoModular tipomodular, BindingResult result, Model model, SessionStatus status)
+	public String saveTipoModular(@Valid TypeModular tipomodular, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
 			return "tipoModular/tipoModular";
@@ -63,14 +63,14 @@ public class TipoModularController {
 	}
 	
 	@RequestMapping("/listarId")
-	public String listarId(Map<String, Object> model, @ModelAttribute TipoModular tipomodular) {
-		tmService.listarId(tipomodular.getIdTipoModular());
+	public String listarId(Map<String, Object> model, @ModelAttribute TypeModular tipomodular) {
+		tmService.listarId(tipomodular.getId_modular());
 		return "tipoModular/listTipoModular";
 	}
 
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
-		TipoModular objTipoModular = tmService.listarId(id);
+		TypeModular objTipoModular = tmService.listarId(id);
 		if (objTipoModular == null) {
 			objRedir.addFlashAttribute("mensaje", "ocurrió un error");
 			return "redirect:/tipomodulares/list";

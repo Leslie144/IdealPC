@@ -9,43 +9,43 @@ import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "tipoModular")
-public class TipoModular  {
+@Table(name = "typeModular")
+public class TypeModular  {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int idTipoModular;
+	private int id_modular;
 
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El Tipo Modular no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El Tipo Modular no puede contener un número")
-	@Column(name = "nTipoModular",nullable = false,length = 100)
-	private String nTipoModular;
+	@Column(name = "type",nullable = false,length = 100)
+	private String type;
 
-	public TipoModular() {
+	public TypeModular() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public TipoModular(int idTipoModular, String nTipoModular) {
+	public TypeModular(int id_modular, String type) {
 		super();
-		this.idTipoModular = idTipoModular;
-		this.nTipoModular = nTipoModular;
+		this.id_modular = id_modular;
+		this.type = type;
 	}
 
-	public int getIdTipoModular() {
-		return idTipoModular;
+	public int getId_modular() {
+		return id_modular;
 	}
 
-	public void setIdTipoModular(int idTipoModular) {
-		this.idTipoModular = idTipoModular;
+	public void setId_modular(int id_modular) {
+		this.id_modular = id_modular;
 	}
 
-	public String getnTipoModular() {
-		return nTipoModular;
+	public String getType() {
+		return type;
 	}
 
-	public void setnTipoModular(String nTipoModular) {
-		this.nTipoModular = nTipoModular;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	

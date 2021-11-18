@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.upc.entities.TipoModular;
+import pe.edu.upc.entities.TypeModular;
 import pe.edu.upc.repositories.ITipoModularRepository;
 import pe.edu.upc.serviceinterfaces.ITipoModularService;
 
@@ -17,8 +17,8 @@ public class TipoModularServiceImplement implements ITipoModularService {
 	private ITipoModularRepository tmR;
 
 	@Override
-	public boolean insert(TipoModular tipomodular) {
-		TipoModular rpta=tmR.save(tipomodular);
+	public boolean insert(TypeModular tipomodular) {
+		TypeModular rpta=tmR.save(tipomodular);
 		if(rpta==null) {
 			return false;
 		}else {
@@ -27,16 +27,16 @@ public class TipoModularServiceImplement implements ITipoModularService {
 	}
 
 	@Override
-	public List<TipoModular> list() {
+	public List<TypeModular> list() {
 		// TODO Auto-generated method stub
 		return tmR.findAll();
 	}
 
 	@Override
-	public TipoModular listarId(int idTipoModular) {
+	public TypeModular listarId(int idTipoModular) {
 		// TODO Auto-generated method stub
-		Optional<TipoModular> op = tmR.findById(idTipoModular);
-		return op.isPresent() ? op.get() : new TipoModular();
+		Optional<TypeModular> op = tmR.findById(idTipoModular);
+		return op.isPresent() ? op.get() : new TypeModular();
 	}
 
 	@Override

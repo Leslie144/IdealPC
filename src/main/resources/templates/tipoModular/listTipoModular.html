@@ -38,13 +38,13 @@
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoModular}">
-						<td class="text-center" th:text="${tip.idTipoModular}"></td>
-						<td class="text-center" th:text="${tip.nTipoModular}"></td>
+						<td class="text-center" th:text="${tip.id_modular}"></td>
+						<td class="text-center" th:text="${tip.type}"></td>
 						<td class="text-center"><a class="btn btn-default btn-sm"
-							th:href="@{'/tipomodulares/update/' + ${tip.idTipoModular}}">
+							th:href="@{'/tipomodulares/update/' + ${tip.id_modular}}">
 								<i class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"
-							th:href="@{/tipomodulares/delete?id=}+${tip.idTipoModular}">
+							th:href="@{/tipomodulares/delete?id=}+${tip.id_modular}">
 								<i class="fa fa-trash-o fa-lg"></i> Delete
 						</a></td>
 					</tr>

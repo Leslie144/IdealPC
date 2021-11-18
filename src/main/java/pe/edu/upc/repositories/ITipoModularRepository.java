@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import pe.edu.upc.entities.TipoModular;
+import pe.edu.upc.entities.TypeModular;
 @Repository
-public interface ITipoModularRepository extends JpaRepository<TipoModular, Integer> {
+public interface ITipoModularRepository extends JpaRepository<TypeModular, Integer> {
   
-	@Query("select count(tm.nTipoModular) from TipoModular tm where tm.nTipoModular=:tipo")
-	public int TipoModularExistentes(@Param("tipo") String tipo);
+	@Query("select count(tm.type) from TypeModular tm where tm.type=:type")
+	public int TipoModularExistentes(@Param("type") String type);
 }
