@@ -83,8 +83,8 @@
 						<div class="form-group">
 							<label for="marca">Marca:</label> <select class="form-control"
 								th:field="*{companies.id_company}">
-								<option th:each="c: ${listaMarcas}" th:value="${c.id_company}"
-									th:text="${c.nameCompany}"
+								<option th:each="c: ${listaCompanies}"
+									th:value="${c.id_company}" th:text="${c.nameCompany}"
 									th:selected="(${c.id_company} == *{companies.id_company})"></option>
 							</select>
 						</div>
@@ -105,7 +105,7 @@
 							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control"
-									th:text="${hardware.fotoHardware}" />
+									th:text="${hardwares.fotoHardware}" />
 							</div>
 
 						</div>

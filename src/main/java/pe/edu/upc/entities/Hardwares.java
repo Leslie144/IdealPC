@@ -16,8 +16,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "Hardware")
-public class Hardware {
+@Table(name = "hardwares")
+public class Hardwares {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idHardware;
@@ -49,12 +50,12 @@ public class Hardware {
 	@JoinColumn(name = "id_company", nullable = false)
 	private Companies companies;
 
-	public Hardware() {
+	public Hardwares() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Hardware(int idHardware,
+	public Hardwares(int idHardware,
 			String nombreHardware,
 			String modeloHardware,
 			Double precioHardware,
@@ -112,11 +113,8 @@ public class Hardware {
 		return companies;
 	}
 
-	public void setCompany(Companies companies) {
+	public void setCompanies(Companies companies) {
 		this.companies = companies;
 	}
-	
-	
-	
 
 }

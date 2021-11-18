@@ -24,7 +24,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Hardware;
+import pe.edu.upc.entities.Hardwares;
 import pe.edu.upc.serviceinterfaces.IHardwareService;
 import pe.edu.upc.serviceinterfaces.IMarcaService;
 import pe.edu.upc.serviceinterfaces.ISubirFotoService;
@@ -41,9 +41,8 @@ public class HardwareController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newHardware(Model model) {
-		model.addAttribute("listaMarcas", mService.list());
-		model.addAttribute("hardwares",new Hardware());
-		System.out.println("Aqui");
+		model.addAttribute("listaCompanies", mService.list());
+		model.addAttribute("hardwares",new Hardwares());
 		//model.addAttribute("hardware",new Hardware());
 		return "hardware/hardware";
 		
@@ -51,7 +50,7 @@ public class HardwareController {
 	@GetMapping("/list")
 	public String listHardware(Model model) {
 		try {
-			model.addAttribute("hardwares",new Hardware());
+			model.addAttribute("hardwares",new Hardwares());
 			model.addAttribute("listaHardwares",hService.list());
 		} catch (Exception e) {
 			model.addAttribute("error",e.getMessage());
@@ -61,7 +60,7 @@ public class HardwareController {
 	}
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
-	public String insertHardware(@ModelAttribute @Valid Hardware objHard, BindingResult binRes, Model model,
+	public String insertHardware(@ModelAttribute @Valid Hardwares objHard, BindingResult binRes, Model model,
 	@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status)
 	throws ParseException {
 		if(binRes.hasErrors()) {
@@ -106,7 +105,7 @@ public class HardwareController {
 	}
 	@GetMapping(value = "/view/{id}")
 	public String view(@PathVariable(value = "id") int id, Map<String, Object> model, RedirectAttributes flash) {
-		Hardware hardware= hService.listarId(id);
+		Hardwares hardware= hService.listarId(id);
 		if (hardware == null) {
 			flash.addFlashAttribute("error", "El Hardware no existe en la base de datos");
 			return "hardware/listHardware";
@@ -122,13 +121,13 @@ public class HardwareController {
 		return "hardware/listHardware";
 	}
 	@RequestMapping("/listarId")
-	public String listarId(Map<String,Object>model,@ModelAttribute Hardware hard) {
+	public String listarId(Map<String,Object>model,@ModelAttribute Hardwares hard) {
 		hService.listarId(hard.getIdHardware());
 		return "hardware/listHardware";
 	}
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id,Model model,RedirectAttributes objRedir) {
-		Hardware objHard=hService.listarId(id);
+		Hardwares objHard=hService.listarId(id);
 		if(objHard==null) {
 			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
 			return "redirect:/hardware/list";
@@ -143,13 +142,13 @@ public class HardwareController {
 	public String deleteHardware(Model model, @RequestParam(value = "id") Integer id) {
 		hService.delete(id);
 		model.addAttribute("listaHardwares",hService.list());
-		model.addAttribute("hardware",new Hardware());
+		model.addAttribute("hardware",new Hardwares());
 		return "hardware/listHardware";
 	}
 	
 	@RequestMapping("/search")
-	public String findCategory(@ModelAttribute Hardware hardware, Model model) {
-	List<Hardware> listaHardwares;
+	public String findCategory(@ModelAttribute Hardwares hardware, Model model) {
+	List<Hardwares> listaHardwares;
 	listaHardwares=hService.findBynombreHardware(hardware.getNombreHardware());
 	model.addAttribute("listaHardwares",listaHardwares);
 	return "hardware/listHardware";
