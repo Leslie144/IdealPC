@@ -47,7 +47,6 @@
 						<th scope="col" class="text-center">Modelo</th>
 						<th scope="col" class="text-center">Precio</th>
 						<th scope="col" class="text-center">Marca</th>
-						<th scope="col" class="text-center">Fecha Registro</th>
 						<th scope="col" class="text-center">OPERACIÓN</th>
 						<th scope="col" class="text-center">DETALLE</th>
 					</tr>
@@ -62,7 +61,6 @@
 						<td class="text-center" th:text="${p.modeloHardware}"></td>
 						<td class="text-center" th:text="${p.precioHardware}"></td>
 						<td class="text-center" th:text="${p.marca.nMarca}"></td>
-						<td class="text-center" th:text="${p.fecha}"></td>
 						<td class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/hardware/update/' + ${p.idHardware}}"> <i
 								class="fa fa-cog"></i> Update
