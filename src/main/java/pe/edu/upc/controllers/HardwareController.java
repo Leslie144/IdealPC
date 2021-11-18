@@ -132,8 +132,8 @@ public class HardwareController {
 			objRedir.addFlashAttribute("mensaje", "Ocurrió un error");
 			return "redirect:/hardware/list";
 		}else {
-			model.addAttribute("listaMarcas",mService.list());
-			model.addAttribute("hardware",objHard);
+			model.addAttribute("listaCompanies", mService.list());
+			model.addAttribute("hardwares",objHard);
 			return "hardware/hardware";
 		}
 	}
