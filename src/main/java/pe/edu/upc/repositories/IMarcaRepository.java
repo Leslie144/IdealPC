@@ -13,8 +13,8 @@ import pe.edu.upc.entities.Companies;
 @Repository
 public interface IMarcaRepository extends JpaRepository<Companies, Integer>{
 	
-	/*@Query("select count(co.nCompany) from Companies co where co.nCompany=:nCompany")
+	@Query("select count(co.nameCompany) from Companies co where co.nameCompany=:nCompany")
 	public int CompanysExistentes(@Param("nCompany") String nCompany);
-	*/
+	
 	List<Companies> findBynameCompany(String name);
 }

@@ -41,16 +41,17 @@ public class HardwareController {
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newHardware(Model model) {
-		model.addAttribute("hardware",new Hardware());
-		model.addAttribute("listaMarcas",mService.list());
-		model.addAttribute("hardware",new Hardware());
+		model.addAttribute("listaMarcas", mService.list());
+		model.addAttribute("hardwares",new Hardware());
+		System.out.println("Aqui");
+		//model.addAttribute("hardware",new Hardware());
 		return "hardware/hardware";
 		
 	}
 	@GetMapping("/list")
 	public String listHardware(Model model) {
 		try {
-			model.addAttribute("hardware",new Hardware());
+			model.addAttribute("hardwares",new Hardware());
 			model.addAttribute("listaHardwares",hService.list());
 		} catch (Exception e) {
 			model.addAttribute("error",e.getMessage());

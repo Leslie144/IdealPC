@@ -28,7 +28,7 @@
 				<h3 class="title-content">Lista de Hardwares</h3>
 
 				<form th:action="@{/hardware/search}" method="post"
-					th:object="${hardware}">
+					th:object="${hardwares}">
 					<label for="nombreHardware">Buscar:</label> <input type="text"
 						required="required" class="form-control"
 						th:field="*{nombreHardware}" id="nombreHardware"></input>

@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-6 frm-registro">
 				<form th:action="@{/hardware/save}" method="post" class="row"
-					th:object="${hardware}" enctype="multipart/form-data">
+					th:object="${hardwares}" enctype="multipart/form-data">
 
 					<div class="col-6">
 
@@ -82,10 +82,10 @@
 					<div class="col-6">
 						<div class="form-group">
 							<label for="marca">Marca:</label> <select class="form-control"
-								th:field="*{marca.idMarca}">
-								<option th:each="c: ${listaMarcas}" th:value="${c.idMarca}"
-									th:text="${c.nMarca}"
-									th:selected="(${c.idMarca} == *{marca.idMarca})"></option>
+								th:field="*{companies.id_company}">
+								<option th:each="c: ${listaMarcas}" th:value="${c.id_company}"
+									th:text="${c.nameCompany}"
+									th:selected="(${c.id_company} == *{companies.id_company})"></option>
 							</select>
 						</div>
 
