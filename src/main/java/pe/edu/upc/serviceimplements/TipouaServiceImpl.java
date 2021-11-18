@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entities.Tipoua;
+import pe.edu.upc.entities.Typeua;
 import pe.edu.upc.repositories.ITipouaRepository;
 import pe.edu.upc.serviceinterfaces.ITipouaService;
 
@@ -18,8 +18,8 @@ public class TipouaServiceImpl implements ITipouaService {
 	private ITipouaRepository cR;
 
 	@Override
-	public Integer insert(Tipoua tipoua) {
-		int rpta = cR.buscarTipoua(tipoua.getNameTipoua());
+	public Integer insert(Typeua tipoua) {
+		int rpta = cR.buscarTipoua(tipoua.getType());
 		if (rpta == 0) {
 			cR.save(tipoua);
 		}
@@ -27,16 +27,16 @@ public class TipouaServiceImpl implements ITipouaService {
 	}
 
 	@Override
-	public List<Tipoua> list() {
+	public List<Typeua> list() {
 		// TODO Auto-generated method stub
 		return cR.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public Tipoua listarId(int idTipoua) {
-		Optional<Tipoua>op=cR.findById(idTipoua);
-		return op.isPresent()?op.get():new Tipoua();
+	public Typeua listarId(int idTipoua) {
+		Optional<Typeua>op=cR.findById(idTipoua);
+		return op.isPresent()?op.get():new Typeua();
 	}
 
 	@Override

@@ -43,6 +43,7 @@
 							<label for="nombre">Username:</label> <input type="text" required
 								th:field="*{username}" class="form-control" id="nombre"></input>
 						</div>
+						<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
 
@@ -118,7 +119,7 @@
 
 						<div class="form-group">
 							<label for="fechaUsuario">Fecha Registro:</label> <input
-								type="date" required th:field="*{registrationdate}"
+								type="date" readonly th:field="*{registrationdate}"
 								id="fechaUsuario" name="trip-start" value="*{registrationdate}"
 								min="2018-01-01" max="2058-12-31">
 						</div>
@@ -129,9 +130,9 @@
 						<div class="form-group">
 							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
-								<input type="file" name="file" class="form-control"
-									th:text="${users.photo}" value="*${users.photo}"/>
-									
+								<input type="file" required name="file"  class="form-control"
+									th:text="${users.photo}"
+									accept=".jpg,.png,.jpeg" />
 							</div>
 
 						</div>

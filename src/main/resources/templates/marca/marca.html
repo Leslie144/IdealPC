@@ -34,22 +34,22 @@
 					th:object="${marca}">
 					<div class="form-group">
 						<label>ID:</label> <input type="text" class="form-control"
-							readonly th:field="*{idMarca}"></input>
+							readonly th:field="*{id_company}"></input>
 
 						<div class="form-group">
 							<label for="nombre">Marca:</label> <input type="text" required
-								th:field="*{nMarca}" class="form-control" id="nombre"></input>
+								th:field="*{nameCompany}" class="form-control" id="nombre"></input>
 							<div class="alert alert-danger"
-								th:if="${#fields.hasErrors('nMarca')}"
-								th:errors="*{nMarca}"></div>
+								th:if="${#fields.hasErrors('nameCompany')}"
+								th:errors="*{nameCompany}"></div>
 
 						</div>
 						<div class="form-group">
 							<label for="url">URL:</label> <input type="text" required
-								th:field="*{urlMarca}" class="form-control" id="url"></input>
+								th:field="*{urlCompany}" class="form-control" id="url"></input>
 							<div class="alert alert-danger"
-								th:if="${#fields.hasErrors('urlMarca')}"
-								th:errors="*{urlMarca}"></div>
+								th:if="${#fields.hasErrors('urlCompany')}"
+								th:errors="*{urlCompany}"></div>
 
 						</div>
 

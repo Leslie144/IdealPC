@@ -2,17 +2,17 @@ package pe.edu.upc.serviceinterfaces;
 
 import java.util.List;
 
-import pe.edu.upc.entities.Marca;
+import pe.edu.upc.entities.Companies;
 
 public interface IMarcaService {
 	
-	public boolean insert(Marca marca);
+	public boolean insert(Companies marca);
 	
-	List<Marca> list();
+	List<Companies> list();
 	
-	Marca listarId(int idMarca);
+	Companies listarId(int idMarca);
 	
 	public void delete(int idMarca);
 	
-	List<Marca> findBynMarca(String name);
+	List<Companies> findBynMarca(String name);
 }
