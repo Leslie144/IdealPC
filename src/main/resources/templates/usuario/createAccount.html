@@ -42,7 +42,8 @@
 						</div>
 						<div class="alert alert-danger" role="alert" th:text="${error}" th:if="${error}"></div>
 						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+							th:if="${#fields.hasErrors('username')}" 
+							th:errors="*{username}"></div>
 
 
 						<div class="form-group">
@@ -54,7 +55,7 @@
 							th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
 
 						<div class="form-group">
-							<label for="tTelefono">Teléfono:</label> <input type="text"
+							<label for="tTelefono">Teléfono:</label> <input type="number"
 								required th:field="*{phone}" class="form-control" id="tTelefono"></input>
 						</div>
 						<div class="alert alert-danger"
@@ -89,40 +90,13 @@
 						</div>
 
 
-						<div class="form-group">
-							<label for="tipousuario">Tipo usuario:</label> <select
-								class="form-control" th:field="*{roles.id_role}">
-								<option th:each="c: ${listaTipos}" th:value="${c.id_role}"
-									th:text="${c.rol}"
-									th:selected="(${c.id_role} == *{roles.id_role})"></option>
-							</select>
-						</div>
 						
-						<div class="form-group">
-							<label for="name" class="col-sm-2 col-form-label">Estado:
-							</label>
-							<div class="col-sm-6">
-								<input type="checkbox" th:field="*{enabled}"
-									class="form-control"
-									th:errorclass="'form-control alert-danger'" /> <small
-									class="form-text text-danger"
-									th:if="${#fields.hasErrors('enabled')}" th:errors="*{enabled}"></small>
-							</div>
-						</div>
 
 
 
 
 
-						<div class="form-group">
-							<label for="fechaUsuario">Fecha Registro:</label> <input
-								type="date" readonly th:field="*{registrationdate}"
-								id="fechaUsuario" name="trip-start" value="*{registrationdate}"
-								min="2018-01-01" max="2058-12-31">
-						</div>
-						<div class="alert alert-danger"
-							th:if="${#fields.hasErrors('registrationdate')}"
-							th:errors="*{registrationdate}"></div>
+						
 
 						<div class="form-group">
 							<label for="file" class="">Foto:</label>

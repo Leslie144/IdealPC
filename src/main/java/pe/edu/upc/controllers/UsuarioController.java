@@ -197,12 +197,7 @@ public class UsuarioController {
 	@GetMapping("/createAccount")
 	public String createAccount(Model model) {
 		model.addAttribute("listaDistritos", dService.list());
-		model.addAttribute("listaTipos", tService.list());
 		Users newuser = new Users();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		String formatdate = formatter.format(date);
-		date2 =  java.sql.Date.valueOf(formatdate);
-		newuser.setRegistrationdate(date2);
 		model.addAttribute("users", newuser);
 		return "usuario/createAccount";
 	}
@@ -213,8 +208,7 @@ public class UsuarioController {
 			throws Exception {
 		if (result.hasErrors()) {
 			model.addAttribute("listaDistritos", dService.list());
-			model.addAttribute("listaTipos", tService.list());
-			return "usuario/usuario";
+			return "usuario/createAccount";
 		} else {
 			if (!photo.isEmpty()) {
 				if (Math.toIntExact(usuario.getId()) > 0 && usuario.getPhoto() != null
@@ -233,15 +227,20 @@ public class UsuarioController {
 			}
 			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
 			usuario.setPassword(bcryptPassword);
+			
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			String formatdate = formatter.format(date);
+			date2 =  java.sql.Date.valueOf(formatdate);
 			usuario.setRegistrationdate(date2);
 			usuario.setEnabled(true);
-			System.out.println("Rol: "+tService.listarId(Long.parseLong("2")).getRol());
-			usuario.setRoles(tService.listarId(Long.parseLong("2")));
+			System.out.println("Rol: "+tService.listarRol("ROLE_USER").getRol());
+			usuario.setRoles(tService.listarRol("ROLE_USER"));
 
-			boolean flag = uService.insert(usuario);
+			//boolean flag = uService.insert(usuario);
 			//System.out.println(usuario.getRegistrationdate());
-			//uService.insert(usuario);
-			if(flag) {
+			if (uService.findBynombreUsuario(usuario.getUsername()).isEmpty()) {
+				uService.insert(usuario);
 				return "redirect:/usuario/list";
 			} else {
 			    //System.out.println("Aqui");
