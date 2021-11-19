@@ -194,6 +194,65 @@ public class UsuarioController {
 		return "usuario/listUsuario";
 	}
 	
+	@GetMapping("/createAccount")
+	public String createAccount(Model model) {
+		model.addAttribute("listaDistritos", dService.list());
+		model.addAttribute("listaTipos", tService.list());
+		Users newuser = new Users();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String formatdate = formatter.format(date);
+		date2 =  java.sql.Date.valueOf(formatdate);
+		newuser.setRegistrationdate(date2);
+		model.addAttribute("users", newuser);
+		return "usuario/createAccount";
+	}
+	
+	@RequestMapping("/saveAccount")
+	public String saveAccount(@ModelAttribute @Valid Users usuario, BindingResult result, Model model,
+			@RequestParam("file") MultipartFile photo, RedirectAttributes flash, SessionStatus status)
+			throws Exception {
+		if (result.hasErrors()) {
+			model.addAttribute("listaDistritos", dService.list());
+			model.addAttribute("listaTipos", tService.list());
+			return "usuario/usuario";
+		} else {
+			if (!photo.isEmpty()) {
+				if (Math.toIntExact(usuario.getId()) > 0 && usuario.getPhoto() != null
+						&& usuario.getPhoto().length() > 0) {
+					subirarchivoService.delete(usuario.getPhoto());
+				}
+				String uniqueFilename = null;
+				try {
+					uniqueFilename = subirarchivoService.copy(photo);
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
+				usuario.setPhoto(uniqueFilename);
+			}
+			String bcryptPassword = passwordEncoder.encode(usuario.getPassword());
+			usuario.setPassword(bcryptPassword);
+			usuario.setRegistrationdate(date2);
+			usuario.setEnabled(true);
+			System.out.println("Rol: "+tService.listarId(Long.parseLong("2")).getRol());
+			usuario.setRoles(tService.listarId(Long.parseLong("2")));
+
+			boolean flag = uService.insert(usuario);
+			//System.out.println(usuario.getRegistrationdate());
+			//uService.insert(usuario);
+			if(flag) {
+				return "redirect:/usuario/list";
+			} else {
+			    //System.out.println("Aqui");
+				//model.addAttribute("mensaje", "Ocurrió un error");
+				flash.addFlashAttribute("error", "Ya existe un usuario con el username ingresado");
+				return "redirect:/usuario/createAccount";
+			}
+		}
+	}
+	
+	
 	@GetMapping("/reportes")
 	public String listReports(Model model) {
 
