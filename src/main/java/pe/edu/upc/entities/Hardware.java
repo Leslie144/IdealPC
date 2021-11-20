@@ -31,7 +31,8 @@ public class Hardware {
 	private String nombreHardware;
 
 	@Pattern(regexp = "[^!\"$%&'()*+,./:;<=>?@^`{|}~]+", message = "El nombre del MODELO no puede contener caracteres especiales")
-	//@Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede contener un número")
+	// @Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede
+	// contener un número")
 	@NotNull(message = "El nombre del MODELO no puede estar vacio")
 	@Column(name = "modeloHardware", nullable = false)
 	private String modeloHardware;
@@ -51,18 +52,14 @@ public class Hardware {
 	@JoinColumn(name = "id_company", nullable = false)
 	private Companies companies;
 
-  	private Date fecha;
+	private Date fecha;
 
-	
 	public Hardware() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Hardware(int idHardware,
-			String nombreHardware,
-			String modeloHardware,
-			Double precioHardware,
+	public Hardware(int idHardware, String nombreHardware, String modeloHardware, Double precioHardware,
 			String fotoHardware, Companies companies, Date fecha) {
 		super();
 		this.idHardware = idHardware;
@@ -118,10 +115,14 @@ public class Hardware {
 		return companies;
 	}
 
+	public void setCompanies(Companies companies) {
+		this.companies = companies;
+	}
+
 	public void setCompany(Companies companies) {
 		this.companies = companies;
 	}
-	
+
 	public Date getFecha() {
 		return fecha;
 	}
@@ -131,4 +132,3 @@ public class Hardware {
 	}
 
 }
-
