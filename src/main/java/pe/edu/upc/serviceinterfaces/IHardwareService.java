@@ -2,13 +2,13 @@ package pe.edu.upc.serviceinterfaces;
 
 import java.util.List;
 
-import pe.edu.upc.entities.Hardwares;
+import pe.edu.upc.entities.Hardware;
 
 public interface IHardwareService {
 
-	public boolean insert(Hardwares hardware);
-	List<Hardwares>list();
-	Hardwares listarId(int idHardware);
+	public boolean insert(Hardware hardware);
+	List<Hardware>list();
+	Hardware listarId(int idHardware);
 	public void delete(int idHardware);
-	List<Hardwares> findBynombreHardware(String name);
+	List<Hardware> findBynombreHardware(String name);
 }

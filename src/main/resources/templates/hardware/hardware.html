@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-6 frm-registro">
 				<form th:action="@{/hardware/save}" method="post" class="row"
-					th:object="${hardwares}" enctype="multipart/form-data">
+					th:object="${hardware}" enctype="multipart/form-data">
 
 					<div class="col-6">
 
@@ -83,13 +83,20 @@
 						<div class="form-group">
 							<label for="marca">Marca:</label> <select class="form-control"
 								th:field="*{companies.id_company}">
-								<option th:each="c: ${listaCompanies}"
-									th:value="${c.id_company}" th:text="${c.nameCompany}"
+								<option th:each="c: ${listaMarcas}" th:value="${c.id_company}"
+									th:text="${c.nameCompany}"
 									th:selected="(${c.id_company} == *{companies.id_company})"></option>
 							</select>
 						</div>
 
-
+						<div class="form-group">
+							<label for="fechaTienda">Fecha Registro:</label> <input
+								type="date" required th:field="*{fecha}" id="start"
+								name="trip-start" value="*{fecha}" min="2018-01-01"
+								max="2058-12-31">
+						</div>
+						<div class="alert alert-danger"
+							th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"></div>
 
 						<!--  <div class="form-group">
 							<label for="fechaTienda">FECHA REGISTRO:</label> <input
@@ -105,7 +112,7 @@
 							<label for="file" class="">Foto:</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control"
-									th:text="${hardwares.fotoHardware}" />
+									th:text="${hardware.fotoHardware}" />
 							</div>
 
 						</div>

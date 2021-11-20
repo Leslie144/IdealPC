@@ -28,7 +28,7 @@
 				<h3 class="title-content">Lista de Hardwares</h3>
 
 				<form th:action="@{/hardware/search}" method="post"
-					th:object="${hardwares}">
+					th:object="${hardware}">
 					<label for="nombreHardware">Buscar:</label> <input type="text"
 						required="required" class="form-control"
 						th:field="*{nombreHardware}" id="nombreHardware"></input>
@@ -47,6 +47,7 @@
 						<th scope="col" class="text-center">Modelo</th>
 						<th scope="col" class="text-center">Precio</th>
 						<th scope="col" class="text-center">Marca</th>
+						<th scope="col" class="text-center">Fecha Registro</th>
 						<th scope="col" class="text-center">OPERACIÓN</th>
 						<th scope="col" class="text-center">DETALLE</th>
 					</tr>
@@ -61,6 +62,7 @@
 						<td class="text-center" th:text="${p.modeloHardware}"></td>
 						<td class="text-center" th:text="${p.precioHardware}"></td>
 						<td class="text-center" th:text="${p.companies.nameCompany}"></td>
+						<td class="text-center" th:text="${p.fecha}"></td>
 						<td class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/hardware/update/' + ${p.idHardware}}"> <i
 								class="fa fa-cog"></i> Update

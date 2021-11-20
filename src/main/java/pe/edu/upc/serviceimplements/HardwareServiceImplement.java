@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.upc.entities.Hardwares;
+import pe.edu.upc.entities.Hardware;
 import pe.edu.upc.repositories.IHardwareRepository;
 import pe.edu.upc.serviceinterfaces.IHardwareService;
 
@@ -17,9 +17,9 @@ public class HardwareServiceImplement implements IHardwareService{
 	@Autowired
 	private IHardwareRepository hR;
 	@Override
-	public boolean insert(Hardwares hardware) {
+	public boolean insert(Hardware hardware) {
 		// TODO Auto-generated method stub
-		Hardwares rpta=hR.save(hardware);
+		Hardware rpta=hR.save(hardware);
 		if(rpta==null) {
 			return false;
 		}else {
@@ -28,17 +28,17 @@ public class HardwareServiceImplement implements IHardwareService{
 	}
 
 	@Override
-	public List<Hardwares> list() {
+	public List<Hardware> list() {
 		// TODO Auto-generated method stub
 		return hR.findAll();
 	}
 
 	@Override
 	@Transactional(readOnly=true)
-	public Hardwares listarId(int idHardware) {
+	public Hardware listarId(int idHardware) {
 		// TODO Auto-generated method stub
-		Optional<Hardwares>op=hR.findById(idHardware);
-		return op.isPresent()?op.get():new Hardwares();
+		Optional<Hardware>op=hR.findById(idHardware);
+		return op.isPresent()?op.get():new Hardware();
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class HardwareServiceImplement implements IHardwareService{
 	}
 
 	@Override
-	public List<Hardwares> findBynombreHardware(String name){
+	public List<Hardware> findBynombreHardware(String name){
 	return hR.findBynombreHardware(name);	
 	}
 	

@@ -1,5 +1,7 @@
 package pe.edu.upc.entities;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,9 +18,8 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 
 @Entity
-@Table(name = "hardwares")
-public class Hardwares {
-	
+@Table(name = "Hardware")
+public class Hardware {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int idHardware;
@@ -30,7 +31,8 @@ public class Hardwares {
 	private String nombreHardware;
 
 	@Pattern(regexp = "[^!\"$%&'()*+,./:;<=>?@^`{|}~]+", message = "El nombre del MODELO no puede contener caracteres especiales")
-	//@Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede contener un número")
+	// @Pattern(regexp = "[^0-9]+", message = "El nombre del MODELO no puede
+	// contener un número")
 	@NotNull(message = "El nombre del MODELO no puede estar vacio")
 	@Column(name = "modeloHardware", nullable = false)
 	private String modeloHardware;
@@ -50,16 +52,15 @@ public class Hardwares {
 	@JoinColumn(name = "id_company", nullable = false)
 	private Companies companies;
 
-	public Hardwares() {
+	private Date fecha;
+
+	public Hardware() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Hardwares(int idHardware,
-			String nombreHardware,
-			String modeloHardware,
-			Double precioHardware,
-			String fotoHardware, Companies companies) {
+	public Hardware(int idHardware, String nombreHardware, String modeloHardware, Double precioHardware,
+			String fotoHardware, Companies companies, Date fecha) {
 		super();
 		this.idHardware = idHardware;
 		this.nombreHardware = nombreHardware;
@@ -67,6 +68,7 @@ public class Hardwares {
 		this.precioHardware = precioHardware;
 		this.fotoHardware = fotoHardware;
 		this.companies = companies;
+		this.fecha = fecha;
 	}
 
 	public int getIdHardware() {
@@ -115,6 +117,18 @@ public class Hardwares {
 
 	public void setCompanies(Companies companies) {
 		this.companies = companies;
+	}
+
+	public void setCompany(Companies companies) {
+		this.companies = companies;
+	}
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 }
