@@ -17,4 +17,6 @@ public interface IUsuarioService {
 
 	List<Users> findBynombreUsuario(String name);
 
+	public List<String[]> quantityUsers();
+
 }

@@ -11,4 +11,6 @@ public interface IHardwareService {
 	Hardware listarId(int idHardware);
 	public void delete(int idHardware);
 	List<Hardware> findBynombreHardware(String name);
+	
+	public List<String[]> reportMarca();
 }

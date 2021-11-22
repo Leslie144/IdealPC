@@ -63,7 +63,7 @@ public class TipoRecomendacionController {
 	
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object> model, @ModelAttribute TypeRecomendation tiporecomendacion) {
-		trService.listarId(tiporecomendacion.getId());
+		trService.listarId(tiporecomendacion.getId_recomendation());
 		return "tiporecomendacion/listTipoRecomendacion";
 	}
 

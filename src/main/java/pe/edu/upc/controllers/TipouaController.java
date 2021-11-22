@@ -65,7 +65,7 @@ public class TipouaController {
 
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object> model, @ModelAttribute Typeua tipo) {
-		cService.listarId(tipo.getId());
+		cService.listarId(tipo.getId_ua());
 		return "tipoua/listTipouas";
 	}
 

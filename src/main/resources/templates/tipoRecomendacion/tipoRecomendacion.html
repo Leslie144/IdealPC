@@ -27,14 +27,14 @@
 				<h3></h3>
 			</div>
 			<div class="col-3">
-				<h3>Registrar Tippo de Recomendación</h3>
+				<h3>Registrar Tipo de Recomendación</h3>
 			</div>
 			<div class="col-8 frm-registro">
 				<form th:action="@{/tipoderecomendaciones/save}" method="post"
 					th:object="${tipoRecomendacion}">
 					<div class="form-group">
 						<label>ID:</label> <input type="text" class="form-control"
-							readonly th:field="*{id}"></input>
+							readonly th:field="*{id_recomendation}"></input>
 
 						<div class="form-group">
 							<label for="type">Tipo:</label> <input type="text" required

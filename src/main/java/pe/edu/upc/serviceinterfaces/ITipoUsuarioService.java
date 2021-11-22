@@ -10,6 +10,8 @@ public interface ITipoUsuarioService {
 	public boolean insert(Role tipousuario);
 	List<Role> list();
 	Role listarId(Long idTipousuario);
+	
+	Role listarRol(String rol);
 
 	public void delete(Long idTipousuario);
 

@@ -38,13 +38,13 @@
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoRecomendacion}">
-						<td class="text-center" th:text="${tip.id}"></td>
+						<td class="text-center" th:text="${tip.id_recomendation}"></td>
 						<td class="text-center" th:text="${tip.type}"></td>
 						<td class="text-center"><a class="btn btn-default btn-sm"
-							th:href="@{'/tipoderecomendaciones/update/' + ${tip.id}}">
+							th:href="@{'/tipoderecomendaciones/update/' + ${tip.id_recomendation}}">
 								<i class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"
-							th:href="@{/tipoderecomendaciones/delete?id=}+${tip.id}">
+							th:href="@{/tipoderecomendaciones/delete?id=}+${tip.id_recomendation}">
 								<i class="fa fa-trash-o fa-lg"></i> Delete
 						</a></td>
 					</tr>

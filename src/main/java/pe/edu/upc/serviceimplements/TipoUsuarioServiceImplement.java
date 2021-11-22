@@ -40,6 +40,14 @@ public class TipoUsuarioServiceImplement implements ITipoUsuarioService {
 
 		return op.isPresent() ? op.get() : new Role();
 	}
+	
+	@Override
+	public Role listarRol(String rol) {
+		// TODO Auto-generated method stub
+		Role eop=tuR.findByRol(rol).get(0);
+
+		return eop;
+	}
 
 	@Override
 	public void delete(Long idTipousuario) {

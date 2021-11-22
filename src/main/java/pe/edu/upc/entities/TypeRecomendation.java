@@ -14,7 +14,7 @@ public class TypeRecomendation {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int id_recomendation;
 	
 	@Pattern(regexp = "[^!\"#$%&'()*+,-./:;<=>?@^_`{|}~]+", message = "El Tipo de Recomendación no puede contener caracteres especiales")
 	@Pattern(regexp = "[^0-9]+", message = "El Tipo de Recomendación no puede contener un número")
@@ -26,20 +26,21 @@ public class TypeRecomendation {
 		// TODO Auto-generated constructor stub
 	}
 
-	public TypeRecomendation(int id, String type) {
+	public TypeRecomendation(int id_recomendation, String type) {
 		super();
-		this.id = id;
+		this.id_recomendation = id_recomendation;
 		this.type = type;
 	}
 
 	
 
-	public int getId() {
-		return id;
+
+	public int getId_recomendation() {
+		return id_recomendation;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId_recomendation(int id_recomendation) {
+		this.id_recomendation = id_recomendation;
 	}
 
 	public String getType() {
