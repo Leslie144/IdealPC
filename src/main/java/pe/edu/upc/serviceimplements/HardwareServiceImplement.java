@@ -52,4 +52,10 @@ public class HardwareServiceImplement implements IHardwareService{
 	return hR.findBynombreHardware(name);	
 	}
 	
+	@Override
+	public List<String[]> reportMarca() {
+		// TODO Auto-generated method stub
+		return hR.reportMarca();
+	}
+	
 }
