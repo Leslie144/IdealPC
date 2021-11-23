@@ -52,9 +52,9 @@ public class TipoModularController {
 		if (result.hasErrors()) {
             return "tipoModular/tipoModular";
         } else {
-            boolean rpta = tmService.insert(tipomodular);
+            int rpta = tmService.insert(tipomodular);
 
-            if (rpta ) {
+            if (rpta>0) {
                 model.addAttribute("mensaje", "ya existe");
                 return "tipoModular/tipoModular";
 
