@@ -48,6 +48,7 @@ public class MarcaController {
 	public String saveMarca(@Validated Companies marca, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
+			model.addAttribute("listaMarcas", mService.list());
 			return "marca/marca";
 		} else {
 			boolean flag = mService.insert(marca);
@@ -81,7 +82,7 @@ public class MarcaController {
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
 		mService.delete(id);
-		model.addAttribute("marca", new Companies());
+		model.addAttribute("companies", new Companies());
 		model.addAttribute("listaMarcas", mService.list());
 		return "marca/listMarca";
 	}

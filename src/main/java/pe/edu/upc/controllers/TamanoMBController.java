@@ -81,7 +81,8 @@ public class TamanoMBController {
 	@RequestMapping("/delete")
 	public String deleteTamanoMB(Model model, @RequestParam(value="id")Integer id) {
 		mService.delete(id);
-		model.addAttribute("listaTamanoMB", mService.list());
+		model.addAttribute("listaTamanosMB", mService.list());
+		model.addAttribute("tamanomb", new TamanoMB());
 		return "tamanomb/listTamanoMB";
 	}
 	
