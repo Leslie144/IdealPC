@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.TypeRecomendation;
 import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
 
@@ -27,11 +28,14 @@ public class TipoRecomendacionController {
 
 	@Autowired
 	private ITipoRecomendacionService trService;
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTipoRecomendacion(Model model) {
-		model.addAttribute("tipoRecomendacion", new TypeRecomendation());
-		return "tiporecomendacion/tiporecomendacion";
+		model.addAttribute("typeRecomendacion", new TypeRecomendation());
+		model.addAttribute("listaTipoRecomendacion", trService.list());
+		model.addAttribute("typeRecomendacion", new TypeRecomendation());
+		return "tipoRecomendacion/tipoRecomendacion";
 	}
 
 	@GetMapping("/list")
@@ -42,30 +46,35 @@ public class TipoRecomendacionController {
 		} catch (Exception e) {
 			model.addAttribute("error", e.getMessage());
 		}
-		return "tiporecomendacion/listTipoRecomendacion";
+		return "tipoRecomendacion/listTipoRecomendacion";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveTipoRecomendacion(@Valid TypeRecomendation tiporecomendacion, BindingResult result, Model model,
+	public String saveTipoRecomendacion(@ModelAttribute("typeRecomendacion") @Valid TypeRecomendation tiporecomendacion, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 		if (result.hasErrors()) {
-			return "tiporecomendacion/tiporecomendacion";
+			return "tipoRecomendacion/tipoRecomendacion";
 		} else {
-			boolean flag = trService.insert(tiporecomendacion);
-			if (flag) {
-				return "redirect:/tipoderecomendaciones/list";
+			boolean rpta = trService.insert(tiporecomendacion);
+			if (rpta ) {
+				model.addAttribute("mensaje", "ya existe");
+				return "tipoRecomendacion/tipoRecomendacion";
 			} else {
-				model.addAttribute("mensaje", "Ocurrió un error");
-				return "redirect:/tipoderecomendaciones/new";
+				model.addAttribute("mensaje","Se guardó correctamente");
+				status.setComplete();
 			}
 		}
+		model.addAttribute("distrito",new Distrito());
+		return "redirect:/tipoderecomendaciones/list";
 	}
-	
+
 	@RequestMapping("/listarId")
 	public String listarId(Map<String, Object> model, @ModelAttribute TypeRecomendation tiporecomendacion) {
 		trService.listarId(tiporecomendacion.getId_recomendation());
-		return "tiporecomendacion/listTipoRecomendacion";
+		return "tipoRecomendacion/listTipoRecomendacion";
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
@@ -75,9 +84,10 @@ public class TipoRecomendacionController {
 			return "redirect:/tipoderecomendaciones/list";
 		} else {
 			model.addAttribute("tipoRecomendacion", objTipoRecomendacion);
-			return "tiporecomendacion/tiporecomendacion";
+			return "tipoRecomendacion/tipoRecomendacion";
 		}
 	}
+
 	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteMarca(Model model, @RequestParam(value = "id") Integer id) {
