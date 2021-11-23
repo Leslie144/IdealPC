@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
+//import org.springframework.web.bind.support.SessionStatus;
+//import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pe.edu.upc.entities.RecomendacionParte;
@@ -34,7 +34,7 @@ public class RecomendacionParteController {
 	private IHardwareService hService;
 	@Autowired
 	private IRecomendacionService rService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newTienda(Model model) {
 		model.addAttribute("recomendacionParte", new RecomendacionParte());
@@ -56,7 +56,7 @@ public class RecomendacionParteController {
 		return "recomendParts/listRecomendParts";
 	}
 
-	//@Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String insertProduct(@ModelAttribute @Valid RecomendacionParte objRp, BindingResult binRes, Model model)
 			throws ParseException {
@@ -89,7 +89,7 @@ public class RecomendacionParteController {
 		rpService.listarId(rp.getIdRecomendPart());
 		return "recomendParts/listRecomendParts";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
@@ -105,7 +105,7 @@ public class RecomendacionParteController {
 		}
 	}
 
-	//@Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteTienda(Model model, @RequestParam(value = "id") Integer id) {
 		rpService.delete(id);

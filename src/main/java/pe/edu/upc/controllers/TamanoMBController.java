@@ -65,7 +65,7 @@ public class TamanoMBController {
 		mService.listarId(tmb.getIdTamanoMB());
 		return "tamanomb/listTamanoMB";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
 		TamanoMB objTamanoMB=mService.listarId(id);

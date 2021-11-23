@@ -138,7 +138,7 @@ public class TiendaController {
 		tService.listarId(tiend.getIdTienda());
 		return "tienda/listTienda";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 

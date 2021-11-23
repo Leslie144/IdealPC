@@ -159,7 +159,7 @@ public class UsuarioController {
 		uService.listarId(usuario.getId());
 		return "usuario/listUsuario";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 

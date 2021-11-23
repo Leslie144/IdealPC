@@ -132,7 +132,7 @@ public class HardwareController {
 		hService.listarId(hard.getIdHardware());
 		return "hardware/listHardware";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		Hardware objHard = hService.listarId(id);

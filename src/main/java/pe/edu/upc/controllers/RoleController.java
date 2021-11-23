@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,7 +26,7 @@ import pe.edu.upc.serviceinterfaces.IRoleService;
 public class RoleController {
 	@Autowired
 	private IRoleService rService;
-
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newRole(Model model) {
 		try {
@@ -37,7 +38,7 @@ public class RoleController {
 		}
 		return "role/listRoles";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
 	public String saveRole(@Validated Role role, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
@@ -61,6 +62,7 @@ public class RoleController {
 		rService.listId(role.getId_role().intValue());
 		return "role/listRole";
 	}
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
 		Role objRole=rService.listId(id);
@@ -72,6 +74,7 @@ public class RoleController {
 			return "role/role";
 		}
 	}
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteRole(Model model, @RequestParam(value="id")Integer id) {
 		

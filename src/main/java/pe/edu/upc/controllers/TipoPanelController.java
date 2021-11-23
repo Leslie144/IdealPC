@@ -66,7 +66,7 @@ public class TipoPanelController {
 		tpService.listarId(tmb.getIdTamanoMB());
 		return "tipopanel/listTipoPanel";
 	}
-	
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id,Model model, RedirectAttributes objRedir) {
 		TipoPanel objTipoPanel=tpService.listarId(id);
