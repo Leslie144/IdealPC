@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import pe.edu.upc.entities.Distrito;
 import pe.edu.upc.entities.TypeRecomendation;
 import pe.edu.upc.serviceinterfaces.ITipoRecomendacionService;
 
@@ -65,7 +64,7 @@ public class TipoRecomendacionController {
 				status.setComplete();
 			}
 		}
-		model.addAttribute("distrito",new Distrito());
+		model.addAttribute("typeRecomendation", new TypeRecomendation());
 		return "redirect:/tipoderecomendaciones/list";
 	}
 
