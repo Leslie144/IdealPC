@@ -47,19 +47,24 @@ public class TipoModularController {
 	}
 	@Secured("ROLE_ADMIN")
 	@PostMapping("/save")
-	public String saveTipoModular(@Valid TypeModular tipomodular, BindingResult result, Model model, SessionStatus status)
+	public String saveTipoModular(@ModelAttribute("tipomodular")@Valid TypeModular tipomodular, BindingResult result, Model model, SessionStatus status)
 			throws Exception {
 		if (result.hasErrors()) {
-			return "tipoModular/tipoModular";
-		} else {			
-			boolean flag = tmService.insert(tipomodular);
-			if (flag) {
-				return "redirect:/tipomodulares/list";
-			} else {
-				model.addAttribute("mensaje","Ocurrió un error");
-				return "redirect:/tipomodulares/new";
-			}
-		}		
+            return "tipoModular/tipoModular";
+        } else {
+            boolean rpta = tmService.insert(tipomodular);
+
+            if (rpta ) {
+                model.addAttribute("mensaje", "ya existe");
+                return "tipoModular/tipoModular";
+
+            } else {
+                model.addAttribute("mensaje","Se guardó correctamente");
+                status.setComplete();
+            }
+        }
+        model.addAttribute("tipomodular", new TypeModular());
+        return "redirect:/tipomodulares/list";
 	}
 	
 	@RequestMapping("/listarId")
