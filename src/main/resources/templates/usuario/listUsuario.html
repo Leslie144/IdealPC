@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -42,7 +43,7 @@
 				</form>
 
 				<a th:href="@{/tipousuarios/list}" class="btnnew btn btn-danger">Roles</a>
-				<a th:href="@{/usuario/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/usuario/new}" class="btnnew btn btn-danger">Nuevo</a>
 				
 			</div>
 
@@ -57,7 +58,7 @@
 						<th scope="col" class="text-center">Estado</th>
 						<th scope="col" class="text-center">Distrito</th>
 						<th scope="col" class="text-center">Rol</th>
-						<th scope="col" class="text-center">Operaciones</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">Operaciones</th>
 						<th scope="col" class="text-center">Detalle</th>
 					</tr>
 				</thead>
@@ -72,7 +73,7 @@
 						<td class="text-center" th:text="${usu.enabled}"></td>
 						<td class="text-center" th:text="${usu.distrito.nombreDistrito}"></td>
 						<td class="text-center" th:text="${usu.roles.rol}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/usuario/update/' + ${usu.id}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"

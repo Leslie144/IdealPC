@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -38,7 +39,7 @@
 				</form>
 
 
-				<a th:href="@{/recoparts/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/recoparts/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 
 
@@ -51,7 +52,7 @@
 						<th scope="col" class="text-center">Pack Recomendado</th>
 						<th scope="col" class="text-center">Veces Recomendadas</th>
 						<th scope="col" class="text-center">Fecha de Recomendacion</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -64,7 +65,7 @@
 						<td class="text-center" th:text="${p.recomendacion.nombreRecomendacion}"></td>
 						<td class="text-center" th:text="${p.cantidadReco}"></td>
 						<td class="text-center" th:text="${p.fechaRegistro}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/recoparts/update/' + ${p.idRecomendPart}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"

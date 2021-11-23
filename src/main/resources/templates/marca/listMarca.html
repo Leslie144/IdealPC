@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -35,7 +36,7 @@
 					<button type="submit" class="btn btn-danger">Buscar</button>
 					<a href="/marca/list" class="btn btn-light">Limpiar</a>
 				</form>
-				<a th:href="@{/marca/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/marca/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
@@ -43,7 +44,7 @@
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Marca</th>
 						<th scope="col" class="text-center">URL</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -52,10 +53,10 @@
 						<td class="text-center" th:text="${cat.nameCompany}"></td>
 						<td class="text-center" th:text="${cat.urlCompany}"></td>
 
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td class="text-center"><a sec:authorize="hasRole('ROLE_ADMIN')"class="btn btn-default btn-sm"
 							th:href="@{'/marca/update/' + ${cat.id_company}}"> <i
 								class="fa fa-cog"></i> Update
-						</a> <a class="btn btn-danger"
+						</a> <a sec:authorize="hasRole('ROLE_ADMIN')"class="btn btn-danger"
 							th:href="@{/marca/delete?id=}+${cat.id_company}"> <i
 								class="fa fa-trash-o fa-lg"></i> Delete
 						</a></td>
@@ -70,6 +71,7 @@
 
 	</div>
 
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 	<script src="/js/popper.min.js"></script>
 	<script src="/js/jquery-3.3.1.slim.min.js"></script>

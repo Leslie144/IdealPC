@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -26,21 +27,21 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Tipo Modular</h3>
-				<a th:href="@{/tipomodulares/new}" class="btn btn-warning">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/tipomodulares/new}" class="btn btn-warning">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Tipo Modular</th>
-						<th scope="col" class="text-center">Operacion</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">Operacion</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="tip : ${listaTipoModular}">
 						<td class="text-center" th:text="${tip.id_modular}"></td>
 						<td class="text-center" th:text="${tip.type}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/tipomodulares/update/' + ${tip.id_modular}}">
 								<i class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"

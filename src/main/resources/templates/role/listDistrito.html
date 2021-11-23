@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -35,21 +36,21 @@
 					<button type="submit" class="btn btn-danger">Buscar</button>
 					<a href="/distritos/list" class="btn btn-light">Limpiar</a>
 				</form>
-				<a th:href="@{/distritos/new}" class="btn btn-primary">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/distritos/new}" class="btn btn-primary">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">Código</th>
 						<th scope="col" class="text-center">Distritos</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="cat : ${listaDistritos}">
 						<td class="text-center" th:text="${cat.idDistrito}"></td>
 						<td class="text-center" th:text="${cat.nombreDistrito}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/distritos/update/' + ${cat.idDistrito}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"
@@ -66,6 +67,7 @@
 
 	</div>
 
+	<div th:replace="fragments/nav :: logout" class="row topbar col-lg-12"></div>
 
 	<script src="/js/popper.min.js"></script>
 	<script src="/js/jquery-3.3.1.slim.min.js"></script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -36,8 +37,8 @@
 					<a href="/recomendations/list" class="btn btn-light">Limpiar</a>
 				</form>
 
-				<a th:href="@{/tipoderecomendaciones/list}" class="btnnew btn btn-danger">Tipo de Recomendación</a>
-				<a th:href="@{/recomendations/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/tipoderecomendaciones/list}" class="btnnew btn btn-danger">Tipo de Recomendación</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/recomendations/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 
 
@@ -49,7 +50,7 @@
 						<th scope="col" class="text-center">Usuario</th>
 						<th scope="col" class="text-center">Tipo</th>
 						<th scope="col" class="text-center">Fecha</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 						<th scope="col" class="text-center">DETALLE</th>
 					</tr>
 				</thead>
@@ -62,7 +63,7 @@
 						<td class="text-center" th:text="${p.usuario.username}"></td>
 						<td class="text-center" th:text="${p.tipoRecomendation.type}"></td>
 						<td class="text-center" th:text="${p.fechaRecomendacion}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/recomendations/update/' + ${p.idRecomendacion}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"
