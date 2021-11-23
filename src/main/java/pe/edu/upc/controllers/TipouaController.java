@@ -30,6 +30,7 @@ public class TipouaController {
 	@GetMapping("/new")
 	public String newTipoua(Model model) {
 		model.addAttribute("tipoua", new Typeua());
+		model.addAttribute("listaTipouas", cService.list());
 		return "tipoua/tipoua";
 	}
 

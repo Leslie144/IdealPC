@@ -57,5 +57,17 @@ public class HardwareServiceImplement implements IHardwareService{
 		// TODO Auto-generated method stub
 		return hR.reportMarca();
 	}
+
+	@Override
+	public List<String[]> reportCantHardware() {
+		// TODO Auto-generated method stub
+		return hR.reportCantHardware();
+	}
+
+	@Override
+	public List<String[]> reportValueCantHardware() {
+		// TODO Auto-generated method stub
+		return hR.reportValueCantHardware();
+	}
 	
 }

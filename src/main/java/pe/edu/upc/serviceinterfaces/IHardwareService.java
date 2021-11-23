@@ -13,4 +13,6 @@ public interface IHardwareService {
 	List<Hardware> findBynombreHardware(String name);
 	
 	public List<String[]> reportMarca();
+	public List<String[]>reportCantHardware();
+	public List<String[]>reportValueCantHardware();
 }

@@ -162,13 +162,45 @@ public class HardwareController {
 		model.addAttribute("listaHardwares", listaHardwares);
 		return "hardware/listHardware";
 	}
-	
+
 	@RequestMapping("/reporte4")
 	public String quantityUsers(Map<String, Object> model) {
 		model.put("listaMarcas", hService.reportMarca());
 		model.put("nmarca", hService.reportMarca().get(0)[7]);
 		model.put("cantidad", hService.reportMarca().size());
 		return "reports/reportMarca";
+	}
+
+	@GetMapping("/reportes")
+	public String listReports(Model model) {
+
+		return "/reports/reports";
+	}
+
+	@RequestMapping("/reporte1")
+	public String reportCantHardware(Map<String, Object> model) {
+		model.put("listaHardwares", hService.reportCantHardware());
+		// System.out.println("cant usu: " + hService.reportCantHardware().size());
+		String[] val = hService.reportValueCantHardware().get(0);
+	
+		//int suma = 0;
+		//try {
+		//	for (int i = 0; i < val.length; i++) {
+		//		
+		//		suma += (int) val[i];
+		//	}
+		//	/*for (int x = 0; x < val.length; x++) {
+		//		suma = suma + val[x];
+		//	}*/
+		//} catch (Exception e) {
+		//	System.out.println("ERROR DEL FOR");
+		//}
+
+		//String asw = Integer.toString(suma);
+		//System.out.println("Object value: "+val[0]);
+		//System.out.println("cant vecess: "+ val);
+		model.put("cantidad", val[0]);
+		return "reports/reportCantHard";
 	}
 
 }
