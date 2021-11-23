@@ -17,4 +17,6 @@ public interface ITiendaService {
 	
 	List<Tienda> findByDistritoNombreDistrito(String distrito);
 
+	public List<String[]> quantityStores();
+
 }

@@ -49,7 +49,7 @@
 
 
 						<div class="form-group">
-							<label for="tContrasena">Contraseña:</label> <input type="text"
+							<label for="tContrasena">Contraseña:</label> <input type="password"
 								required th:field="*{password}" class="form-control"
 								id="tContrasena"></input>
 						</div>
@@ -119,9 +119,9 @@
 
 						<div class="form-group">
 							<label for="fechaUsuario">Fecha Registro:</label> <input
-								type="date" readonly th:field="*{registrationdate}"
+								type="date" readonly th:field="*{registrationdate}" 
 								id="fechaUsuario" name="trip-start" value="*{registrationdate}"
-								min="2018-01-01" max="2058-12-31">
+								min="2018-01-01" max="2058-12-31"> <!-- cmb -->
 						</div>
 						<div class="alert alert-danger"
 							th:if="${#fields.hasErrors('registrationdate')}"

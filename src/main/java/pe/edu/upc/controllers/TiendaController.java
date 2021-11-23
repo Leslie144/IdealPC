@@ -175,4 +175,13 @@ public class TiendaController {
 		model.addAttribute("listaTiendas", listaTiendas);
 		return "tienda/listTienda";
 	}
+	
+	@RequestMapping("/reporte2")
+	public String quantityUsers(Map<String, Object> model) {
+		model.put("listaTiendas", tService.quantityStores());
+		System.out.println("cant usu: " + tService.quantityStores().size());
+		model.put("cantidad", tService.quantityStores().size());
+		return "reports/reportTiendas";
+	}
+
 }

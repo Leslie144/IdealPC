@@ -79,7 +79,7 @@
 }
 
 .topbar {
-	background-color: /*#172B4D*/ black;
+	background-color: /*#E4E4E4*/#E4E4E4;
 	width: 100%;
 	height: 10vh;
 	margin: 0px;
@@ -158,7 +158,7 @@
 
 .btnnew {
 	width: fit-content;
-	color: white;
+	color:#000000;
 	margin: 30px 20px;
 	align-self: right;
 }

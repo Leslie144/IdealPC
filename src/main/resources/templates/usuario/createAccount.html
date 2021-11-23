@@ -22,7 +22,7 @@
 		<div class="content container row col-12">
 			<div class="col-6">
 				<h3>Registrar Usuario</h3>
-				<img class="imgform" alt="" th:src="@{/img/form/producto.png}">
+				<img class="imgform" alt="" th:src="@{/img/logo/logo3.png}">
 			</div>
 			<div class="col-6 frm-registro">
 				<form th:action="@{/usuario/saveAccount}" method="post" class="row"
@@ -47,7 +47,7 @@
 
 
 						<div class="form-group">
-							<label for="tContrasena">Contraseña:</label> <input type="text"
+							<label for="tContrasena">Contraseña:</label> <input type="password"
 								required th:field="*{password}" class="form-control"
 								id="tContrasena"></input>
 						</div>
@@ -111,7 +111,7 @@
 					</div>
 
 					<button style="margin: 0px 30px;" type="submit"
-						class="btnadd btn btn-primary">Grabar</button>
+						class="btnadd btn btn-primary">Registrarse</button>
 					<a href="/usuario/list" class="btn btn-danger">Cancelar</a>
 				</form>
 

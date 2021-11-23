@@ -16,7 +16,7 @@
 				<form th:action="@{/login}" method="post">
 
 					<div class="col-sm-6">
-						<img th:src="@{/img/logo/logo3.png}" height="35%" width="35%" />
+						<img th:src="@{/img/form/producto.png}" height="35%" width="35%" />
 					</div>
 
 					<div class="col-sm-6">
@@ -34,7 +34,8 @@
 							value="Ingresar" />
 					</div>
 				</form>
-				<a th:href="@{/usuario/createAccount}" class="btnnew btn btn-danger">Nuevo</a>
+				<span class="title-content">¿Aún no tienes una cuenta?</span>
+				<a th:href="@{/usuario/createAccount}">Registrarse</a>
 			
 
 			</div>
