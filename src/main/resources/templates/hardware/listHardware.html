@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -37,7 +38,7 @@
 					<a href="/hardware/list" class="btn btn-light">Limpiar</a>
 				</form>
 
-				<a th:href="@{/hardware/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/hardware/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
@@ -48,7 +49,7 @@
 						<th scope="col" class="text-center">Precio</th>
 						<th scope="col" class="text-center">Marca</th>
 						<th scope="col" class="text-center">Fecha Registro</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 						<th scope="col" class="text-center">DETALLE</th>
 					</tr>
 				</thead>
@@ -63,7 +64,7 @@
 						<td class="text-center" th:text="${p.precioHardware}"></td>
 						<td class="text-center" th:text="${p.companies.nameCompany}"></td>
 						<td class="text-center" th:text="${p.fecha}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/hardware/update/' + ${p.idHardware}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"

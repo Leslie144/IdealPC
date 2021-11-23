@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -37,7 +38,7 @@
 				</form>
 
 
-				<a th:href="@{/store/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/store/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 
 
@@ -51,7 +52,7 @@
 						<th scope="col" class="text-center">Teléfono</th>
 						<th scope="col" class="text-center">Web</th>
 						<th scope="col" class="text-center">Fecha Registro</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 						<th scope="col" class="text-center">DETALLE</th>
 					</tr>
 				</thead>
@@ -65,7 +66,7 @@
 						<td class="text-center" th:text="${p.telefonoTienda}"></td>
 						<td class="text-center" th:text="${p.webTienda}"></td>
 						<td class="text-center" th:text="${p.fechaRegistro}"></td>
-						<td class="text-center"><a class="btn btn-default btn-sm"
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center"><a class="btn btn-default btn-sm"
 							th:href="@{'/store/update/' + ${p.idTienda}}"> <i
 								class="fa fa-cog"></i> Update
 						</a> <a class="btn btn-danger"

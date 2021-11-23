@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head>
 <meta charset="UTF-8">
@@ -26,14 +27,14 @@
 
 			<div class="d-flex">
 				<h3 class="title-content">Lista de Tipo de Unidad de Almacenamiento</h3>
-				<a th:href="@{/tipouas/new}" class="btnnew btn btn-danger">Nuevo</a>
+				<a sec:authorize="hasRole('ROLE_ADMIN')"th:href="@{/tipouas/new}" class="btnnew btn btn-danger">Nuevo</a>
 			</div>
 			<table class="table">
 				<thead class="thead-light">
 					<tr>
 						<th scope="col" class="text-center">ID</th>
 						<th scope="col" class="text-center">Tipo de Unidad de Almacenamiento</th>
-						<th scope="col" class="text-center">OPERACIÓN</th>
+						<th sec:authorize="hasRole('ROLE_ADMIN')"scope="col" class="text-center">OPERACIÓN</th>
 
 					</tr>
 				</thead>
@@ -41,7 +42,7 @@
 					<tr th:each="cat : ${listaTipouas}">
 						<td class="text-center" th:text="${cat.id_ua}"></td>
 						<td class="text-center" th:text="${cat.type}"></td>
-						<td class="text-center">
+						<td sec:authorize="hasRole('ROLE_ADMIN')"class="text-center">
 							<a class="btn btn-default btn-sm" th:href="@{'/tipouas/update/' + ${cat.id_ua}}"> <i class="fa fa-cog"></i> Update </a> 
 							<a class="btn btn-danger" th:href="@{/tipouas/delete?id=}+${cat.id_ua}"> <i class="fa fa-trash-o fa-lg"></i> Delete </a>
 						</td>
