@@ -67,7 +67,7 @@ public class TipoModularController {
 		tmService.listarId(tipomodular.getId_modular());
 		return "tipoModular/listTipoModular";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		TypeModular objTipoModular = tmService.listarId(id);

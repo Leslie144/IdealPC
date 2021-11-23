@@ -66,7 +66,7 @@ public class TipoRecomendacionController {
 		trService.listarId(tiporecomendacion.getId_recomendation());
 		return "tiporecomendacion/listTipoRecomendacion";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		TypeRecomendation objTipoRecomendacion = trService.listarId(id);

@@ -65,7 +65,7 @@ public class TipoUsuarioController {
 		tuService.listarId(tipousuario.getId_role());
 		return "tipoUsuario/listTipoUsuario";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable Long id, Model model, RedirectAttributes objRedir) {
 		Role objTipoUsuario = tuService.listarId(id);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 //import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,7 @@ public class RecomendacionController {
 	@Autowired
 	private ISubirFotoService subirarchivoService;
 
-	// @Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@GetMapping("/new")
 	public String newRecomendation(Model model) {
 		model.addAttribute("recomendacion", new Recomendacion());
@@ -65,7 +66,7 @@ public class RecomendacionController {
 		return "recomendacion/listRecomendacion";
 	}
 
-	// @Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/save")
 	public String insertRecomendacion(@ModelAttribute @Valid Recomendacion objReco, BindingResult binRes, Model model,
 			@RequestParam("file") MultipartFile foto, RedirectAttributes flash, SessionStatus status)
@@ -144,7 +145,7 @@ public class RecomendacionController {
 		rService.listarId(reco.getIdRecomendacion());
 		return "recomendacion/listRecomendacion";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 
@@ -160,7 +161,7 @@ public class RecomendacionController {
 		}
 	}
 
-	// @Secured("ROLE_ADMIN")
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/delete")
 	public String deleteRecomendacion(Model model, @RequestParam(value = "id") Integer id) {
 		rService.delete(id);

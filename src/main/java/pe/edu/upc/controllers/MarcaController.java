@@ -66,7 +66,7 @@ public class MarcaController {
 		mService.listarId(marca.getId_company());
 		return "marca/listMarca";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		Companies objMarca = mService.listarId(id);

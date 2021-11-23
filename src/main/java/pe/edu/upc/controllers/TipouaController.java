@@ -69,7 +69,7 @@ public class TipouaController {
 		cService.listarId(tipo.getId_ua());
 		return "tipoua/listTipouas";
 	}
-
+	@Secured("ROLE_ADMIN")
 	@RequestMapping("/update/{id}")
 	public String update(@PathVariable int id, Model model, RedirectAttributes objRedir) {
 		Typeua objTipoua = cService.listarId(id);
